@@ -28,6 +28,4 @@ class Counter extends React.Component {
   }
 }
 
-console.log(<Counter />);
-
 ReactDOM.render(<Counter />, document.getElementById("root"));
