@@ -44,6 +44,11 @@ const render = (element, targetElement) => {
         });
     }
 
+    // Add event listeners
+    Object.keys(element.props)
+      .filter(prop => /^on.*$/.test(prop))
+      .forEach(prop => node.addEventListener(prop.substring(2).toLowerCase(), element.props[prop]));
+
     // Render children
     if (Array.isArray(element.props.children)) {
       element.props.children.forEach(child => {
