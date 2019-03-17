@@ -23,7 +23,7 @@ class Component {
     }
 
     if (state instanceof Function) {
-      this.state = state(this.state);
+      this.state = { ...this.state, ...state(this.state) };
     } else {
       this.state = { ...this.state, ...state };
     }
