@@ -1,4 +1,4 @@
-import ReactDOM from './reactDOM';
+import ReactDOM from "./reactDOM";
 
 const createElement = (type, props, ...children) => ({
   $$typeof: Symbol.for("react.element"),
@@ -17,7 +17,17 @@ class Component {
   }
 
   setState(state) {
-    this.state = { ...this.state, ...state };
+    // Do not rerender if setState is called with null or undefined
+    if (state == null) {
+      return;
+    }
+
+    if (state instanceof Function) {
+      this.state = state(this.state);
+    } else {
+      this.state = { ...this.state, ...state };
+    }
+
     ReactDOM.__reRender();
   }
 }
