@@ -1,3 +1,5 @@
+import ReactDOM from './reactDOM';
+
 const createElement = (type, props, ...children) => ({
   $$typeof: Symbol.for("react.element"),
   type: type,
@@ -12,6 +14,11 @@ const createElement = (type, props, ...children) => ({
 class Component {
   constructor(props) {
     this.props = props;
+  }
+
+  setState(state) {
+    this.state = { ...this.state, ...state };
+    ReactDOM.__reRender();
   }
 }
 

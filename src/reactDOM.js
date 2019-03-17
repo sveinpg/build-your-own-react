@@ -1,3 +1,9 @@
+const root = {};
+const classCache = {
+  index: -1,
+  cache: []
+};
+
 const render = (element, targetElement) => {
   if (element === undefined || element === null) {
     // Not valid
@@ -18,7 +24,9 @@ const render = (element, targetElement) => {
       typeof element.type.prototype.render === "function"
     ) {
       // Class component
-      const component = new element.type(element.props);
+      classCache.index++;
+      const component = classCache.cache[classCache.index] ? classCache.cache[classCache.index] : new element.type(element.props);
+      classCache.cache[classCache.index] = component;
       render(component.render(), targetElement);
     } else {
       // Function component
@@ -61,5 +69,18 @@ const render = (element, targetElement) => {
 };
 
 module.exports = {
-  render: render
+  render: (element, targetElement) => {
+    root.element = element;
+    root.targetElement = targetElement;
+    render(element, targetElement);
+  },
+  __reRender: () => {
+    while (root.targetElement.hasChildNodes()) {
+      root.targetElement.removeChild(root.targetElement.lastChild);
+    }
+
+    classCache.index = -1;
+
+    render(root.element, root.targetElement);
+  }
 };

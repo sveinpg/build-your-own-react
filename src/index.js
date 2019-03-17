@@ -1,19 +1,33 @@
 import React from "./react";
 import ReactDOM from "./reactDOM";
 
-//const Message = ({ name }) => <p className="red">{name}</p>;
+class Counter extends React.Component {
 
-class Message extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: 0};
+  }
+
+  onPlusClick() {
+    this.setState({value: this.state.value + 1});
+  };
+
+  onMinusClick() {
+    this.setState({value: this.state.value - 1});
+  };
+
   render() {
-    return <p className="red">{this.props.name}</p>;
+    return (
+      <div>
+        <div style={ { color: 'red', marginTop: '20px' } }>The Famous Dan Abramov's Counter</div>
+        <div>{this.state.value}</div>
+        <button onClick={ this.onPlusClick.bind(this) }>+</button>
+        <button onClick={ this.onMinusClick.bind(this) }>-</button>
+      </div>
+    );
   }
 }
 
-const Greeting = () => (
-  <div>
-    <Message name="test" />
-    <Message name="abc" />
-  </div>
-);
+console.log(<Counter />);
 
-ReactDOM.render(<Greeting />, document.getElementById("root"));
+ReactDOM.render(<Counter />, document.getElementById("root"));
