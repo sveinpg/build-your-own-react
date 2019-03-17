@@ -13,7 +13,17 @@ const render = (element, targetElement) => {
 
   if (typeof element.type === "function") {
     // Recursivly render components
-    render(element.type(element.props), targetElement);
+    if (
+      element.type.prototype &&
+      typeof element.type.prototype.render === "function"
+    ) {
+      // Class component
+      const component = new element.type(element.props);
+      render(component.render(), targetElement);
+    } else {
+      // Function component
+      render(element.type(element.props), targetElement);
+    }
   }
 
   if (typeof element.type === "string") {

@@ -1,4 +1,4 @@
-export const createElement = (type, props, ...children) => ({
+const createElement = (type, props, ...children) => ({
   $$typeof: Symbol.for("react.element"),
   type: type,
   props: {
@@ -9,6 +9,13 @@ export const createElement = (type, props, ...children) => ({
   _owner: null
 });
 
+class Component {
+  constructor(props) {
+    this.props = props;
+  }
+}
+
 module.exports = {
-  createElement: createElement
+  createElement: createElement,
+  Component: Component
 };
