@@ -22,7 +22,7 @@ class Component {
       return;
     }
 
-    if (state instanceof Function) {
+    if (typeof state === "function") {
       this.state = { ...this.state, ...state(this.state) };
     } else {
       this.state = { ...this.state, ...state };
