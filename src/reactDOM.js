@@ -1,11 +1,11 @@
 const render = (element, targetElement) => {
-  if (!element) {
+  if (element === undefined || element === null) {
     // Not valid
     return null;
   }
 
   if (!element.type) {
-    if (typeof element === "string") {
+    if (typeof element === "string" || typeof element === "number") {
       // Append text node
       targetElement.appendChild(document.createTextNode(element));
     }
@@ -34,6 +34,14 @@ const render = (element, targetElement) => {
     // Set className
     if (element.props.className) {
       node.className = element.props.className;
+    }
+
+    // Set styles
+    if (element.props.style) {
+      Object.entries(element.props.style)
+        .forEach(([style, value]) => {
+          node.style[style] = value;
+        });
     }
 
     // Render children
