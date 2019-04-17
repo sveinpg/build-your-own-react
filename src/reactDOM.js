@@ -19,10 +19,7 @@ const render = (element, targetElement) => {
 
   if (typeof element.type === "function") {
     // Recursivly render components
-    if (
-      element.type.prototype &&
-      typeof element.type.prototype.render === "function"
-    ) {
+    if (element.type.prototype.isReactComponent) {
       // Class component
       classCache.index++;
       const component = classCache.cache[classCache.index] ? classCache.cache[classCache.index] : new element.type(element.props);

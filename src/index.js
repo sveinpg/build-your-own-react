@@ -8,20 +8,21 @@ class Counter extends React.Component {
   }
 
   onPlusClick() {
-    this.setState(prev => ({ value: this.state.value + 1 }));
+    this.setState(({ value }) => ({ value: value + 1 }));
   }
 
   onMinusClick() {
-    this.setState({ value: this.state.value - 1 });
+    this.setState(({ value }) => ({ value: value - 1 }));
   }
 
   render() {
+    const { value } = this.state;
     return (
       <div>
         <div style={{ color: "red", marginTop: "20px" }}>
           The Famous Dan Abramov's Counter
         </div>
-        <div>{this.state.value}</div>
+        <div>{value}</div>
         <button onClick={this.onPlusClick.bind(this)}>+</button>
         <button onClick={this.onMinusClick.bind(this)}>-</button>
       </div>

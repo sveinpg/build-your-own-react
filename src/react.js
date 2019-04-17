@@ -32,6 +32,8 @@ class Component {
   }
 }
 
+Component.prototype.isReactComponent = {};
+
 module.exports = {
   createElement: createElement,
   Component: Component
