@@ -36,31 +36,37 @@ const render = (element, targetElement) => {
     const node = document.createElement(element.type);
     const component = targetElement.appendChild(node);
 
+    const { className, style, children, ...nodeProps } = element.props;
+
     // Set className
-    if (element.props.className) {
-      node.className = element.props.className;
+    if (className) {
+      node.className = className;
     }
 
     // Set styles
-    if (element.props.style) {
-      Object.entries(element.props.style)
+    if (style) {
+      Object.entries(style)
         .forEach(([style, value]) => {
           node.style[style] = value;
         });
     }
 
-    // Add event listeners
-    Object.keys(element.props)
-      .filter(prop => /^on.*$/.test(prop))
-      .forEach(prop => node.addEventListener(prop.substring(2).toLowerCase(), element.props[prop]));
+    // Add event listeners and other props
+    Object.keys(nodeProps).forEach(prop => {
+      if (/^on.*$/.test(prop)) {
+        node.addEventListener(prop.substring(2).toLowerCase(), nodeProps[prop]);
+      } else {
+        node.setAttribute(prop, nodeProps[prop]);
+      }
+    });
 
     // Render children
-    if (Array.isArray(element.props.children)) {
-      element.props.children.forEach(child => {
+    if (Array.isArray(children)) {
+      children.forEach(child => {
         render(child, component);
       });
-    } else if (element.props.children) {
-      render(element.props.children, component);
+    } else if (children) {
+      render(children, component);
     }
   }
 };
