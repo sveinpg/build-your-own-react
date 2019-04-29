@@ -1,5 +1,6 @@
-import React from "./react";
-import ReactDOM from "./reactDOM";
+import React from './react';
+import ReactDOM from './react-dom';
+
 function Square(props) {
   var border = '5px solid' + props.borderColor;
   var fill = props.fillColor;
