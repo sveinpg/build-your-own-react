@@ -318,7 +318,7 @@ class Game extends React.Component {
 
     //No more flags available
     else {
-      alert("You have more available flags!");
+      alert("You have no more available flags!");
     }
   }
 
