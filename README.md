@@ -6,7 +6,7 @@
 
 :construction_worker_man: [Tasks: build your own React](#tasks)
 
-# <a name="introduction"></a> :closed_book: Introduction 
+# <a name="introduction"></a> :closed_book: Introduction
 
 Generally, when we speak about React we talk about both [React](https://www.npmjs.com/package/react) and [ReactDOM](https://www.npmjs.com/package/react-dom). Prior to v0.14, all ReactDOM functionality was part of the React package. This may be a source of confusion, since older documentation won't mention the distinction between the React and ReactDOM packages.
 
@@ -48,4 +48,38 @@ The dev server should now be running on http://localhost:1234
 
 # <a name="tasks"></a> :construction_worker_man: Tasks: build your own React
 
-Implement `react.createElement`
+Time to get your hands dirty.
+
+To make your life easier, we have marked the task with a :throphy:
+
+## React.createElement()
+
+`createElement` creates and returns a new [React element](#react-elements) of a given type. The function signature of `createElement` takes three arguments:
+
+- `type` - the type of the element we are creating. This can be either be a [HTML element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) or a React component. If we are creating a HTML element, the name of the element (`div`, `p` etc.) is passed as a string. If we are creating a React component, the variable that the component is assigned to is passed as the value.
+- `props` - An object containing the properties (`props`) that get passed to the component.
+- `children` - The children of the component. You can pass as many children as you want.
+
+```js
+React.createElement(type, props, ...children);
+```
+
+The function returns an object like the one below.
+
+TODO: Update this code snippet
+
+```js
+{
+  $$typeof: Symbol.for("react.element"),
+  type: "div",
+  props: {
+      children: []
+  },
+  ref: null,
+  _owner: null
+}
+```
+
+:trophy: Implement `createElement` in the file named `react.js`
+
+> Unfamiliar with `React.createElement()`? Code written with [JSX](https://reactjs.org/docs/introducing-jsx.html) will be converted to use React.createElement(). You will not typically invoke React.createElement() directly if you are using JSX.
