@@ -40,4 +40,4 @@ Different renderes such as ReactDOM and React Native shares a lot of logic. Rend
 
 When you use React you can think of the `render()` method as creating a tree of React elements. If props or state is changed, the `render()` method will return a different tree. The reconciler then needs to figure out how to effectively update the UI to match the most recent tree with the minimum number of operations required.
 
-> If you want to learn more about this, the [React documentation contains an article that explains the choices made in React's diffing algorithm](https://reactjs.org/docs/reconciliation.html).
+> If you want to learn more about this, the [React documentation](https://reactjs.org/docs/reconciliation.html) contains an article that explains the choices made in React's diffing algorithm.
