@@ -1,10 +1,12 @@
 # Table of contents
 
 :closed_book: [Introduction](#introduction)
+
 :runner: [Run the code](#run-the-code)
+
 :construction_worker_man: [Tasks: build your own React](#tasks)
 
-# <a name="introduction"></a> Introduction :closed_book:
+# <a name="introduction"></a> :closed_book: Introduction 
 
 Generally, when we speak about React we talk about both [React](https://www.npmjs.com/package/react) and [ReactDOM](https://www.npmjs.com/package/react-dom). Prior to v0.14, all ReactDOM functionality was part of the React package. This may be a source of confusion, since older documentation won't mention the distinction between the React and ReactDOM packages.
 
@@ -34,7 +36,7 @@ When you use React you can think of the `render()` method as creating a tree of 
 
 > If you want to learn more about this, the [React documentation](https://reactjs.org/docs/reconciliation.html) contains an article that explains the choices made in React's diffing algorithm.
 
-# <a name="run-the-code"></a> Run the code :running:
+# <a name="run-the-code"></a> :running: Run the code
 
 ```
 cd src
@@ -44,6 +46,6 @@ npm start
 
 The dev server should now be running on http://localhost:1234
 
-# <a name="tasks"></a> Tasks: build your own React :construction_worker_man:
+# <a name="tasks"></a> :construction_worker_man: Tasks: build your own React
 
 Implement `react.createElement`
