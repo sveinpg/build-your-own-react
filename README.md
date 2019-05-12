@@ -4,7 +4,7 @@
 
 :runner: [Run the code](#run-the-code)
 
-:construction_worker_man: [Tasks: build your own React](#tasks)
+:construction_worker_man: [Tasks](#tasks)
 
 # <a name="introduction"></a> :closed_book: Introduction
 
@@ -46,7 +46,7 @@ npm start
 
 The dev server should now be running on http://localhost:1234
 
-# <a name="tasks"></a> :construction_worker_man: Tasks: build your own React
+# <a name="tasks"></a> :construction_worker_man: Tasks
 
 Time to get your hands dirty.
 
