@@ -16,9 +16,9 @@ The dev server should now be running on http://localhost:1234
 
 Generally, when we speak about React we talk about both [React](https://www.npmjs.com/package/react) and [ReactDOM](https://www.npmjs.com/package/react-dom). Prior to v0.14, all ReactDOM functionality was part of the React package. This may be a source of confusion, since older documentation won't mention the distinction between the React and ReactDOM packages.
 
-_ReactDOM_ is the glue between React and the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model). When you want to show your React application you need to use `ReactDOM.render()` from the ReactDOM package. This package include the [reconciliation algorithm](#reconciliation) and platform-specific code – also known as [renderers](#renderers).
+__ReactDOM__ is the glue between React and the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model). When you want to show your React application you need to use `ReactDOM.render()` from the ReactDOM package. This package include the [reconciliation algorithm](#reconciliation) and platform-specific code – also known as [renderers](#renderers).
 
-_React_ – often refered to as React core – only includes [the level React APIs](https://reactjs.org/docs/react-api.html#react). It only includes the APIs necessary to define components – the component base class, lifecycle methods, state, props and all the concepts we know and love.
+__React__ – often refered to as React core – only includes [the level React APIs](https://reactjs.org/docs/react-api.html#react). It only includes the APIs necessary to define components – the component base class, lifecycle methods, state, props and all the concepts we know and love.
 
 ## <a name="react-elements"></a> React elements
 
