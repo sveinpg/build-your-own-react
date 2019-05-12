@@ -1,24 +1,16 @@
-# build-your-own-react
+# Table of contents
 
-Work in progress
+:closed_book: [Introduction](#introduction)
+:runner: [Run the code](#run-the-code)
+:construction_worker_man: [Tasks: build your own React](#tasks)
 
-## Run the code
-
-```
-cd src
-npm install
-npm start
-```
-
-The dev server should now be running on http://localhost:1234
-
-# Introduction
+# <a name="introduction"></a> Introduction :closed_book:
 
 Generally, when we speak about React we talk about both [React](https://www.npmjs.com/package/react) and [ReactDOM](https://www.npmjs.com/package/react-dom). Prior to v0.14, all ReactDOM functionality was part of the React package. This may be a source of confusion, since older documentation won't mention the distinction between the React and ReactDOM packages.
 
-__ReactDOM__ is the glue between React and the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model). When you want to show your React application you need to use `ReactDOM.render()` from the ReactDOM package. This package include the [reconciliation algorithm](#reconciliation) and platform-specific code – also known as [renderers](#renderers).
+**ReactDOM** is the glue between React and the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model). When you want to show your React application you need to use `ReactDOM.render()` from the ReactDOM package. This package include the [reconciliation algorithm](#reconciliation) and platform-specific code – also known as [renderers](#renderers).
 
-__React__ – often refered to as React core – only includes [the level React APIs](https://reactjs.org/docs/react-api.html#react). It only includes the APIs necessary to define components – the component base class, lifecycle methods, state, props and all the concepts we know and love.
+**React** – often refered to as React core – only includes [the level React APIs](https://reactjs.org/docs/react-api.html#react). It only includes the APIs necessary to define components – the component base class, lifecycle methods, state, props and all the concepts we know and love.
 
 ## <a name="react-elements"></a> React elements
 
@@ -41,3 +33,17 @@ Different renderes such as ReactDOM and React Native shares a lot of logic. Rend
 When you use React you can think of the `render()` method as creating a tree of React elements. If props or state is changed, the `render()` method will return a different tree. The reconciler then needs to figure out how to effectively update the UI to match the most recent tree with the minimum number of operations required.
 
 > If you want to learn more about this, the [React documentation](https://reactjs.org/docs/reconciliation.html) contains an article that explains the choices made in React's diffing algorithm.
+
+# <a name="run-the-code"></a> Run the code :running:
+
+```
+cd src
+npm install
+npm start
+```
+
+The dev server should now be running on http://localhost:1234
+
+# <a name="tasks"></a> Tasks: build your own React :construction_worker_man:
+
+Implement `react.createElement`
