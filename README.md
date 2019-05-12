@@ -50,7 +50,7 @@ The dev server should now be running on http://localhost:1234
 
 Time to get your hands dirty.
 
-To make your life easier, we have marked the task with a :throphy:
+To make your life easier, we have marked the task with a :trophy:
 
 ## React.createElement()
 
