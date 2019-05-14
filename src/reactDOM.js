@@ -1,3 +1,5 @@
+import "./polyfill";
+
 const root = {};
 const classCache = {
   index: -1,
@@ -22,7 +24,9 @@ const render = (element, targetElement) => {
     if (element.type.prototype.isReactComponent) {
       // Class component
       classCache.index++;
-      const component = classCache.cache[classCache.index] ? classCache.cache[classCache.index] : new element.type(element.props);
+      const component = classCache.cache[classCache.index]
+        ? classCache.cache[classCache.index]
+        : new element.type(element.props);
       classCache.cache[classCache.index] = component;
       render(component.render(), targetElement);
     } else {
@@ -45,10 +49,9 @@ const render = (element, targetElement) => {
 
     // Set styles
     if (style) {
-      Object.entries(style)
-        .forEach(([style, value]) => {
-          node.style[style] = value;
-        });
+      Object.entries(style).forEach(([style, value]) => {
+        node.style[style] = value;
+      });
     }
 
     // Add event listeners and other props
