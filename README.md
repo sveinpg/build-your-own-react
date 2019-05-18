@@ -115,16 +115,76 @@ ReactDOM.render(
 );
 ```
 
-..should result in a `<div />` within our root element.
+..should result in a `div` element within our root element.
 
 ```html
 <div id="root">
-  <div> </div>
+  <div></div>
 </div>
 ```
 
-:trophy: Create a new HTML node and append it to the DOM.
+:trophy: Create a new HTML node and append it to the DOM. Write your code in `ReactDOM.js`.
 
 :bulb: [document.createElement()](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) can be used to create HTML elements.
 
 :bulb: [Node.appendChild()](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) method adds a node to the end of the list of children of a specified parent node.
+
+## 3. Handle children
+
+Great, we are now able to create **one** HTML element! In order to render more than one element we need to handle children.
+
+The following call to `ReactDOM.render()`..
+
+```js
+ReactDOM.render(
+  React.createElement("div", {}, React.createElement("div", {})),
+  document.getElementById("root")
+);
+```
+
+..should result in two nested `div` elements within our root element.
+
+```html
+<div id="root">
+  <div>
+    <div></div>
+  </div>
+</div>
+```
+
+To handle children we are going to recursively call the `render()` method in `ReactDOM.js` until we discover an element without children.
+
+:trophy: Extend the `render` method to support children.
+
+:bulb: React elements can have multiple children.
+
+## 4. Primitive types
+
+Your next task is to handle primitive types like `number` and `string`. Unlike HTML elements and React components, primitive types are not represented with a React element. Moreover, they are not represented with an object with a `type` field. Instead they are represented with their own value. Because of this primitive types are always children of another React element.
+
+The following call to `ReactDOM.render()`..
+
+```js
+ReactDOM.render(
+  React.createElement("div", {}, "Hello world!"),
+  document.getElementById("root")
+);
+```
+
+..should result in a `div` element with the text `Hello world!` inside it.
+
+```html
+<div id="root">
+  <div>
+    <div></div>
+  </div>
+</div>
+```
+
+:trophy: Extend the `render()` method in `ReactDOM.js` to support primitive types by appending their value to the target element.
+
+To check if an element is a primitive type, you should rememeber:
+
+:bulb: Primitive types are not represented with an object with a `type` field.
+
+:bulb: You can use the [typeof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) operator to check the type of a variable.
