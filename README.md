@@ -188,3 +188,17 @@ To check if an element is a primitive type, you should rememeber:
 :bulb: Primitive types are not represented with an object with a `type` field.
 
 :bulb: You can use the [typeof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) operator to check the type of a variable.
+
+## 5 Props
+
+## 6. Classes
+
+## 7. Inline styles
+
+## 8. Events
+
+## 9. React components
+
+## 10. State
+
+## 11. Conditional rendering
