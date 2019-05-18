@@ -50,9 +50,13 @@ The dev server should now be running on http://localhost:1234
 
 Time to get your hands dirty.
 
-To make your life easier, we have marked the task with a :trophy:
+To make your life easier, we have used emojis to mark important content:
 
-## React.createElement()
+:trophy: - A task.
+
+:bulb: - Tips and helpful information to solve a specific task.
+
+## 1. React.createElement()
 
 `createElement` creates and returns a new [React element](#react-elements) of a given type. The function signature of `createElement` takes three arguments:
 
@@ -82,4 +86,45 @@ TODO: Update this code snippet
 
 :trophy: Implement `createElement` in the file named `react.js`
 
-> Unfamiliar with `React.createElement()`? Code written with [JSX](https://reactjs.org/docs/introducing-jsx.html) will be converted to use React.createElement(). You will not typically invoke React.createElement() directly if you are using JSX.
+:bulb: Unfamiliar with `React.createElement()`? Code written with [JSX](https://reactjs.org/docs/introducing-jsx.html) will be converted to use React.createElement(). You will not typically invoke React.createElement() directly if you are using JSX.
+
+## 2. Render HTML elements
+
+Time to render our newly created React element!
+
+React elements can be of different types (HTML elements, React components or primitive types like `number` and `string`), specified by the `type` value in our newly created object. Let's start with the HTML elements.
+
+The specific HTML element we are going to render is specified by the `type` value of the React element with a `string`. HTML elements are the only type of React elements that are specified by a string.
+
+```js
+// ReactDOM.js
+
+const render = (element, targetElement) => {
+  if (typeof element.type === "string") {
+    // Your code goes here
+  }
+};
+```
+
+The following call to `ReactDOM.render()`..
+
+```js
+ReactDOM.render(
+  React.createElement("div", {}),
+  document.getElementById("root")
+);
+```
+
+..should result in a `<div />` within our root element.
+
+```html
+<div id="root">
+  <div> </div>
+</div>
+```
+
+:trophy: Create a new HTML node and append it to the DOM.
+
+:bulb: [document.createElement()](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) can be used to create HTML elements.
+
+:bulb: [Node.appendChild()](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) method adds a node to the end of the list of children of a specified parent node.
