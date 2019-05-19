@@ -176,7 +176,7 @@ ReactDOM.render(
 ```html
 <div id="root">
   <div>
-    <div></div>
+    Hello world!
   </div>
 </div>
 ```
