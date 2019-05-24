@@ -1,4 +1,4 @@
-import ReactDOM from './react-dom';
+import ReactDOM from './simple-react-dom';
 
 const createElement = (type, props, ...children) => ({
   $$typeof: Symbol.for("react.element"),
