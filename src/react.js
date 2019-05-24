@@ -1,4 +1,5 @@
-import ReactDOM from './react-dom';
+import ReactDOM from "./react-dom";
+import "./polyfill";
 
 const createElement = (type, props, ...children) => ({
   $$typeof: Symbol.for("react.element"),
