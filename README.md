@@ -189,7 +189,7 @@ To check if an element is a primitive type, you should rememeber:
 
 :bulb: You can use the [typeof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) operator to check the type of a variable.
 
-## 5 Functional components and props
+## 5. Functional components and props
 
 In many ways React components are like JavaScript functions. Just like functions, they accept arbitrary input. All input values are passed to the component in a single object called `props`. Props are used to customize components, and enables us to re-use components.
 
@@ -212,7 +212,7 @@ In the above example the prop "name" is set as a JSX attribute. React passes all
 
 :bulb: As you see in the code snippet above, you can simply give the `props` object as an argument to your functional component.
 
-## 6. css-classes
+## 6. className
 
 No application is complete without styling. In React there is mainly two ways to style your elements – [inline styling](https://reactjs.org/docs/dom-elements.html#style) and [CSS](https://reactjs.org/docs/faq-styling.html). We'll cover CSS in this task and inline styling in task #7.
 
