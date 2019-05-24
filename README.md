@@ -189,9 +189,30 @@ To check if an element is a primitive type, you should rememeber:
 
 :bulb: You can use the [typeof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) operator to check the type of a variable.
 
-## 5 Props
+## 5 Functional components and props
 
-## 6. Classes
+In many ways React components are like JavaScript functions. Just like functions, they accept arbitrary input. All input values are passed to the component in a single object called `props`. Props are used to customize components, and enables us to re-use components.
+
+For example, this code renders "Hello, NDC" on the page.
+
+```jsx
+function Greeting(props) {
+  return <p>Hello, {props.name}</p>;
+}
+
+const element = <Greeting name="NDC" />;
+ReactDOM.render(element, document.getElementById("root"));
+```
+
+In the above example the prop "name" is set as a JSX attribute. React passes all JSX attributes to our user-defined component in a single object.
+
+:trophy: Extend `reactDOM.js` to handle functional components.
+
+:trophy: Extend your handling of functional components to pass `props` to the function.
+
+:bulb: As you see in the code snippet above, you can simply give the `props` object as an argument to your functional component.
+
+## 6. css-classes
 
 ## 7. Inline styles
 
