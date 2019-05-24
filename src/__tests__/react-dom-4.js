@@ -12,7 +12,11 @@ test("Check rendering of p", async () => {
       "div",
       {},
       "Hello universe",
-      React.createElement("p", {}, "Hello world")
+      React.createElement(
+        "p",
+        {},
+        "Hello world"
+      )
     ),
     container
   );
