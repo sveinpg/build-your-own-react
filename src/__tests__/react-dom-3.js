@@ -1,19 +1,12 @@
 import React from "../react";
-import ReactDOM from "../reactDOM";
-import { getExampleDOM } from '../test-utils';
+import ReactDOM from "../react-dom";
+import { getExampleDOM } from "../test-utils";
 
 test("Check rendering of p", async () => {
   const container = getExampleDOM();
 
   ReactDOM.render(
-    React.createElement(
-      "p",
-      {},
-      React.createElement(
-        "span",
-        {}
-      )
-    ),
+    React.createElement("p", {}, React.createElement("span", {})),
     container
   );
 

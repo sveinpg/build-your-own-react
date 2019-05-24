@@ -1,17 +1,11 @@
 import React from "../react";
-import ReactDOM from "../reactDOM";
-import { getExampleDOM } from '../test-utils';
+import ReactDOM from "../react-dom";
+import { getExampleDOM } from "../test-utils";
 
 test("Check rendering of p", async () => {
   const container = getExampleDOM();
 
-  ReactDOM.render(
-    React.createElement(
-      "p",
-      {},
-    ),
-    container
-  );
+  ReactDOM.render(React.createElement("p", {}), container);
 
   expect(container.querySelector("p")).not.toBeNull();
 });
