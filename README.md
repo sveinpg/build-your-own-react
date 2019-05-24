@@ -60,9 +60,9 @@ To make your life easier, we have used emojis to mark important content:
 
 `createElement` creates and returns a new [React element](#react-elements) of a given type. The function signature of `createElement` takes three arguments:
 
-- `type` - the type of the element we are creating. This can be either be a [HTML element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) or a React component. If we are creating a HTML element, the name of the element (`div`, `p` etc.) is passed as a string. If we are creating a React component, the variable that the component is assigned to is passed as the value.
-- `props` - An object containing the properties (`props`) that get passed to the component.
-- `children` - The children of the component. You can pass as many children as you want.
+-   `type` - the type of the element we are creating. This can be either be a [HTML element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) or a React component. If we are creating a HTML element, the name of the element (`div`, `p` etc.) is passed as a string. If we are creating a React component, the variable that the component is assigned to is passed as the value.
+-   `props` - An object containing the properties (`props`) that get passed to the component.
+-   `children` - The children of the component. You can pass as many children as you want.
 
 ```js
 React.createElement(type, props, ...children);
@@ -100,9 +100,9 @@ The specific HTML element we are going to render is specified by the `type` valu
 // ReactDOM.js
 
 const render = (element, targetElement) => {
-  if (typeof element.type === "string") {
-    // Your code goes here
-  }
+    if (typeof element.type === 'string') {
+        // Your code goes here
+    }
 };
 ```
 
@@ -110,8 +110,8 @@ The following call to `ReactDOM.render()`..
 
 ```js
 ReactDOM.render(
-  React.createElement("div", {}),
-  document.getElementById("root")
+    React.createElement('div', {}),
+    document.getElementById('root')
 );
 ```
 
@@ -119,7 +119,7 @@ ReactDOM.render(
 
 ```html
 <div id="root">
-  <div></div>
+    <div></div>
 </div>
 ```
 
@@ -137,8 +137,8 @@ The following call to `ReactDOM.render()`..
 
 ```js
 ReactDOM.render(
-  React.createElement("div", {}, React.createElement("div", {})),
-  document.getElementById("root")
+    React.createElement('div', {}, React.createElement('div', {})),
+    document.getElementById('root')
 );
 ```
 
@@ -146,9 +146,9 @@ ReactDOM.render(
 
 ```html
 <div id="root">
-  <div>
-    <div></div>
-  </div>
+    <div>
+        <div></div>
+    </div>
 </div>
 ```
 
@@ -166,8 +166,8 @@ The following call to `ReactDOM.render()`..
 
 ```js
 ReactDOM.render(
-  React.createElement("div", {}, "Hello world!"),
-  document.getElementById("root")
+    React.createElement('div', {}, 'Hello world!'),
+    document.getElementById('root')
 );
 ```
 
@@ -175,9 +175,9 @@ ReactDOM.render(
 
 ```html
 <div id="root">
-  <div>
-    Hello world!
-  </div>
+    <div>
+        Hello world!
+    </div>
 </div>
 ```
 
@@ -197,11 +197,11 @@ For example, this code renders "Hello, NDC" on the page.
 
 ```jsx
 function Greeting(props) {
-  return <p>Hello, {props.name}</p>;
+    return <p>Hello, {props.name}</p>;
 }
 
 const element = <Greeting name="NDC" />;
-ReactDOM.render(element, document.getElementById("root"));
+ReactDOM.render(element, document.getElementById('root'));
 ```
 
 In the above example the prop "name" is set as a JSX attribute. React passes all JSX attributes to our user-defined component in a single object.
@@ -214,7 +214,23 @@ In the above example the prop "name" is set as a JSX attribute. React passes all
 
 ## 6. css-classes
 
+No application is complete without styling. In React there is mainly two ways to style your elements – [inline styling](https://reactjs.org/docs/dom-elements.html#style) and [CSS](https://reactjs.org/docs/faq-styling.html). We'll cover CSS in this task and inline styling in task #7.
+
+To specify a CSS class of an element, use the `className` attribute. This is one of the JSX attributes (`props`) that are reserved by React. It is used to set the [class attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class) of the specific element.
+
+:trophy: Implement support for the `className` attribute in `VDomNode.js`
+
+:bulb: You can use the [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) property of the Element interface to set the value of the class attribute of a specific HTML element.
+
 ## 7. Inline styles
+
+Inline styling is another way to style your application. The `style` attribute accepts a JavaScript object with camelCased properties. For instance, `background-color` becomes `backgroundColor` etc.
+
+> This is different from HTML where the [style attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/style) accepts a CSS-string.
+
+:trophy: Implement support for the `style` attribute in `VDomNode.js`
+
+:bulb: You can use the [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) property of the HTMLElement to set the style attribute of a specific HTML element.
 
 ## 8. Events
 
