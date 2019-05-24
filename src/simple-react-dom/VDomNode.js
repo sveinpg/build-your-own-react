@@ -67,21 +67,21 @@ export default class VDomNode {
     constructor(reactElement) {
         this.currentReactElement = reactElement;
         this.domNode = null;
-        this.childrenVNodes = [];
     }
 
     getPublicInstance() {
         return this.domNode;
     }
 
-    mount() {
+    mount(classCache) {
         const { props } = this.currentReactElement || {};
 
         this.domNode = VDomNode.buildDomNode(this.currentReactElement);
-        this.childrenVNodes = VDomNode.getChildrenAsArray(props).map(instantiateVNode);
 
-        for (const childVNode of this.childrenVNodes) {
-            const childDomNode = childVNode.mount();
+        const childrenVNodes = VDomNode.getChildrenAsArray(props).map(instantiateVNode);
+
+        for (const childVNode of childrenVNodes) {
+            const childDomNode = childVNode.mount(classCache);
             this.domNode.appendChild(childDomNode);
         }
 

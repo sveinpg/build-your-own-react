@@ -12,27 +12,35 @@ export default class VCompositeNode {
     constructor(reactElement) {
         this.currentReactElement = reactElement;
         this.classInstance = null;
-        this.renderedInstance = null;
     }
 
     getPublicInstance() {
         return this.classInstance;
     }
 
-    mount() {
+    mount(classCache) {
         const {
             type,
             props,
         } = this.currentReactElement;
 
+        let renderedInstance;
         if (VCompositeNode.isReactClassComponent(type)) {
-            this.classInstance = new type(props);
-            this.renderedInstance = instantiateVNode(this.classInstance.render());
+            const cacheIndex = classCache.index++;
+            const cachedInstance = classCache.cache[cacheIndex];
+
+            const instance = cachedInstance ? cachedInstance : new type(props);
+            instance.props = props;
+
+            classCache.cache[cacheIndex] = instance;
+
+            renderedInstance = instantiateVNode(instance.render());
+            this.classInstance = instance;
         } else {
+            renderedInstance = instantiateVNode(type(props));
             this.classInstance = null;
-            this.renderedInstance = instantiateVNode(type(props));
         }
 
-        return this.renderedInstance.mount();
+        return renderedInstance.mount(classCache);
     }
 }
