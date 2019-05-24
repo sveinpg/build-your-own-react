@@ -2,6 +2,10 @@ import VCompositeNode from './VCompositeNode';
 import VDomNode from './VDomNode';
 
 const root = {};
+const classCache = {
+    index: -1,
+    cache: []
+};
 
 export function instantiateVNode(reactElement) {
     const { type } = reactElement || {};
@@ -17,14 +21,13 @@ function render(
     reactElement = root.reactElement,
     domContainerNode = root.domContainerNode
 ) {
-    const vNode = instantiateVNode(reactElement);
-
-    const domNode = vNode.mount();
-    domNode._vNode = vNode;
-
     if (root.domContainerNode) {
         domContainerNode.innerHTML = '';
+        classCache.index = -1;
     }
+
+    const vNode = instantiateVNode(reactElement);
+    const domNode = vNode.mount(classCache);
 
     domContainerNode.appendChild(domNode);
 
