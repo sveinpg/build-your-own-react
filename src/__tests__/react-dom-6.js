@@ -1,3 +1,5 @@
+import { getNodeText } from "dom-testing-library";
+
 import React from "../react";
 import ReactDOM from "../react-dom";
 import { getExampleDOM } from "../test-utils";
@@ -6,9 +8,11 @@ test("Check rendering of p", async () => {
   const container = getExampleDOM();
 
   ReactDOM.render(
-    <p />,
+    <p className="NDC">
+      Hello world!
+    </p>,
     container
   );
 
-  expect(container.querySelector("p")).not.toBeNull();
+  expect(getNodeText(container.querySelector(".NDC"))).toEqual("Hello world!");
 });

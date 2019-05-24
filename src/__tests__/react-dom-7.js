@@ -6,9 +6,11 @@ test("Check rendering of p", async () => {
   const container = getExampleDOM();
 
   ReactDOM.render(
-    <p />,
+    <p style={ { color: "red" } }>
+      Hello world!
+    </p>,
     container
   );
 
-  expect(container.querySelector("p")).not.toBeNull();
+  expect(container.querySelector('[style="color: red;"]')).not.toBeNull();
 });

@@ -6,14 +6,9 @@ test("Check rendering of p", async () => {
   const container = getExampleDOM();
 
   ReactDOM.render(
-    React.createElement(
-      "p",
-      {},
-      React.createElement(
-        "span",
-        {}
-      )
-    ),
+    <p>
+      <span />
+    </p>,
     container
   );
 

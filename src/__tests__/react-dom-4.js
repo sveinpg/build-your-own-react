@@ -8,16 +8,12 @@ test("Check rendering of p", async () => {
   const container = getExampleDOM();
 
   ReactDOM.render(
-    React.createElement(
-      "div",
-      {},
-      "Hello universe",
-      React.createElement(
-        "p",
-        {},
-        "Hello world"
-      )
-    ),
+    <div>
+      Hello universe
+      <p>
+        Hello world
+      </p>
+    </div>,
     container
   );
 
