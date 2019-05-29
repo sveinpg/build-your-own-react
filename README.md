@@ -232,8 +232,6 @@ Inline styling is another way to style your application. The `style` attribute a
 
 :bulb: You can use the [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) property of the HTMLElement to set the style attribute of a specific HTML element.
 
-TODO: Skal vi ha en oppgave som looper over resten av attributtene?
-
 ## 8. Attributes
 
 If you are familiar with HTML, you know that we need to support more attributes than `style` and `className`. Luckily for us, most of these attributes are simular for React (we will handle events in the next task).
