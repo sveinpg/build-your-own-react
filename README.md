@@ -232,10 +232,61 @@ Inline styling is another way to style your application. The `style` attribute a
 
 :bulb: You can use the [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) property of the HTMLElement to set the style attribute of a specific HTML element.
 
-## 8. Events
+TODO: Skal vi ha en oppgave som looper over resten av attributtene?
 
-## 9. React components
+## 8. Attributes
 
-## 10. State
+If you are familiar with HTML, you know that we need to support more attributes than `style` and `className`. Luckily for us, most of these attributes are simular for React (we will handle events in the next task).
 
-## 11. Conditional rendering
+:trophy: Loop through the rest of the attributes (`props`) and add them to the DOM node.
+
+:bulb: You can use [setAttribute()](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute) to set attributes.
+
+:bulb: You can use [Object.entries](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) to loop through the keys and values of an object.
+
+## 9. Events
+
+With plain html and JavaScript we primarly have to two ways of adding event listeners. You can either use the [addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) JavaScript method or you can pass a string as a HTML attribute to the HTML element.
+
+```html
+<button id="click-me">JavaScript</button>
+<button onclick="alert('The second button was clicked')">HTML-attribute</button>
+
+<script type="text/javascript">
+    var element = document.getElementById('click-me');
+    element.addEventListener('click', function() {
+        alert('The first button was clicked');
+    });
+</script>
+```
+
+[Handling events in React](https://reactjs.org/docs/handling-events.html) is simular to the second way of adding an event listener – by passing a HTML attribute. However, there are some syntactic differences:
+
+-   React events are named using camelCase, rather than lowercase.
+-   With JSX you pass a function as the event handler, rather than a string.
+
+```jsx
+const button = () => (
+    <button onClick={() => alert('The button was clicked')}>Click me</button>
+);
+```
+
+> When using React you should generally not need to call `addEventListener` to add listeners to a DOM element after it is created.
+
+:trophy: Use `addEventListener()` to add event listeners for each of the attributes that start with `on`.
+
+:bulb: You can use the following regex to find strings that start with `on`:
+
+```js
+const varToTest = 'onClick';
+
+if (/^on.*$/.test(varToTest)) {
+    console.log('Found match ', varToTest);
+}
+```
+
+## 10. React components
+
+## 11. State
+
+## 12. Conditional rendering
