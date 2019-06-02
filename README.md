@@ -309,7 +309,7 @@ To create a class component you simply extend [React.Component](https://reactjs.
 
 As mentioned, the `render`-method is used to specify what to render. It is the only required method in a class component and should return [React elements](#react-elements).
 
-:throphy: Create an instance method in your newly created class called `render` that throws an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error).
+:trophy: Create an instance method in your newly created class called `render` that throws an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error).
 
 :bulb: By creating this method we enfore that all classes that extend our class implement a `render`-method.
 
