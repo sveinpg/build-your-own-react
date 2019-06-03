@@ -12,7 +12,7 @@ Generally, when we speak about React we talk about both [React](https://www.npmj
 
 **ReactDOM** is the glue between React and the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model). When you want to show your React application you need to use `ReactDOM.render()` from the ReactDOM package. This package include the [reconciliation algorithm](#reconciliation) and platform-specific code – also known as [renderers](#renderers).
 
-**React** – often refered to as React core – only includes [the top-level React APIs](https://reactjs.org/docs/react-api.html#react). It only includes the APIs necessary to define components: the component base class, lifecycle methods, state, props and all the concepts we know and love.
+**React** – often referred to as React core – only includes [the top-level React APIs](https://reactjs.org/docs/react-api.html#react). It only includes the APIs necessary to define components: the component base class, lifecycle methods, state, props and all the concepts we know and love.
 
 ## <a name="react-elements"></a> React elements
 
@@ -30,7 +30,7 @@ In this workshop we are going to create a renderer that renders React components
 
 ## <a name="reconciliation"></a> Reconciliation
 
-Different renderes such as ReactDOM and React Native shares a lot of logic. Rendering, custom components, state, lifecycle methods and refs should work consistently across platforms.
+Different renderers such as ReactDOM and React Native shares a lot of logic. Rendering, custom components, state, lifecycle methods and refs should work consistently across platforms.
 
 When you use React you can think of the `render()` method as creating a tree of React elements. If props or state is changed, the `render()` method will return a different tree. The reconciler then needs to figure out how to effectively update the UI to match the most recent tree with the minimum number of operations required.
 
@@ -183,7 +183,7 @@ ReactDOM.render(
 
 :trophy: Extend the `render()` method in `ReactDOM.js` to support primitive types by appending their value to the target element.
 
-To check if an element is a primitive type, you should rememeber:
+To check if an element is a primitive type, you should remember:
 
 :bulb: Primitive types are not represented with an object with a `type` field.
 
@@ -191,7 +191,7 @@ To check if an element is a primitive type, you should rememeber:
 
 ## 5. Functional components and props
 
-In many ways React components are like JavaScript functions. Just like functions, they accept arbitrary input. All input values are passed to the component in a single object called `props`. Props are used to customize components, and enables us to re-use components.
+In many ways React components are like JavaScript functions. Just like functions, they accept arbitrary input. All input values are passed to the component in a single object called `props`. Props are used to customise components, and enables us to re-use components.
 
 For example, this code renders "Hello, NDC" on the page.
 
@@ -234,7 +234,7 @@ Inline styling is another way to style your application. The `style` attribute a
 
 ## 8. Attributes
 
-If you are familiar with HTML, you know that we need to support more attributes than `style` and `className`. Luckily for us, most of these attributes are simular for React (we will handle events in the next task).
+If you are familiar with HTML, you know that we need to support more attributes than `style` and `className`. Luckily for us, most of these attributes are similar for React (we will handle events in the next task).
 
 :trophy: Loop through the rest of the attributes (`props`) and add them to the DOM node.
 
@@ -244,7 +244,7 @@ If you are familiar with HTML, you know that we need to support more attributes 
 
 ## 9. Events
 
-With plain html and JavaScript we primarly have to two ways of adding event listeners. You can either use the [addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) JavaScript method or you can pass a string as a HTML attribute to the HTML element.
+With plain html and JavaScript we primarily have to two ways of adding event listeners. You can either use the [addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) JavaScript method or you can pass a string as a HTML attribute to the HTML element.
 
 ```html
 <button id="click-me">JavaScript</button>
@@ -258,7 +258,7 @@ With plain html and JavaScript we primarly have to two ways of adding event list
 </script>
 ```
 
-[Handling events in React](https://reactjs.org/docs/handling-events.html) is simular to the second way of adding an event listener – by passing a HTML attribute. However, there are some syntactic differences:
+[Handling events in React](https://reactjs.org/docs/handling-events.html) is similar to the second way of adding an event listener – by passing a HTML attribute. However, there are some syntactic differences:
 
 -   React events are named using camelCase, rather than lowercase.
 -   With JSX you pass a function as the event handler, rather than a string.
@@ -291,7 +291,7 @@ Stateless applications are only required to render once, and that is exactly wha
 
 Historically, stateful React components are defined using [a class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes).
 
-> With the additon of hooks, you can [use state and other React features](https://reactjs.org/docs/hooks-state.html) without writing a class. This will not be covered in this workshop.
+> With the addition of hooks, you can [use state and other React features](https://reactjs.org/docs/hooks-state.html) without writing a class. This will not be covered in this workshop.
 
 ```jsx
 class Greeting extends React.Component {
@@ -301,7 +301,7 @@ class Greeting extends React.Component {
 }
 ```
 
-To create a class component you simply extend [React.Component](https://reactjs.org/docs/react-component.html) and implement the `render`-method to specifiy what to render.
+To create a class component you simply extend [React.Component](https://reactjs.org/docs/react-component.html) and implement the `render`-method to specify what to render.
 
 :trophy: Create a class in `react.js` and export it with the name `Component`.
 
@@ -311,7 +311,7 @@ As mentioned, the `render`-method is used to specify what to render. It is the o
 
 :trophy: Create an instance method in your newly created class called `render` that throws an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error).
 
-:bulb: By creating this method we enfore that all classes that extend our class implement a `render`-method.
+:bulb: By creating this method we enforce that all classes that extend our class implement a `render`-method.
 
 ## 11. Render class components
 
@@ -327,7 +327,7 @@ Component.prototype.isReactComponent = {};
 
 :trophy: Add the `isReactComponent` prototype data value to our class, and use this to determine if we should call the function itself or the `render`-method of a component in React DOM.
 
-**Secondly**, our class component does not support `props` yet. Props should be accessible in all the class methods of our class. In other words, the props should be avaible in the [function context](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#Function_context) of our class.
+**Secondly**, our class component does not support `props` yet. Props should be accessible in all the class methods of our class. In other words, the props should be available in the [function context](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#Function_context) of our class.
 
 :trophy: Implement a [constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Constructor) that takes the `props` as an argument and assign them to the class.
 
