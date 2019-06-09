@@ -31,6 +31,10 @@ class Component {
 
     ReactDOM._reRender();
   }
+
+  render() {
+    throw new Error("React.Component may not be used directly. Create your own class which extends this class.")
+  }
 }
 
 Component.prototype.isReactComponent = {};
