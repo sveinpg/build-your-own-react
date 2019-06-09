@@ -346,6 +346,54 @@ Component.prototype.isReactComponent = {};
 
 :bulb: To assign the `props` you can simply say: `this.props = props;`
 
-## 11. State
+## 12. State
 
-## 12. Conditional rendering
+As mentioned, the whole point of making this Component class is to be able to create stateful components.
+So finally, let's add some state.
+
+Setting the initial state of your component is really easy. Just assign an object with some properties to the property `state` on your class.
+Just like with props, this is now accessible through `this.state`.
+
+```jsx
+class Greeting extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { name: "world" };
+    }
+
+    render() {
+        return <p>Hello, {this.state.name}</p>;
+    }
+}
+```
+
+Strictly speaking your component now just has a property `state`, it doesn't really _have_ state.
+As you may know, in React you can use `this.setState()` to change this property, and finally make your component stateful.
+
+:trophy: Implement an instance method on your `React.Component` class which takes `state` as an argument.
+This is expected to be an object, and it should be merged to the existing state.
+If it is `undefined` or `null` you should simply do nothing - just return from the function.
+
+:bulb: To merge objects you can either use `Object.assign()` or the shorthand [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax).
+
+:fire: In React `setState()` can also take a function as the first parameter. If you want this you can check the type of `state` in your function. If it's a function, call it with the current state as an argument. 
+
+If you try this code now, you might notice that changing the state doesn't actually change anything in your DOM.
+Your `setState()` method also needs to trigger a re-render of your DOM.
+
+:trophy: In your `setState()` method call `ReactDOM.render()` after updating the state.
+
+Note that if you have many components updating their state at the same time, this might be quite the bottleneck.
+It will be very advantageous to defer the actual rendering until after we are done updating state in all components.
+We can do this by wrapping `ReactDOM.render()` in a `setTimeout`.
+
+:trophy: Implement a re-render function in ReactDOM and call this from `setState()` instead.
+This function should call `setTimeout` with `ReactDOM.render()` as its callback function.
+
+:bulb: Timeouts in JS are only guaranteed to not run _sooner_ than requested, but they _may_ run later.
+A timeout of 0 ms will run its callback as soon as the browser isn't busy doing other things - like updating lots of component states.
+
+:books: When you use `setTimeout` the callback function is placed on the callback queue and ran at the next event loop.
+There was [a nice talk about this](https://www.youtube.com/watch?v=8aGhZQkoFbQ) at JSConf EU 2014.
+
+## 13. Conditional rendering
