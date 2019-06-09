@@ -4,7 +4,7 @@ import React from "../react";
 import ReactDOM from "../react-dom";
 import { getExampleDOM } from "../test-utils";
 
-test("Check rendering of p", async () => {
+test("Check rendering of a functional component with a prop", async () => {
   const container = getExampleDOM();
 
   function Greeting(props) {
@@ -16,5 +16,5 @@ test("Check rendering of p", async () => {
     container
   );
 
-  expect(getNodeText(container.querySelector("p"))).toEqual("Hello, NDC");
+  expect(getNodeText(container.querySelector("p"))).toBe("Hello, NDC");
 });

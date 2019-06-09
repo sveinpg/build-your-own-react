@@ -1,24 +1,14 @@
-import { fireEvent } from 'dom-testing-library';
-
 import React from "../react";
 import ReactDOM from "../react-dom";
 import { getExampleDOM } from "../test-utils";
 
-test("Check rendering of p", async () => {
+test("Check rendering with an html prop", async () => {
   const container = getExampleDOM();
-  const onClick = jest.fn();
 
   ReactDOM.render(
-    <button onClick={ onClick }>
-      Hello world!
-    </button>,
+    <input value="Hello world" />,
     container
   );
 
-  fireEvent(
-    container.querySelector("button"),
-    new MouseEvent('click')
-  );
-
-  expect(onClick).toHaveBeenCalled();
+  expect(container.querySelector("input").value).toBe("Hello world");
 });

@@ -4,7 +4,7 @@ import React from "../react";
 import ReactDOM from "../react-dom";
 import { getExampleDOM } from "../test-utils";
 
-test("Check rendering of p", async () => {
+test("Check rendering of a primitive type child", async () => {
   const container = getExampleDOM();
 
   ReactDOM.render(
@@ -17,6 +17,6 @@ test("Check rendering of p", async () => {
     container
   );
 
-  expect(getNodeText(container.querySelector("div"))).toEqual("Hello universe");
-  expect(getNodeText(container.querySelector("p"))).toEqual("Hello world");
+  expect(getNodeText(container.querySelector("div"))).toBe("Hello universe");
+  expect(getNodeText(container.querySelector("p"))).toBe("Hello world");
 });

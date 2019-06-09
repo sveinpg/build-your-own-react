@@ -4,7 +4,7 @@ import React from "../react";
 import ReactDOM from "../react-dom";
 import { getExampleDOM } from "../test-utils";
 
-test("Check rendering of p", async () => {
+test("Check rendering with a CSS class", async () => {
   const container = getExampleDOM();
 
   ReactDOM.render(
@@ -14,5 +14,5 @@ test("Check rendering of p", async () => {
     container
   );
 
-  expect(getNodeText(container.querySelector(".NDC"))).toEqual("Hello world!");
+  expect(getNodeText(container.querySelector(".NDC"))).toBe("Hello world!");
 });
