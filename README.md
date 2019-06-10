@@ -62,6 +62,10 @@ To make your life easier, we have used emojis to mark important content:
 
 :bulb: - Tips and helpful information to solve a specific task.
 
+:fire: - An extra task if you're up for it.
+
+:books: - Some extended information you might check out some other time.
+
 ## :bulb: - Yes, already a tips. Starting off strong!
 We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented 
 the task correctly. You will find the test-suite in the  `__tests__` directory!
