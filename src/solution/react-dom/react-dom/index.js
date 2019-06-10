@@ -22,7 +22,7 @@ function render(
         const prevReactElement = prevVNode.getCurrentReactElement();
 
         if (prevReactElement.type === reactElement.type) {
-            prevVNode.receive(reactElement);
+            prevVNode.update(reactElement);
             return;
         }
 
