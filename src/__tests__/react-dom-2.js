@@ -1,8 +1,12 @@
-import React from "../solution/react";
-import ReactDOM from "../solution/react-dom";
-import { getExampleDOM } from "../test-utils";
+import React from '../solution/react';
+import ReactDOM, { instantiateVNode } from '../solution/react-dom';
+import { getExampleDOM } from '../test-utils';
 
-test("Check rendering of html element", async () => {
+test('Checks that instantiateVNode returns a VDomNode', () => {
+  expect(instantiateVNode(<p />).constructor.name).toBe('VDomNode');
+});
+
+test('Check rendering of html element', async () => {
   const container = getExampleDOM();
 
   ReactDOM.render(
@@ -10,5 +14,5 @@ test("Check rendering of html element", async () => {
     container
   );
 
-  expect(container.querySelector("p")).not.toBeNull();
+  expect(container.querySelector('p')).not.toBeNull();
 });

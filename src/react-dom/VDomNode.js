@@ -1,7 +1,7 @@
 import { instantiateVNode } from './index';
 
 export default class VDomNode {
-    constructor() {}
+    constructor(reactElement) {}
 
     getPublicInstance() {}
 
