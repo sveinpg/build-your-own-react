@@ -12,11 +12,13 @@ Generally, when we speak about React we talk about both [React](https://www.npmj
 
 **ReactDOM** is the glue between React and the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model). When you want to show your React application you need to use `ReactDOM.render()` from the ReactDOM package. This package include the [reconciliation algorithm](#reconciliation) and platform-specific code – also known as [renderers](#renderers).
 
-**React** – often referred to as React core – only includes [the top-level React APIs](https://reactjs.org/docs/react-api.html#react). It only includes the APIs necessary to define components: the component base class, lifecycle methods, state, props and all the concepts we know and love.
+**React** – often referred to as React core and includes [the top-level React APIs](https://reactjs.org/docs/react-api.html#react). It only includes the APIs necessary to define components: the component base class, lifecycle methods, state, props and all the concepts we know and love.
 
 ## <a name="react-elements"></a> React elements
 
-React elements are the building blocks of React applications. React elements might be confused with the concept of React components. To clarify, React elements are what you see on the screen – the return value of the `render()` method of a React component.
+React elements are the building blocks of React applications. React elements might be confused with the concept of 
+React components. To clarify, React elements are generally what gets rendered on the screen, i.e. the return value of
+the `render()` method of a React component or the return of a functional component.
 
 ```jsx
 const element = <p>I'm an element</p>;
@@ -26,15 +28,19 @@ const element = <p>I'm an element</p>;
 
 React was originally created for the DOM, but the concept of renderers was introduced to support native platforms like React Native. A renderer is responsible for turning a tree of [React elements](#react-elements) into the underlying platform. In other words, if we want to support another platform all we need is a new renderer.
 
-In this workshop we are going to create a renderer that renders React components to the DOM – just like ReactDOM.
+In this workshop we are going to create a renderer that renders React components to the DOM, just like ReactDOM.
 
 ## <a name="reconciliation"></a> Reconciliation
 
 Different renderers such as ReactDOM and React Native shares a lot of logic. Rendering, custom components, state, lifecycle methods and refs should work consistently across platforms.
 
-When you use React you can think of the `render()` method as creating a tree of React elements. If props or state is changed, the `render()` method will return a different tree. The reconciler then needs to figure out how to effectively update the UI to match the most recent tree with the minimum number of operations required.
+When you use React you can think of the `render()` method as creating a tree of React elements. If props or state is 
+changed, the `render()` method might return a different tree. The reconciler then needs to figure out how to 
+effectively update the UI to match the most recent tree with the minimum number of operations required.
 
 > If you want to learn more about this, the [React documentation](https://reactjs.org/docs/reconciliation.html) contains an article that explains the choices made in React's diffing algorithm.
+
+Reconciliation  
 
 # <a name="run-the-code"></a> :running: Run the code
 
@@ -55,6 +61,10 @@ To make your life easier, we have used emojis to mark important content:
 :trophy: - A task.
 
 :bulb: - Tips and helpful information to solve a specific task.
+
+## :bulb: - Yes, already a tips. Starting off strong!
+We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented 
+the task correctly. You will find the test-suite in the  `__tests__` directory!
 
 ## 1. React.createElement()
 
@@ -87,6 +97,9 @@ TODO: Update this code snippet
 :trophy: Implement `createElement` in the file named `react.js`
 
 :bulb: Unfamiliar with `React.createElement()`? Code written with [JSX](https://reactjs.org/docs/introducing-jsx.html) will be converted to use React.createElement(). You will not typically invoke React.createElement() directly if you are using JSX.
+
+:bulb: In this workshop, we won't make use `$$typeof`, but do take a look at [this blog post](https://overreacted.io/why-do-react-elements-have-typeof-property/) for details about what `$$typeof` is. Essentially it is to protect 
+against XSS-attacks.
 
 ## 2. Render HTML elements
 

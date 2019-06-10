@@ -82,7 +82,7 @@ export default class VDomNode {
         return this.currentReactElement;
     }
 
-    receive(nextReactElement) {
+    update(nextReactElement) {
         const {
             props: { children: currentChildren = {} } = {},
         } = this.currentReactElement || {};
@@ -111,7 +111,7 @@ export default class VDomNode {
             if (isTypeDefined && nextChild.type === currentChild.type) {
                 const vNode = this.childrenVNodes[i];
                 nextChildrenVNodes.push(vNode);
-                vNode.receive(nextChild);
+                vNode.update(nextChild);
             } else if (!isNextChildDefined && isCurrentChildDefined) {
                 const vNode = this.childrenVNodes[i];
                 this.domNode.removeChild(vNode.getDomNode());

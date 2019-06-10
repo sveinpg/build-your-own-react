@@ -27,7 +27,7 @@ export default class VCompositeNode {
         return this.renderedInstance.getDomNode();
     }
 
-    receive(nextReactElement) {
+    update(nextReactElement) {
         const {
             type,
             props: nextProps,
@@ -43,7 +43,7 @@ export default class VCompositeNode {
 
         const prevRenderedReactElement = this.renderedInstance.getCurrentReactElement();
         if (prevRenderedReactElement.type === nextRenderedReactElement.type) {
-            this.renderedInstance.receive(nextRenderedReactElement);
+            this.renderedInstance.update(nextRenderedReactElement);
         } else {
             this.renderedInstance = instantiateVNode(nextRenderedReactElement);
 
