@@ -1,4 +1,4 @@
-import React from "../react";
+import React from "../solution/react";
 import "../test-utils";
 
 class Greeting extends React.Component {

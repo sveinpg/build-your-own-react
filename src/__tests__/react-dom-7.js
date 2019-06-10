@@ -1,5 +1,5 @@
-import React from "../react";
-import ReactDOM from "../react-dom";
+import React from "../solution/react";
+import ReactDOM from "../solution/react-dom";
 import { getExampleDOM } from "../test-utils";
 
 test("Check rendering with inline styling", async () => {

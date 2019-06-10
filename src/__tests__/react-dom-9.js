@@ -1,7 +1,7 @@
-import { fireEvent } from 'dom-testing-library';
+import { fireEvent } from "dom-testing-library";
 
-import React from "../react";
-import ReactDOM from "../react-dom";
+import React from "../solution/react";
+import ReactDOM from "../solution/react-dom";
 import { getExampleDOM } from "../test-utils";
 
 test("Check rendering with an event listener", async () => {
@@ -17,7 +17,7 @@ test("Check rendering with an event listener", async () => {
 
   fireEvent(
     container.querySelector("button"),
-    new MouseEvent('click')
+    new MouseEvent("click")
   );
 
   expect(onClick).toHaveBeenCalled();

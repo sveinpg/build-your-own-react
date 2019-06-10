@@ -1,7 +1,7 @@
-import { getNodeText } from 'dom-testing-library';
+import { getNodeText } from "dom-testing-library";
 
-import React from "../react";
-import ReactDOM from "../react-dom";
+import React from "../solution/react";
+import ReactDOM from "../solution/react-dom";
 import { getExampleDOM } from "../test-utils";
 
 class Greeting extends React.Component {
