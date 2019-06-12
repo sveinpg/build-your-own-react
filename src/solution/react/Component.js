@@ -25,6 +25,6 @@ class Component {
     }
 }
 
-Component.prototype.isReactComponent = {};
+Component.prototype.isReactComponent = true;
 
 export default Component;

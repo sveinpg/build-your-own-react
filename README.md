@@ -52,6 +52,22 @@ npm start
 
 The dev server should now be running on http://localhost:1234
 
+# The structure
+
+If you've already looked in the `/react-dom` directory or `/react` directory, you might have noticed that they 
+are not empty.
+We've taken the liberty of implementing a skeleton for you of empty functions that are to be implemented.
+
+To stay true to the virtual-dom mindset you will find `VCompositeNode.js` and `VDomNode.js` in the `react-dom` 
+directory. `VDomNode.js` is a "virtual" DOM-node, while the `VCompositeNode` represents a "virtual" react-component node.
+Everything that can be represented in the DOM, such as a `number`, `string`, `div`, `a`, `p` etc. should be a 
+`VDomNode`. Everything else, and by that we mean stateful- or stateless-components should be a `VCompositeNode`.
+
+These "virtual"-nodes can have children, which again are "virtual" nodes. This means that we get a tree-structure
+of nodes known as "the virtual DOM". The "virtual DOM" that we are about to implement is pretty naive. Nevertheless,
+the structure is there to make it easier to extend with a more advanced reconciliation-algorithm that 
+can just render portions of a sub-tree instead of rendering the whole tree every time.
+
 # <a name="tasks"></a> :construction_worker_man: Tasks
 
 Time to get your hands dirty.
@@ -66,9 +82,10 @@ To make your life easier, we have used emojis to mark important content:
 
 :books: - Some extended information you might check out some other time.
 
-## :bulb: - Yes, already a tips. Starting off strong!
+### :bulb: - Yes, already a tips. Starting off strong!
 We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented 
 the task correctly. You will find the test-suite in the  `__tests__` directory!
+
 
 ## 1. React.createElement()
 
@@ -98,7 +115,7 @@ TODO: Update this code snippet
 }
 ```
 
-:trophy: Implement `createElement` in the file named `react.js`
+:trophy: Implement the `createElement` function in the file named `react/index.js`
 
 :bulb: Unfamiliar with `React.createElement()`? Code written with [JSX](https://reactjs.org/docs/introducing-jsx.html) will be converted to use React.createElement(). You will not typically invoke React.createElement() directly if you are using JSX.
 
@@ -113,15 +130,15 @@ React elements can be of different types (HTML elements, React components or pri
 
 The specific HTML element we are going to render is specified by the `type` value of the React element with a `string`. HTML elements are the only type of React elements that are specified by a string.
 
-```js
-// ReactDOM.js
+To complete our task, we need to return a `new VDomNode(reactElement)` from the `instantiateVNode`
+function in `react-dom/index.js`.
 
-const render = (element, targetElement) => {
-    if (typeof element.type === 'string') {
-        // Your code goes here
-    }
-};
-```
+Next, in `render`, we just call `instantiateVNode` with our `reactElement`. We then append the result of `mount` 
+from the node that `instantiateVNode` produces to the `container`.
+
+Remember to also implement the `constructor` and `mount` in `VDomNode`.
+The `constructor` just need to set the `reactElement`-argument as a class-property.
+`mount` has to create a DOM-element from the `reactElement` class-property and return it.
 
 The following call to `ReactDOM.render()`..
 
@@ -140,7 +157,7 @@ ReactDOM.render(
 </div>
 ```
 
-:trophy: Create a new HTML node and append it to the DOM. Write your code in `ReactDOM.js`.
+:trophy: Create a new HTML node and append it to the DOM. Write your code in `/react-dom`.
 
 :bulb: [document.createElement()](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) can be used to create HTML elements.
 

@@ -1,6 +1,6 @@
 import Component from './Component';
 
-const createElement = () => ({});
+const createElement = (type, props, ...children) => {};
 
 export default {
     createElement: createElement,

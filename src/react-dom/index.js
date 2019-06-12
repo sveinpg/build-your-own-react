@@ -1,10 +1,10 @@
 import VCompositeNode from './VCompositeNode';
 import VDomNode from './VDomNode';
 
-export function instantiateVNode() {
+export function instantiateVNode(reactElement) {
 }
 
-function render() {
+function render(reactElement, domContainerNode) {
 }
 
 export default {
