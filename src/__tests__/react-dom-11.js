@@ -12,7 +12,7 @@ class Greeting extends React.Component {
 }
 
 test("Check Component has prototype isReactComponent", async () => {
-  expect(React.Component.prototype.isReactComponent).toEqual({});
+  expect(React.Component.prototype.isReactComponent).toEqual(true);
 });
 
 test("Check Component sets props", async () => {
