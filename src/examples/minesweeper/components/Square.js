@@ -1,4 +1,4 @@
-import React from '../../../solution/react';
+import React from '../../react';
 
 function Square(props) {
     if (props.valueToDisplay === 'f') {

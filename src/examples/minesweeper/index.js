@@ -1,5 +1,5 @@
-import React from '../../solution/react';
-import ReactDOM from '../../solution/react-dom';
+import React from '../react';
+import ReactDOM from '../react-dom';
 
 import Game from './components/Game';
 

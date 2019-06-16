@@ -1,4 +1,4 @@
-import React from '../../../solution/react';
+import React from '../../react';
 import Board from './Board';
 
 class Game extends React.Component {
