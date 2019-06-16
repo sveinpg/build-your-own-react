@@ -1,8 +1,8 @@
-import React from "../solution/react";
-import ReactDOM from "../solution/react-dom";
-import { getExampleDOM } from "../test-utils";
+import React from '../react';
+import ReactDOM from '../react-dom';
+import { getExampleDOM } from '../test-utils';
 
-test("Check rendering of a child", async () => {
+test('Check rendering of a child', async () => {
   const container = getExampleDOM();
 
   ReactDOM.render(
@@ -12,6 +12,6 @@ test("Check rendering of a child", async () => {
     container
   );
 
-  expect(container.querySelector("p")).not.toBeNull();
-  expect(container.querySelector("span")).not.toBeNull();
+  expect(container.querySelector('p')).not.toBeNull();
+  expect(container.querySelector('span')).not.toBeNull();
 });

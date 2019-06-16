@@ -56,14 +56,23 @@ If you've already looked in the `/react-dom` directory or `/react` directory, yo
 are not empty.
 We've taken the liberty of implementing a skeleton for you of empty functions that are to be implemented.
 
+<<<<<<< HEAD
 To stay true to the virtual-dom mindset you will find `VCompositeNode.js` and `VDomNode.js` in the `react-dom`
+=======
+To stay true to the virtual-DOM mindset you will find `VCompositeNode.js` and `VDomNode.js` in the `react-dom` 
+>>>>>>> master
 directory. `VDomNode.js` is a "virtual" DOM-node, while the `VCompositeNode` represents a "virtual" react-component node.
 Everything that can be represented in the DOM, such as a `number`, `string`, `div`, `a`, `p` etc. should be a
 `VDomNode`. Everything else, and by that we mean stateful- or stateless-components should be a `VCompositeNode`.
 
 These "virtual"-nodes can have children, which again are "virtual" nodes. This means that we get a tree-structure
+<<<<<<< HEAD
 of nodes known as "the virtual DOM". The "virtual DOM" that we are about to implement is pretty naive. Nevertheless,
 the structure is there to make it easier to extend with a more advanced reconciliation-algorithm that
+=======
+of nodes known as the "virtual DOM". The "virtual DOM" that we are about to implement is pretty naive. Nevertheless,
+the structure is there to make it easier to extend with a more advanced reconciliation-algorithm that 
+>>>>>>> master
 can just render portions of a sub-tree instead of rendering the whole tree every time.
 
 # <a name="tasks"></a> :construction_worker_man: Tasks
@@ -80,7 +89,13 @@ To make your life easier, we have used emojis to mark important content:
 
 :books: - Some extended information you might check out some other time.
 
+<<<<<<< HEAD
 ### :bulb: - Yes, already a tips. Starting off strong!
+=======
+### :bulb: Yes, already a tips. Starting off strong!
+We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented 
+the task correctly. You will find the test-suite in the  `__tests__` directory!
+>>>>>>> master
 
 We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented
 the task correctly. You will find the test-suite in the `__tests__` directory!
@@ -132,17 +147,23 @@ React elements can be of different types (HTML elements, React components or pri
 
 The specific HTML element we are going to render is specified by the `type` value of the React element with a `string`. HTML elements are the only type of React elements that are specified by a string.
 
-To complete our task, we need to return a `new VDomNode(reactElement)` from the `instantiateVNode`
-function in `react-dom/index.js`.
+To complete our task, we need to:
+ 
+1. return a `new VDomNode(reactElement)` from the `instantiateVNode` function in `react-dom/index.js`.
+2. In `render`, we just call `instantiateVNode` with our `reactElement`.
+3. Append the result of `mount`  from the node that `instantiateVNode` produces to the `container`.
 
+<<<<<<< HEAD
 Next, in `render`, we just call `instantiateVNode` with our `reactElement`. We then append the result of `mount`
 from the node that `instantiateVNode` produces to the `container`.
+=======
+Remember to also implement the `constructor` and `mount` in `VDomNode`:
+>>>>>>> master
 
-Remember to also implement the `constructor` and `mount` in `VDomNode`.
-The `constructor` just need to set the `reactElement`-argument as a class-property.
-`mount` has to create a DOM-element from the `reactElement` class-property and return it.
+4. The `constructor` need to set the `reactElement`-argument as a class-property.
+5. `mount` has to create a DOM-element from the `reactElement` class-property and return it.
 
-The following call to `ReactDOM.render()`..
+The following call to `ReactDOM.render()`...
 
 ```js
 ReactDOM.render(
@@ -151,7 +172,7 @@ ReactDOM.render(
 );
 ```
 
-..should result in a `div` element within our root element.
+...should result in a `div` element within our root element.
 
 ```html
 <div id="root">
@@ -168,6 +189,13 @@ ReactDOM.render(
 ## 3. Handle children
 
 Great, we are now able to create **one** HTML element! In order to render more than one element we need to handle children.
+
+To do so we have to extend the `mount()` function in `VDomNode.js` to iterate over possible children:
+
+1. Get `props.children` of the `reactElement` and map the children to `instantiateVNode`, which will create virtual 
+DOM-nodes.
+2. Iterate over the array of virtual child DOM-nodes and use `appendChild` to append them to the element you created 
+in the previous task.
 
 The following call to `ReactDOM.render()`..
 
@@ -188,15 +216,22 @@ ReactDOM.render(
 </div>
 ```
 
-To handle children we are going to recursively call the `render()` method in `ReactDOM.js` until we discover an element without children.
-
-:trophy: Extend the `render` method to support children.
+:trophy: Extend the `mount` function in `VDomNode.js` to support children.
 
 :bulb: React elements can have multiple children.
 
 ## 4. Primitive types
 
-Your next task is to handle primitive types like `number` and `string`. Unlike HTML elements and React components, primitive types are not represented with a React element. Moreover, they are not represented with an object with a `type` field. Instead they are represented with their own value. Because of this primitive types are always children of another React element.
+Your next task is to handle primitive types like `number` and `string`.
+Unlike HTML elements and React components, primitive types are not represented with a React element.
+Moreover, they are not represented with an object with a `type` field. Instead they are represented with their own value.
+Because of this primitive types are always children of another React element.
+
+We need to extend the `mount` function in `VDomNode` to support primitive types:
+
+1. Check the `typeof` the `reactElement`,
+2. If it is a primitive (`number` or `string`), create a new DOM-node and return it.
+3. If it's not a primitive, then do the logic we implemented in the previous tasks.
 
 The following call to `ReactDOM.render()`..
 
@@ -223,11 +258,25 @@ To check if an element is a primitive type, you should remember:
 
 :bulb: Primitive types are not represented with an object with a `type` field.
 
-:bulb: You can use the [typeof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) operator to check the type of a variable.
+:bulb: Primitives are always leaf-nodes and does have children.
+
+:bulb: You can use the [typeof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) operator to check the type of a variable, like this util-function:
+
+```js
+static isPrimitive(reactElement) {
+    return !reactElement.type &&
+        (typeof reactElement === 'string' || typeof reactElement === 'number');
+}
+```
+
+:bulb: [createTextNode](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode) is perfect for 
+representing primitive types in the DOM.
 
 ## 5. Functional components and props
 
-In many ways React components are like JavaScript functions. Just like functions, they accept arbitrary input. All input values are passed to the component in a single object called `props`. Props are used to customise components, and enables us to re-use components.
+In many ways React components are like JavaScript functions.
+Just like functions, they accept arbitrary input. All input values are passed to the component in a single object called `props`.
+Props are used to customise components, and enables us to re-use components.
 
 For example, this code renders "Hello, NDC" on the page.
 
@@ -242,7 +291,20 @@ ReactDOM.render(element, document.getElementById('root'));
 
 In the above example the prop "name" is set as a JSX attribute. React passes all JSX attributes to our user-defined component in a single object.
 
-:trophy: Extend `reactDOM.js` to handle functional components.
+To get functional components working, you should:
+
+1. Extend `instantiateVNode` in `react-dom/index.js` to be able to instantiate a `VCompositeNode`.
+To do this, just check if the `type` attribute of `reactElement` is a `function` (use `typeof`).
+
+You also need to implement `VCompositeNode.js`:
+
+2. The `constructor` need to set the `reactElement`-argument as a class-property.
+3. `mount` should render the `reactElement` class-property by calling `type` as a function with its `props` as the 
+argument (`type(props);`).
+4. Call `instantiateVNode` with the result the rendering we did in step-3 to get a virtual-node.
+5. The last ting we need to do is to call `mount` on the virtual-node we got in step-5 and return the value.
+
+:trophy: Extend `react-dom/index.js` and `VCompositeNode.js` to handle functional components.
 
 :trophy: Extend your handling of functional components to pass `props` to the function.
 
