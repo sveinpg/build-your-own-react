@@ -101,15 +101,25 @@ React.createElement(type, props, ...children);
 
 The function returns an object like the one below.
 
-TODO: Update this code snippet
-
 ```js
+// JSX is syntax sugar for React.createElement
+// <div>
+//   <button className="blue" />
+//   <button className="red" />
+// </div>
+
 {
-  $$typeof: Symbol.for("react.element"),
-  type: "div",
+  type: 'div',
   props: {
-      children: []
-  },
+    children: [{
+      type: 'button',
+      props: { className: 'blue' }
+    }, {
+      type: 'button',
+      props: { className: 'red' }
+    }]
+  }, 
+  $$typeof: Symbol.for("react.element"),
   ref: null,
   _owner: null
 }
