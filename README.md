@@ -142,8 +142,8 @@ The following call to `ReactDOM.render()`..
 
 ```js
 ReactDOM.render(
-    React.createElement('div', {}),
-    document.getElementById('root')
+    React.createElement("div", {}),
+    document.getElementById("root")
 );
 ```
 
@@ -169,8 +169,8 @@ The following call to `ReactDOM.render()`..
 
 ```js
 ReactDOM.render(
-    React.createElement('div', {}, React.createElement('div', {})),
-    document.getElementById('root')
+    React.createElement("div", {}, React.createElement("div", {})),
+    document.getElementById("root")
 );
 ```
 
@@ -198,8 +198,8 @@ The following call to `ReactDOM.render()`..
 
 ```js
 ReactDOM.render(
-    React.createElement('div', {}, 'Hello world!'),
-    document.getElementById('root')
+    React.createElement("div", {}, "Hello world!"),
+    document.getElementById("root")
 );
 ```
 
@@ -233,7 +233,7 @@ function Greeting(props) {
 }
 
 const element = <Greeting name="NDC" />;
-ReactDOM.render(element, document.getElementById('root'));
+ReactDOM.render(element, document.getElementById("root"));
 ```
 
 In the above example the prop "name" is set as a JSX attribute. React passes all JSX attributes to our user-defined component in a single object.
@@ -283,9 +283,9 @@ With plain html and JavaScript we primarily have to two ways of adding event lis
 <button onclick="alert('The second button was clicked')">HTML-attribute</button>
 
 <script type="text/javascript">
-    var element = document.getElementById('click-me');
-    element.addEventListener('click', function() {
-        alert('The first button was clicked');
+    var element = document.getElementById("click-me");
+    element.addEventListener("click", function() {
+        alert("The first button was clicked");
     });
 </script>
 ```
@@ -297,7 +297,7 @@ With plain html and JavaScript we primarily have to two ways of adding event lis
 
 ```jsx
 const button = () => (
-    <button onClick={() => alert('The button was clicked')}>Click me</button>
+    <button onClick={() => alert("The button was clicked")}>Click me</button>
 );
 ```
 
@@ -308,10 +308,10 @@ const button = () => (
 :bulb: You can use the following regex to find strings that start with `on`:
 
 ```js
-const varToTest = 'onClick';
+const varToTest = "onClick";
 
 if (/^on.*$/.test(varToTest)) {
-    console.log('Found match ', varToTest);
+    console.log("Found match ", varToTest);
 }
 ```
 
@@ -377,7 +377,7 @@ Just like with props, this is now accessible through `this.state`.
 class Greeting extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { name: 'world' };
+        this.state = { name: "world" };
     }
 
     render() {
