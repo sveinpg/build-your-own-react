@@ -1,7 +1,7 @@
 import { getNodeText, fireEvent, waitForDomChange } from "dom-testing-library";
 
-import React from "../solution/react";
-import ReactDOM from "../solution/react-dom";
+import React from "../react";
+import ReactDOM from "../react-dom";
 import { getExampleDOM } from "../test-utils";
 
 class Greeting extends React.Component {
@@ -23,11 +23,6 @@ class Greeting extends React.Component {
     );
   }
 }
-
-test("Check Component has function setState", async () => {
-  expect(new React.Component().setState).not.toBeUndefined();
-  expect(typeof new React.Component().setState).toBe("function");
-});
 
 test("Check Component correctly updates state", async () => {
   const container = getExampleDOM();
