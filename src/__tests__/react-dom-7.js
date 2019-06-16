@@ -1,12 +1,12 @@
-import React from "../solution/react";
-import ReactDOM from "../solution/react-dom";
-import { getExampleDOM } from "../test-utils";
+import React from '../react';
+import ReactDOM from '../react-dom';
+import { getExampleDOM } from '../test-utils';
 
-test("Check rendering with inline styling", async () => {
+test('Check rendering with inline styling', async () => {
   const container = getExampleDOM();
 
   ReactDOM.render(
-    <p style={ { color: "red" } }>
+    <p style={ { color: 'red' } }>
       Hello world!
     </p>,
     container

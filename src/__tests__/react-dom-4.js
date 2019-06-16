@@ -1,10 +1,10 @@
-import { getNodeText } from "dom-testing-library";
+import { getNodeText } from 'dom-testing-library';
 
-import React from "../solution/react";
-import ReactDOM from "../solution/react-dom";
-import { getExampleDOM } from "../test-utils";
+import React from '../react';
+import ReactDOM from '../react-dom';
+import { getExampleDOM } from '../test-utils';
 
-test("Check rendering of a primitive type child", async () => {
+test('Check rendering of a primitive type child', async () => {
   const container = getExampleDOM();
 
   ReactDOM.render(
@@ -17,6 +17,6 @@ test("Check rendering of a primitive type child", async () => {
     container
   );
 
-  expect(getNodeText(container.querySelector("div"))).toBe("Hello universe");
-  expect(getNodeText(container.querySelector("p"))).toBe("Hello world");
+  expect(getNodeText(container.querySelector('div'))).toBe('Hello universe');
+  expect(getNodeText(container.querySelector('p'))).toBe('Hello world');
 });

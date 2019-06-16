@@ -1,5 +1,5 @@
-import React from '../solution/react';
-import ReactDOM, { instantiateVNode } from '../solution/react-dom';
+import React from '../react';
+import ReactDOM, { instantiateVNode } from '../react-dom';
 import { getExampleDOM } from '../test-utils';
 
 test('Checks that instantiateVNode returns a VDomNode', () => {
