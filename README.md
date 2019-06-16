@@ -89,10 +89,11 @@ To make your life easier, we have used emojis to mark important content:
 ### :bulb: Yes, already a tips. Starting off strong!
 
 We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented
-the task correctly. You will find the test-suite in the `__tests__` directory!
+the task correctly.
 
-We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented
-the task correctly. You will find the test-suite in the `__tests__` directory!
+You can run the tests for task 1 with `npm run test1`, the tests for task 2 with `npm run test2`, and so on.
+
+Note that these test scripts will also run the tests for all the previous tasks. This way you can be sure you don't break anything in the process.
 
 ## 1. React.createElement()
 
@@ -130,7 +131,7 @@ The function returns an object like the one below.
 
 :bulb: Unfamiliar with `React.createElement()`? Code written with [JSX](https://reactjs.org/docs/introducing-jsx.html) will be converted to use React.createElement(). You will not typically invoke React.createElement() directly if you are using JSX.
 
-:bulb: In this workshop, we won't make use `$$typeof`, `ref` or `_owner`, but do take a look at [this blog post](https://overreacted.io/why-do-react-elements-have-typeof-property/) for details about what `$$typeof` is. Essentially it is to protect
+:bulb: In this workshop, we won't make use of `$$typeof`, `ref` or `_owner`, but do take a look at [this blog post](https://overreacted.io/why-do-react-elements-have-typeof-property/) for details about what `$$typeof` is. Essentially it is to protect
 against XSS-attacks.
 
 ## 2. Render HTML elements
@@ -490,13 +491,13 @@ Every time we change the state of one our components in our application, the DOM
 > If an element type in the same place in the tree “matches up” between the previous and the next renders, React reuses the existing host instance.
 > Source: https://overreacted.io/react-as-a-ui-runtime/#reconciliation
 
-There is multiple ways to reduce the number of manipulations. For instance, by reusing HTML-elements (such as `<div/>`) or to use the `key` prop of children to determine which to update.
+There are multiple ways to reduce the number of manipulations. For instance, by reusing HTML-elements (such as `<div/>`) or to use the `key` prop of children to determine which to update.
 
 In `src/solution/react-dom/react-dom` we have provided a more advanced implementation that you can use as inspiration.
 
 ## Lifecycle methods
 
-React components has several "lifecycle methods" that you can override to run code at a particullar time. For instance, to run code after the component is mounted we can override `Component.componentDidMount`.
+React components has several "lifecycle methods" that you can override to run code at a particular time. For instance, to run code after the component is mounted we can override `Component.componentDidMount`.
 
 Read the about the lifecycle methods in [the documentation](https://reactjs.org/docs/react-component.html#the-component-lifecycle) and try to implement them yourself.
 
