@@ -23,7 +23,7 @@ function render(
 
         if (prevReactElement.type === reactElement.type) {
             prevVNode.update(reactElement);
-            return;
+            return prevVNode.getPublicInstance();
         }
 
         domContainerNode.innerHTML = '';

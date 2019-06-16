@@ -1,8 +1,12 @@
 import { instantiateVNode } from './index';
 
 export default class VDomNode {
+    static isTypeDefined(reactElement) {
+        return !VDomNode.isEmpty(reactElement) && reactElement.type;
+    }
+
     static isEmpty(reactElement) {
-        return reactElement === undefined || reactElement == null;
+        return reactElement === undefined || reactElement === null;
     }
 
     static isPrimitive(reactElement) {
@@ -103,10 +107,7 @@ export default class VDomNode {
 
             const isNextChildDefined = !VDomNode.isEmpty(nextChild);
             const isCurrentChildDefined = !VDomNode.isEmpty(currentChild);
-            const isTypeDefined = isNextChildDefined
-                && isCurrentChildDefined
-                && nextChild.type
-                && currentChild.type;
+            const isTypeDefined = VDomNode.isTypeDefined(nextChild) && VDomNode.isTypeDefined(currentChild);
 
             if (isTypeDefined && nextChild.type === currentChild.type) {
                 const vNode = this.childrenVNodes[i];
