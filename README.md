@@ -16,7 +16,7 @@ Generally, when we speak about React we talk about both [React](https://www.npmj
 
 ## <a name="react-elements"></a> React elements
 
-React elements are the building blocks of React applications. React elements might be confused with the concept of 
+React elements are the building blocks of React applications. React elements might be confused with the concept of
 React components. To clarify, React elements are generally what gets rendered on the screen, i.e. the return value of
 the `render()` method of a React component or the return of a functional component.
 
@@ -34,13 +34,11 @@ In this workshop we are going to create a renderer that renders React components
 
 Different renderers such as ReactDOM and React Native shares a lot of logic. Rendering, custom components, state, lifecycle methods and refs should work consistently across platforms.
 
-When you use React you can think of the `render()` method as creating a tree of React elements. If props or state is 
-changed, the `render()` method might return a different tree. The reconciler then needs to figure out how to 
+When you use React you can think of the `render()` method as creating a tree of React elements. If props or state is
+changed, the `render()` method might return a different tree. The reconciler then needs to figure out how to
 effectively update the UI to match the most recent tree with the minimum number of operations required.
 
 > If you want to learn more about this, the [React documentation](https://reactjs.org/docs/reconciliation.html) contains an article that explains the choices made in React's diffing algorithm.
-
-Reconciliation  
 
 # <a name="run-the-code"></a> :running: Run the code
 
@@ -54,18 +52,18 @@ The dev server should now be running on http://localhost:1234
 
 # The structure
 
-If you've already looked in the `/react-dom` directory or `/react` directory, you might have noticed that they 
+If you've already looked in the `/react-dom` directory or `/react` directory, you might have noticed that they
 are not empty.
 We've taken the liberty of implementing a skeleton for you of empty functions that are to be implemented.
 
-To stay true to the virtual-dom mindset you will find `VCompositeNode.js` and `VDomNode.js` in the `react-dom` 
+To stay true to the virtual-dom mindset you will find `VCompositeNode.js` and `VDomNode.js` in the `react-dom`
 directory. `VDomNode.js` is a "virtual" DOM-node, while the `VCompositeNode` represents a "virtual" react-component node.
-Everything that can be represented in the DOM, such as a `number`, `string`, `div`, `a`, `p` etc. should be a 
+Everything that can be represented in the DOM, such as a `number`, `string`, `div`, `a`, `p` etc. should be a
 `VDomNode`. Everything else, and by that we mean stateful- or stateless-components should be a `VCompositeNode`.
 
 These "virtual"-nodes can have children, which again are "virtual" nodes. This means that we get a tree-structure
 of nodes known as "the virtual DOM". The "virtual DOM" that we are about to implement is pretty naive. Nevertheless,
-the structure is there to make it easier to extend with a more advanced reconciliation-algorithm that 
+the structure is there to make it easier to extend with a more advanced reconciliation-algorithm that
 can just render portions of a sub-tree instead of rendering the whole tree every time.
 
 # <a name="tasks"></a> :construction_worker_man: Tasks
@@ -83,9 +81,9 @@ To make your life easier, we have used emojis to mark important content:
 :books: - Some extended information you might check out some other time.
 
 ### :bulb: - Yes, already a tips. Starting off strong!
-We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented 
-the task correctly. You will find the test-suite in the  `__tests__` directory!
 
+We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented
+the task correctly. You will find the test-suite in the `__tests__` directory!
 
 ## 1. React.createElement()
 
@@ -119,7 +117,7 @@ TODO: Update this code snippet
 
 :bulb: Unfamiliar with `React.createElement()`? Code written with [JSX](https://reactjs.org/docs/introducing-jsx.html) will be converted to use React.createElement(). You will not typically invoke React.createElement() directly if you are using JSX.
 
-:bulb: In this workshop, we won't make use `$$typeof`, but do take a look at [this blog post](https://overreacted.io/why-do-react-elements-have-typeof-property/) for details about what `$$typeof` is. Essentially it is to protect 
+:bulb: In this workshop, we won't make use `$$typeof`, but do take a look at [this blog post](https://overreacted.io/why-do-react-elements-have-typeof-property/) for details about what `$$typeof` is. Essentially it is to protect
 against XSS-attacks.
 
 ## 2. Render HTML elements
@@ -133,7 +131,7 @@ The specific HTML element we are going to render is specified by the `type` valu
 To complete our task, we need to return a `new VDomNode(reactElement)` from the `instantiateVNode`
 function in `react-dom/index.js`.
 
-Next, in `render`, we just call `instantiateVNode` with our `reactElement`. We then append the result of `mount` 
+Next, in `render`, we just call `instantiateVNode` with our `reactElement`. We then append the result of `mount`
 from the node that `instantiateVNode` produces to the `container`.
 
 Remember to also implement the `constructor` and `mount` in `VDomNode`.
@@ -379,7 +377,7 @@ Just like with props, this is now accessible through `this.state`.
 class Greeting extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { name: "world" };
+        this.state = { name: 'world' };
     }
 
     render() {
@@ -397,7 +395,7 @@ If it is `undefined` or `null` you should simply do nothing - just return from t
 
 :bulb: To merge objects you can either use `Object.assign()` or the shorthand [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax).
 
-:fire: In React `setState()` can also take a function as the first parameter. If you want this you can check the type of `state` in your function. If it's a function, call it with the current state as an argument. 
+:fire: In React `setState()` can also take a function as the first parameter. If you want this you can check the type of `state` in your function. If it's a function, call it with the current state as an argument.
 
 If you try this code now, you might notice that changing the state doesn't actually change anything in your DOM.
 Your `setState()` method also needs to trigger a re-render of your DOM.
@@ -417,4 +415,34 @@ A timeout of 0 ms will run its callback as soon as the browser isn't busy doing 
 :books: When you use `setTimeout` the callback function is placed on the callback queue and ran at the next event loop.
 There was [a nice talk about this](https://www.youtube.com/watch?v=8aGhZQkoFbQ) at JSConf EU 2014.
 
-## 13. Conditional rendering
+# Next steps
+
+That’s all – we have a functional version of React now. Lets take a closer look at what we built:
+
+-   Supports HTML elements, such as `<div />` and `<p />`
+-   Supports both functional and class components — together with proper internal state handling.
+-   Handles children, state, props, events and other attributes.
+-   Supports initial rendering and re-rendering.
+
+The main purpose of this article was to demonstrate core principles of React internal structure. However, some features were left out and this implementation serves as a foundation for you extend with these features.
+
+## Lifecycle methods
+
+React components has several "lifecycle methods" that you can override to run code at a particullar time. For instance, to run code after the component is mounted we can override `Component.componentDidMount`.
+
+Read the about the lifecycle methods in [the documentation](https://reactjs.org/docs/react-component.html#the-component-lifecycle) and try to implement them yourself.
+
+## Remove the class cache
+
+In our implementation we used a class cache to keep track of instanciated classes. However, this approach is flawed. If the order of components changes between renders we will retrieve the wrong class instance from the cache.
+
+In `src/solution/react-dom/react-dom` we have provided a more advanced implementation that you can use as inspiration.
+
+## Reconciliation
+
+Every time we change the state of one our components in our application, the DOM gets uppdated to reflect the new state. Frequent DOM manipulations affects performance and should be avoided. To avoid this we should minimize the number of manipulations.
+
+> If an element type in the same place in the tree “matches up” between the previous and the next renders, React reuses the existing host instance.
+> Source: https://overreacted.io/react-as-a-ui-runtime/#reconciliation
+
+There is multiple ways to reduce the number of manipulations. For instance, by reusing HTML-elements (such as `<div/>`) or to use the `key` prop of children to determine which to update.
