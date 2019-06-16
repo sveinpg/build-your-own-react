@@ -1,8 +1,8 @@
-import { getNodeText } from "dom-testing-library";
+import { getNodeText } from 'dom-testing-library';
 
-import React from "../react";
-import ReactDOM from "../react-dom";
-import { getExampleDOM } from "../test-utils";
+import React from '../react';
+import ReactDOM from '../react-dom';
+import { getExampleDOM } from '../test-utils';
 
 class Greeting extends React.Component {
   render() {
@@ -11,14 +11,14 @@ class Greeting extends React.Component {
   }
 }
 
-test("Check Component has prototype isReactComponent", async () => {
+test('Check Component has prototype isReactComponent', async () => {
   expect(React.Component.prototype.isReactComponent).toEqual(true);
 });
 
-test("Check Component sets props", async () => {
+test('Check Component sets props', async () => {
   const container = getExampleDOM();
 
-  ReactDOM.render(<Greeting name="world" />, container);
+  ReactDOM.render(<Greeting name='world' />, container);
 
-  expect(getNodeText(container.querySelector("p"))).toBe("Hello world");
+  expect(getNodeText(container.querySelector('p'))).toBe('Hello world');
 });

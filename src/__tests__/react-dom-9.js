@@ -1,10 +1,10 @@
-import { fireEvent } from "dom-testing-library";
+import { fireEvent } from 'dom-testing-library';
 
-import React from "../react";
-import ReactDOM from "../react-dom";
-import { getExampleDOM } from "../test-utils";
+import React from '../react';
+import ReactDOM from '../react-dom';
+import { getExampleDOM } from '../test-utils';
 
-test("Check rendering with an event listener", async () => {
+test('Check rendering with an event listener', async () => {
   const container = getExampleDOM();
   const onClick = jest.fn();
 
@@ -16,8 +16,8 @@ test("Check rendering with an event listener", async () => {
   );
 
   fireEvent(
-    container.querySelector("button"),
-    new MouseEvent("click")
+    container.querySelector('button'),
+    new MouseEvent('click')
   );
 
   expect(onClick).toHaveBeenCalled();
