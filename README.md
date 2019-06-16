@@ -83,10 +83,11 @@ To make your life easier, we have used emojis to mark important content:
 ### :bulb: Yes, already a tips. Starting off strong!
 
 We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented
-the task correctly. You will find the test-suite in the `__tests__` directory!
+the task correctly.
 
-We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented
-the task correctly. You will find the test-suite in the `__tests__` directory!
+You can run the tests for task 1 with `npm run test1`, the tests for task 2 with `npm run test2`, and so on.
+
+Note that these test scripts will also run the tests for all the previous tasks. This way you can be sure you don't break anything in the process.
 
 ## 1. React.createElement()
 
