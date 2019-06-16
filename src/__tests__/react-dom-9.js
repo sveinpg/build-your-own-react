@@ -1,7 +1,7 @@
 import { fireEvent } from "dom-testing-library";
 
-import React from "../solution/react";
-import ReactDOM from "../solution/react-dom";
+import React from "../react";
+import ReactDOM from "../react-dom";
 import { getExampleDOM } from "../test-utils";
 
 test("Check rendering with an event listener", async () => {
