@@ -56,23 +56,14 @@ If you've already looked in the `/react-dom` directory or `/react` directory, yo
 are not empty.
 We've taken the liberty of implementing a skeleton for you of empty functions that are to be implemented.
 
-<<<<<<< HEAD
-To stay true to the virtual-dom mindset you will find `VCompositeNode.js` and `VDomNode.js` in the `react-dom`
-=======
-To stay true to the virtual-DOM mindset you will find `VCompositeNode.js` and `VDomNode.js` in the `react-dom` 
->>>>>>> master
+To stay true to the virtual-DOM mindset you will find `VCompositeNode.js` and `VDomNode.js` in the `react-dom`
 directory. `VDomNode.js` is a "virtual" DOM-node, while the `VCompositeNode` represents a "virtual" react-component node.
 Everything that can be represented in the DOM, such as a `number`, `string`, `div`, `a`, `p` etc. should be a
 `VDomNode`. Everything else, and by that we mean stateful- or stateless-components should be a `VCompositeNode`.
 
 These "virtual"-nodes can have children, which again are "virtual" nodes. This means that we get a tree-structure
-<<<<<<< HEAD
-of nodes known as "the virtual DOM". The "virtual DOM" that we are about to implement is pretty naive. Nevertheless,
-the structure is there to make it easier to extend with a more advanced reconciliation-algorithm that
-=======
 of nodes known as the "virtual DOM". The "virtual DOM" that we are about to implement is pretty naive. Nevertheless,
-the structure is there to make it easier to extend with a more advanced reconciliation-algorithm that 
->>>>>>> master
+the structure is there to make it easier to extend with a more advanced reconciliation-algorithm that
 can just render portions of a sub-tree instead of rendering the whole tree every time.
 
 # <a name="tasks"></a> :construction_worker_man: Tasks
@@ -89,13 +80,10 @@ To make your life easier, we have used emojis to mark important content:
 
 :books: - Some extended information you might check out some other time.
 
-<<<<<<< HEAD
-### :bulb: - Yes, already a tips. Starting off strong!
-=======
 ### :bulb: Yes, already a tips. Starting off strong!
-We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented 
-the task correctly. You will find the test-suite in the  `__tests__` directory!
->>>>>>> master
+
+We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented
+the task correctly. You will find the test-suite in the `__tests__` directory!
 
 We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented
 the task correctly. You will find the test-suite in the `__tests__` directory!
@@ -148,17 +136,12 @@ React elements can be of different types (HTML elements, React components or pri
 The specific HTML element we are going to render is specified by the `type` value of the React element with a `string`. HTML elements are the only type of React elements that are specified by a string.
 
 To complete our task, we need to:
- 
+
 1. return a `new VDomNode(reactElement)` from the `instantiateVNode` function in `react-dom/index.js`.
 2. In `render`, we just call `instantiateVNode` with our `reactElement`.
-3. Append the result of `mount`  from the node that `instantiateVNode` produces to the `container`.
+3. Append the result of `mount` from the node that `instantiateVNode` produces to the `container`.
 
-<<<<<<< HEAD
-Next, in `render`, we just call `instantiateVNode` with our `reactElement`. We then append the result of `mount`
-from the node that `instantiateVNode` produces to the `container`.
-=======
 Remember to also implement the `constructor` and `mount` in `VDomNode`:
->>>>>>> master
 
 4. The `constructor` need to set the `reactElement`-argument as a class-property.
 5. `mount` has to create a DOM-element from the `reactElement` class-property and return it.
@@ -192,10 +175,10 @@ Great, we are now able to create **one** HTML element! In order to render more t
 
 To do so we have to extend the `mount()` function in `VDomNode.js` to iterate over possible children:
 
-1. Get `props.children` of the `reactElement` and map the children to `instantiateVNode`, which will create virtual 
-DOM-nodes.
-2. Iterate over the array of virtual child DOM-nodes and use `appendChild` to append them to the element you created 
-in the previous task.
+1. Get `props.children` of the `reactElement` and map the children to `instantiateVNode`, which will create virtual
+   DOM-nodes.
+2. Iterate over the array of virtual child DOM-nodes and use `appendChild` to append them to the element you created
+   in the previous task.
 
 The following call to `ReactDOM.render()`..
 
@@ -269,7 +252,7 @@ static isPrimitive(reactElement) {
 }
 ```
 
-:bulb: [createTextNode](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode) is perfect for 
+:bulb: [createTextNode](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode) is perfect for
 representing primitive types in the DOM.
 
 ## 5. Functional components and props
@@ -294,13 +277,13 @@ In the above example the prop "name" is set as a JSX attribute. React passes all
 To get functional components working, you should:
 
 1. Extend `instantiateVNode` in `react-dom/index.js` to be able to instantiate a `VCompositeNode`.
-To do this, just check if the `type` attribute of `reactElement` is a `function` (use `typeof`).
+   To do this, just check if the `type` attribute of `reactElement` is a `function` (use `typeof`).
 
 You also need to implement `VCompositeNode.js`:
 
 2. The `constructor` need to set the `reactElement`-argument as a class-property.
-3. `mount` should render the `reactElement` class-property by calling `type` as a function with its `props` as the 
-argument (`type(props);`).
+3. `mount` should render the `reactElement` class-property by calling `type` as a function with its `props` as the
+   argument (`type(props);`).
 4. Call `instantiateVNode` with the result the rendering we did in step-3 to get a virtual-node.
 5. The last ting we need to do is to call `mount` on the virtual-node we got in step-5 and return the value.
 
@@ -486,25 +469,15 @@ There was [a nice talk about this](https://www.youtube.com/watch?v=8aGhZQkoFbQ) 
 That’s all – we have a functional version of React now. Lets take a closer look at what we built:
 
 -   Supports HTML elements, such as `<div />` and `<p />`
--   Supports both functional and class components — together with proper internal state handling.
+-   Supports both functional and class components.
 -   Handles children, state, props, events and other attributes.
 -   Supports initial rendering and re-rendering.
 
 The main purpose of this article was to demonstrate core principles of React internal structure. However, some features were left out and this implementation serves as a foundation for you extend with these features.
 
-## Lifecycle methods
-
-React components has several "lifecycle methods" that you can override to run code at a particullar time. For instance, to run code after the component is mounted we can override `Component.componentDidMount`.
-
-Read the about the lifecycle methods in [the documentation](https://reactjs.org/docs/react-component.html#the-component-lifecycle) and try to implement them yourself.
-
 ## Remove the class cache
 
 In our implementation we used a class cache to keep track of instanciated classes. However, this approach is flawed. If the order of components changes between renders we will retrieve the wrong class instance from the cache.
-
-In `src/solution/react-dom/react-dom` we have provided a more advanced implementation that you can use as inspiration.
-
-## Reconciliation
 
 Every time we change the state of one our components in our application, the DOM gets uppdated to reflect the new state. Frequent DOM manipulations affects performance and should be avoided. To avoid this we should minimize the number of manipulations.
 
@@ -512,3 +485,15 @@ Every time we change the state of one our components in our application, the DOM
 > Source: https://overreacted.io/react-as-a-ui-runtime/#reconciliation
 
 There is multiple ways to reduce the number of manipulations. For instance, by reusing HTML-elements (such as `<div/>`) or to use the `key` prop of children to determine which to update.
+
+In `src/solution/react-dom/react-dom` we have provided a more advanced implementation that you can use as inspiration.
+
+## Lifecycle methods
+
+React components has several "lifecycle methods" that you can override to run code at a particullar time. For instance, to run code after the component is mounted we can override `Component.componentDidMount`.
+
+Read the about the lifecycle methods in [the documentation](https://reactjs.org/docs/react-component.html#the-component-lifecycle) and try to implement them yourself.
+
+## Reconciliation
+
+Our implementation renders the whole application regardless of which part of the application that triggered the re-render. To further improve the performance of our implementation we can add a `_dirty` to the component that changed. This way we are able to only re-render the subtree that changed.
