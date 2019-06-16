@@ -50,6 +50,12 @@ npm start
 
 The dev server should now be running on http://localhost:1234
 
+## Examples
+
+Need to test your implementation?
+
+We have provided you with some examples you can use in `src/examples`
+
 # The structure
 
 If you've already looked in the `/react-dom` directory or `/react` directory, you might have noticed that they

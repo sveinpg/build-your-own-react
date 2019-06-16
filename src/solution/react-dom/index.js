@@ -1,4 +1,4 @@
-import ReactDOM, { instantiateVNode } from './react-dom';
-export { instantiateVNode } from './react-dom'
+import ReactDOM, { instantiateVNode } from './class-cache-react-dom';
+export { instantiateVNode } from './class-cache-react-dom';
 
 export default ReactDOM;

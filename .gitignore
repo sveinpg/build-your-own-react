@@ -1,5 +1,13 @@
 .idea/
 src/.cache/
 src/dist/
-src/node_modules
 src/package-lock.json
+
+node_modules/
+
+src/examples/minesweeper/package-lock.json
+src/examples/minesweeper/.cache/
+src/examples/minesweeper/dist/
+src/examples/todo/package-lock.json
+src/examples/todo/.cache/
+src/examples/todo/dist/
