@@ -1,5 +1,5 @@
-import React from "../react";
-import "../test-utils";
+import React from '../react';
+import '../test-utils';
 
 class Greeting extends React.Component {
   render() {
@@ -7,18 +7,18 @@ class Greeting extends React.Component {
   }
 }
 
-test("Check Component render method returns React element", async () => {
+test('Check Component render method returns React element', async () => {
   const instance = new Greeting();
   const element = instance.render();
 
-  expect(element.props.children).toEqual(["Hello world"]);
+  expect(element.props.children).toEqual(['Hello world']);
 });
 
-test("Check React Component throws error if used directly", async () => {
+test('Check React Component throws error if used directly', async () => {
   const instance = new React.Component();
 
   expect(instance.render).not.toBeUndefined();
-  expect(typeof instance.render).toBe("function");
+  expect(typeof instance.render).toBe('function');
 
   let error;
   try {
