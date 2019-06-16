@@ -1,4 +1,5 @@
 import { instantiateVNode } from './index';
+import VDomNode from './VDomNode';
 
 export default class VCompositeNode {
     static isReactClassComponent(type) {
@@ -42,15 +43,20 @@ export default class VCompositeNode {
         })();
 
         const prevRenderedReactElement = this.renderedInstance.getCurrentReactElement();
-        if (prevRenderedReactElement.type === nextRenderedReactElement.type) {
+
+        const isTypeDefined = VDomNode.isTypeDefined(prevRenderedReactElement)
+            && VDomNode.isTypeDefined(nextRenderedReactElement);
+
+        if (isTypeDefined && prevRenderedReactElement.type === nextRenderedReactElement.type) {
             this.renderedInstance.update(nextRenderedReactElement);
         } else {
-            this.renderedInstance = instantiateVNode(nextRenderedReactElement);
+            const nextRenderedInstance = instantiateVNode(nextRenderedReactElement);
 
-            const nextDomNode = this.renderedInstance.mount();
             const prevDomNode = this.getDomNode();
+            const nextDomNode = nextRenderedInstance.mount();
+            prevDomNode.parentNode.replaceChild(nextDomNode, prevDomNode);
 
-            prevDomNode.parentNode.replaceChild(nextDomNode, prevDomNode)
+            this.renderedInstance = nextRenderedInstance;
         }
     }
 
