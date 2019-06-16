@@ -101,15 +101,19 @@ React.createElement(type, props, ...children);
 
 The function returns an object like the one below.
 
-TODO: Update this code snippet
-
 ```js
 {
-  $$typeof: Symbol.for("react.element"),
-  type: "div",
+  type: 'div',
   props: {
-      children: []
-  },
+    children: [{
+      type: 'button',
+      props: { className: 'blue' }
+    }, {
+      type: 'button',
+      props: { className: 'red' }
+    }]
+  }, 
+  $$typeof: Symbol.for("react.element"),
   ref: null,
   _owner: null
 }
@@ -119,7 +123,7 @@ TODO: Update this code snippet
 
 :bulb: Unfamiliar with `React.createElement()`? Code written with [JSX](https://reactjs.org/docs/introducing-jsx.html) will be converted to use React.createElement(). You will not typically invoke React.createElement() directly if you are using JSX.
 
-:bulb: In this workshop, we won't make use `$$typeof`, but do take a look at [this blog post](https://overreacted.io/why-do-react-elements-have-typeof-property/) for details about what `$$typeof` is. Essentially it is to protect 
+:bulb: In this workshop, we won't make use `$$typeof`, `ref` or `_owner`, but do take a look at [this blog post](https://overreacted.io/why-do-react-elements-have-typeof-property/) for details about what `$$typeof` is. Essentially it is to protect 
 against XSS-attacks.
 
 ## 2. Render HTML elements
