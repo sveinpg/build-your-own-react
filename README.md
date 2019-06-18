@@ -217,11 +217,6 @@ Great, we are now able to create **one** HTML element! In order to render more t
 
 To do so we have to extend the `mount()` function in `VDomNode.js` to iterate over possible children:
 
-1. Get `props.children` of the `reactElement` and map the children to `instantiateVNode`, which will create virtual
-   DOM-nodes.
-2. Iterate over the array of virtual child DOM-nodes and use `appendChild` to append them to the element you created
-   in the previous task.
-
 The following call to `ReactDOM.render()`..
 
 ```js
@@ -243,7 +238,20 @@ ReactDOM.render(
 
 :trophy: Extend the `mount` function in `VDomNode.js` to support children.
 
-:bulb: React elements can have multiple children.
+1. Get `props.children` of the `reactElement` and map the children to `instantiateVNode`, which will create virtual
+   DOM-nodes.
+
+:bulb: You can use this util method to get the children as an array from the props
+
+```js
+function getChildrenAsArray(props) {
+    const { children = [] } = props || {};
+    return !Array.isArray(children) ? [children] : children;
+}
+```
+
+2. Iterate over the array of virtual child nodes, mount each of the virtual child nodes with the `.mount()` and use `appendChild` to append the result of `mount` to the element you created
+   in the previous task.
 
 ## 4. Primitive types
 
