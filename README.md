@@ -142,19 +142,6 @@ React elements can be of different types (HTML elements, React components or pri
 
 The specific HTML element we are going to render is specified by the `type` value of the React element with a `string`. HTML elements are the only type of React elements that are specified by a string.
 
-To complete our task, we need to:
-
-1. return a `new VDomNode(reactElement)` from the `instantiateVNode` function in `react-dom/index.js`.
-2. In `render`, we just call `instantiateVNode` with our `reactElement`.
-3. Append the result of `mount` from the node that `instantiateVNode` produces to the `container`.
-
-Remember to also implement the `constructor` and `mount` in `VDomNode`:
-
-4. The `constructor` need to set the `reactElement`-argument as a class-property.
-5. `mount` has to create a DOM-element from the `reactElement` class-property and return it.
-
-The following call to `ReactDOM.render()`...
-
 ```js
 ReactDOM.render(
     React.createElement('div', {}),
@@ -172,9 +159,26 @@ ReactDOM.render(
 
 :trophy: Create a new HTML node and append it to the DOM. Write your code in `/react-dom`.
 
-:bulb: [document.createElement()](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) can be used to create HTML elements.
+To complete our task, we need to:
+
+1. return a `new VDomNode(reactElement)` from the `instantiateVNode` function in `react-dom/index.js`.
+2. In `render`, we instansite our virtual node with our reactElement by calling `instantiateVNode(reactElement)`. Store it in a variable named `vNode`.
+
+Now we need to mount (create a DOM-element) for our virtual node and append it to the DOM.
+
+3. In `render` need to mount our virtual node by calling the mount method on the virtual node. `vNode.mount()`
+4. Append the result of the mount method to the `domContainerNode`.
 
 :bulb: [Node.appendChild()](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) method adds a node to the end of the list of children of a specified parent node.
+
+Remember to also implement the `constructor` and `mount` in `VDomNode`:
+
+5. The `constructor` need to set the `reactElement`-argument as a class-property.
+6. `mount` has to create a DOM-element from the `reactElement` class-property and return it.
+
+The following call to `ReactDOM.render()`...
+
+:bulb: [document.createElement()](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) can be used to create HTML elements.
 
 ## 3. Handle children
 
