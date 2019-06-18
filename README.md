@@ -120,7 +120,7 @@ To make your life easier, we have used emojis to mark important content:
 
 :books: - Some extended information you might check out some other time.
 
-:running: - We'll keep on reminding you to run the tests
+:running: - We'll keep on reminding you to run the tests.
 
 ### :bulb: Yes, already a tips. Starting off strong!
 
