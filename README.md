@@ -326,6 +326,8 @@ ReactDOM.render(element, document.getElementById('root'));
 
 In the above example the prop "name" is set as a JSX attribute. React passes all JSX attributes to our user-defined component in a single object.
 
+:trophy: Extend `react-dom/index.js` and `VCompositeNode.js` to handle functional components.
+
 To get functional components working, you should:
 
 1. Extend `instantiateVNode` in `react-dom/index.js` to be able to instantiate a `VCompositeNode`.
@@ -333,17 +335,19 @@ To get functional components working, you should:
 
 You also need to implement `VCompositeNode.js`:
 
-2. The `constructor` need to set the `reactElement`-argument as a class-property.
-3. `mount` should render the `reactElement` class-property by calling `type` as a function with its `props` as the
-   argument (`type(props);`).
+2. The `constructor` need to set the `reactElement`-argument as a class-property. (Just like we did for `VDomNode` in task 2)
+
+3. The next thing we need to do is render out component. Call the functional component (`type`) with its `props` as the argument. `this.reactElement.type(this.reactElement.props)` 
+
+:bulb: `this.reactElement.type` is a functional component (Like `Greeting` in the snippet above)
+
+:bulb: Writing `this.reactElement.type` etc. all the time is exhausting. Use [Object deconstruction](https://hacks.mozilla.org/2015/05/es6-in-depth-destructuring/) to extract the values you frequently use.
+
 4. Call `instantiateVNode` with the result the rendering we did in step-3 to get a virtual-node.
-5. The last ting we need to do is to call `mount` on the virtual-node we got in step-4 and return the value.
 
-:trophy: Extend `react-dom/index.js` and `VCompositeNode.js` to handle functional components.
+:bulb: User defined (composite) components allways render *exactly one* React element (which in turn can contain multiple React elements as children), hence we only need to call `instantiateVNode` once with the value returned from our component. 
 
-:trophy: Extend your handling of functional components to pass `props` to the function.
-
-:bulb: As you see in the code snippet above, you can simply give the `props` object as an argument to your functional component.
+5. The last ting we need to do is to call `mount` on the virtual node we got in step-4 and return the value.
 
 ## 6. className
 
