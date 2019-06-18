@@ -2,7 +2,7 @@
 
 :closed_book: [Introduction](#introduction)
 
-:runner: [Run the code](#run-the-code)
+:runner: [Test your implementation](#test-your-impl)
 
 :construction_worker_man: [Tasks](#tasks)
 
@@ -40,11 +40,31 @@ effectively update the UI to match the most recent tree with the minimum number 
 
 > If you want to learn more about this, the [React documentation](https://reactjs.org/docs/reconciliation.html) contains an article that explains the choices made in React's diffing algorithm.
 
-# <a name="run-the-code"></a> :running: Run the code
+# <a name="test-your-impl"></a> :running: Testing your implementation
+
+First of all, run `npm install`
+
+We have provided you with tests for each task. We urge you to use these and run them after each task to verify you implementation or to point you in the right direction.
+
+To run the tests for a specific task, you can simply specify the task (in this case task 1):
 
 ```
-cd src
-npm install
+npm run test1
+```
+
+To run all tests:
+
+```
+npm run test
+```
+
+## Playground
+
+In addition to the test you edit `src/index.js` to play with you implementation.
+
+To run the code:
+
+```
 npm start
 ```
 
@@ -52,9 +72,20 @@ The dev server should now be running on http://localhost:1234
 
 ## Examples
 
-Need to test your implementation?
-
 We have provided you with some examples you can use in `src/examples`
+
+To run the an example:
+
+1. Change directory to the example `cd src/examples/<the example you want to test>`
+2. Install and run the example with `npm`
+
+For instance, if you want to test the todo-example
+
+```
+cd src/examples/todo
+npm install
+npm start
+```
 
 # The structure
 

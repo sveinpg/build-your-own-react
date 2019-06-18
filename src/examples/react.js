@@ -1,3 +1,3 @@
-import React from '../solution/react';
+import React from '../react';
 
 export default React;
