@@ -1,4 +1,9 @@
 .idea/
+
+.cache/
+dist/
+package-lock.json
+
 src/.cache/
 src/dist/
 src/package-lock.json

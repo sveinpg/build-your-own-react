@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "parcel index.html",
+        "start": "parcel src/index.html",
         "test": "jest",
         "tdd": "jest --watch",
         "test1": "jest react-dom-1.js",
