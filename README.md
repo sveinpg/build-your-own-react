@@ -339,9 +339,7 @@ You also need to implement `VCompositeNode.js`:
 
 3. The next thing we need to do is to render our component. Call the functional component (`type`) with its `props` as the argument. `type(props)` 
 
-:bulb: `this.reactElement.type` is a functional component (Like `Greeting` in the snippet above)
-
-:bulb: Writing `this.reactElement.type` etc. all the time is exhausting. Use [Object deconstruction](https://hacks.mozilla.org/2015/05/es6-in-depth-destructuring/) to extract the values you frequently use.
+:bulb: `this.reactElement.type` is a functional component (like `Greeting` in the snippet above).
 
 4. Call `instantiateVNode` with the result of the rendering we did in step-3 to get a virtual-node.
 
