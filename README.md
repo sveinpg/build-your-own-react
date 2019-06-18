@@ -296,7 +296,7 @@ static isPrimitive(reactElement) {
 
 2. If it is a primitive (`number` or `string`), create a new DOM-node and return it.
 
-:bulb: Primitives are always leaf-nodes and does have children.
+:bulb: Primitives are always leaf-nodes and does not have children.
 
 :bulb: [createTextNode](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode) is perfect for
 representing primitive types in the DOM.
