@@ -457,7 +457,7 @@ But still, using class components in our implementation of React does not work p
 
 :trophy: As mentioned, the `render`-function is used to specify what to render. It is the only required method in a 
 class component and should return [React elements](#react-elements).
-To enforce that all classes that extend the base-`Component` class implements the `render`, let the 
+To enforce that all classes that extend the `Component` class implements the `render`, let the 
 `render` function in `react/Component.js` throw an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error).
 
 :trophy: We need to treat functional and class components differently. In contrast to functional components, we need 

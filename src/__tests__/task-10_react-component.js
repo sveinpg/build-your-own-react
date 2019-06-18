@@ -4,8 +4,6 @@ import React from '../react';
 import ReactDOM from '../react-dom';
 import { getExampleDOM } from '../test-utils';
 
-import '../test-utils';
-
 class Greeting extends React.Component {
   render() {
     return <p>Hello world</p>;
