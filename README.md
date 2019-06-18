@@ -454,11 +454,15 @@ underlying components with a wrapper of data from the original event.
 
 Now we have created a library that supports stateless applications, well done!
 
-Stateless applications are only required to render once, and that is exactly what we have created – a React-like library that supports initial rendering. The next step to make this library complete is to introduce state.
+Stateless applications always return the same result for every render. The next step to make this library complete is 
+to introduce state.
 
 Historically, stateful React components are defined using [a class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes).
 
 > With the addition of hooks, you can [use state and other React features](https://reactjs.org/docs/hooks-state.html) without writing a class. This will not be covered in this workshop.
+
+To create a class component you simply extend [React.Component](https://reactjs.org/docs/react-component.html) and 
+implement the `render`-function to specify what to render.
 
 ```jsx
 class Greeting extends React.Component {
@@ -468,41 +472,37 @@ class Greeting extends React.Component {
 }
 ```
 
-To create a class component you simply extend [React.Component](https://reactjs.org/docs/react-component.html) and 
-implement the `render`-function to specify what to render.
+If you take a look in `react/` you will find that we've already created a base `Component` for you.
+But still, using class components in our implementation of React does not work properly – yet.
 
-:trophy: Create a class in `react.js` and export it with the name `Component`.
+:trophy: As mentioned, the `render`-function is used to specify what to render. It is the only required method in a 
+class component and should return [React elements](#react-elements).
+To enforce that all classes that extend the `Component` class implements the `render`, let the 
+`render` function in `react/Component.js` throw an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error).
 
-:bulb: Use a [named export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description) to specify the name of an export.
-
-As mentioned, the `render`-function is used to specify what to render. It is the only required method in a class 
-component and should return [React elements](#react-elements).
-
-:trophy: Create an instance method in your newly created class called `render` that throws an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error).
-
-:bulb: By creating this method we enforce that all classes that extend our class implement a `render`-method.
-
-## 11. Render class components
-
-Passing class components to our implementation of React DOM does not work properly – yet.
-
-**Firstly**, they are not rendered at all. We need to treat functional and class components differently. In contrast to functional components, we need to call the `render`-method to determine the React elements to render. To do this we need to know if a component is a functional or class component. Since [JavaScript classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) in fact are functions, we can not use the type of the variable to determine it. Instead we simply add a [prototype data value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype) to our `React.Component`.
+:trophy: We need to treat functional and class components differently. In contrast to functional components, we need 
+to call the `render`-method to determine the React elements to render. 
+To do this we need to know if a component is a functional or class component.
+Since [JavaScript classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) in fact are functions,
+we can not use the type of the variable to determine it. Instead add a simple flag as a
+[prototype data value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)
+to our `react/Component.js`.
 
 ```js
-Component.prototype.isReactComponent = {};
+Component.prototype.isReactComponent = true;
 ```
 
-> In JavaScript, [Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions) are first-class objects, because they can have properties and methods just like any other object. Because of this we can use `Object.prototype` to store data values.
-
-:trophy: Add the `isReactComponent` prototype data value to our class, and use this to determine if we should call the function itself or the `render`-method of a component in React DOM.
-
-**Secondly**, our class component does not support `props` yet. Props should be accessible in all the class methods of our class. In other words, the props should be available in the [function context](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#Function_context) of our class.
-
-:trophy: Implement a [constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Constructor) that takes the `props` as an argument and assign them to the class.
+:trophy: Our class component does not support `props` yet. Props should be accessible in all the class methods of our
+class. In other words, the props should be available in the
+[function context](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#Function_context)
+of our class. Implement a [constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Constructor)
+that takes the `props` as an argument and assign them as a class-property.
 
 :bulb: To assign the `props` you can simply say: `this.props = props;`
 
-## 12. State
+:running: This seems like a good time to `npm run test10`.
+
+## 11. State
 
 As mentioned, the whole point of making this Component class is to be able to create stateful components.
 So finally, let's add some state.
