@@ -44,7 +44,7 @@ effectively update the UI to match the most recent tree with the minimum number 
 
 First of all, run `npm install`
 
-We have provided you with tests for each task. We urge you to use these and run them after each task to verify you implementation or to point you in the right direction.
+We have provided you with tests for each task. We urge you to use these and run them after each task to verify your implementation or to point you in the right direction.
 
 To run the tests for a specific task, you can simply specify the task (in this case task 1):
 
