@@ -341,11 +341,11 @@ You also need to implement `VCompositeNode.js`:
 
 :bulb: `this.reactElement.type` is a functional component (like `Greeting` in the snippet above).
 
-4. Call `instantiateVNode` with the result of the rendering we did in step-3 to get a virtual-node.
+4. Call `instantiateVNode` with the result of the rendering we did in step 3 to get a virtual node.
 
 :bulb: User defined (composite) components always render *exactly one* React element (which in turn can contain multiple React elements as children), hence we only need to call `instantiateVNode` once with the value returned from our component. 
 
-5. The last ting we need to do is to call `mount` on the virtual node we got in step-4 and return the value.
+5. The last ting we need to do is to call `mount` on the virtual node we got in step 4 and return the value.
 
 ## 6. className
 
