@@ -292,7 +292,7 @@ ReactDOM.render(
 :bulb: You can use the [typeof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) operator to check the type of a variable, like this util-function:
 
 ```js
-static isPrimitive(reactElement) {
+function isPrimitive(reactElement) {
     return !reactElement.type &&
         (typeof reactElement === 'string' || typeof reactElement === 'number');
 }
