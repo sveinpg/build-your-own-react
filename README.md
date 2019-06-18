@@ -2,7 +2,7 @@
 
 :closed_book: [Introduction](#introduction)
 
-:runner: [Run the code](#run-the-code)
+:runner: [Test your implementation](#test-your-impl)
 
 :construction_worker_man: [Tasks](#tasks)
 
@@ -40,7 +40,7 @@ effectively update the UI to match the most recent tree with the minimum number 
 
 > If you want to learn more about this, the [React documentation](https://reactjs.org/docs/reconciliation.html) contains an article that explains the choices made in React's diffing algorithm.
 
-# <a name="run-the-code"></a> :running: Testing your implementation
+# <a name="test-your-impl"></a> :running: Testing your implementation
 
 We have provided you with tests for each task. We urge you to use these and run them after each task to verify you implementation. Additionally, you can run them with an incomplete implementation point you in the right direction.
 
