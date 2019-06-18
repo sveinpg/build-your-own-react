@@ -90,7 +90,7 @@ npm install
 npm start
 ```
 
-# The structure
+# :house: The structure
 
 If you've already looked in the `/react-dom` directory or `/react` directory, you might have noticed that they
 are not empty.
@@ -119,6 +119,8 @@ To make your life easier, we have used emojis to mark important content:
 :fire: - An extra task if you're up for it.
 
 :books: - Some extended information you might check out some other time.
+
+:running: - We'll keep on reminding you to run the tests
 
 ### :bulb: Yes, already a tips. Starting off strong!
 
@@ -550,7 +552,7 @@ A timeout of 0 ms will run its callback as soon as the browser isn't busy doing 
 :books: When you use `setTimeout` the callback function is placed on the callback queue and ran at the next event loop.
 There was [a nice talk about this](https://www.youtube.com/watch?v=8aGhZQkoFbQ) at JSConf EU 2014.
 
-# Next steps
+# :feet: Next steps
 
 That’s all – we have a functional version of React now. Lets take a closer look at what we built:
 
