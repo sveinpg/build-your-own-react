@@ -536,23 +536,30 @@ If it is `undefined` or `null` you should simply do nothing - just return from t
 
 :fire: In React `setState()` can also take a function as the first parameter. If you want this you can check the type of `state` in your function. If it's a function, call it with the current state as an argument.
 
-If you try this code now, you might notice that changing the state doesn't actually change anything in your DOM.
-Your `setState()` method also needs to trigger a re-render of your DOM.
+:running: Time to check the state of things with `npm run test11`.
 
-:trophy: In your `setState()` method call `ReactDOM.render()` after updating the state.
+## 12. (Re)rendering with state
 
-Note that if you have many components updating their state at the same time, this might be quite the bottleneck.
+If you try the code you currently have, you might notice that changing the state doesn't actually change anything in your DOM.
+Your `setState` function also needs to trigger a re-render of your DOM.
+
+You could simply call `ReactDOM.render()` in `setState` after updating the state, but we want to do a little bit better than that.
+
+If you have many components updating their state at the same time, simply calling `ReactDOM.render()` would be quite the bottleneck,
+as you would be rendering for every single component updating its state.
 It will be very advantageous to defer the actual rendering until after we are done updating state in all components.
 We can do this by wrapping `ReactDOM.render()` in a `setTimeout`.
 
-:trophy: Implement a re-render function in ReactDOM and call this from `setState()` instead.
-This function should call `setTimeout` with `ReactDOM.render()` as its callback function.
+:trophy: Implement a re-render function in ReactDOM and call this from the `setState` function.
+The re-render function should call `setTimeout` with `ReactDOM.render` as its callback function.
 
 :bulb: Timeouts in JS are only guaranteed to not run _sooner_ than requested, but they _may_ run later.
 A timeout of 0 ms will run its callback as soon as the browser isn't busy doing other things - like updating lots of component states.
 
 :books: When you use `setTimeout` the callback function is placed on the callback queue and ran at the next event loop.
 There was [a nice talk about this](https://www.youtube.com/watch?v=8aGhZQkoFbQ) at JSConf EU 2014.
+
+:running: Finally, for the last time, run the tests `npm run test12`.
 
 # :feet: Next steps
 
