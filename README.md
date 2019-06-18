@@ -260,12 +260,6 @@ Unlike HTML elements and React components, primitive types are not represented w
 Moreover, they are not represented with an object with a `type` field. Instead they are represented with their own value.
 Because of this primitive types are always children of another React element.
 
-We need to extend the `mount` function in `VDomNode` to support primitive types:
-
-1. Check the `typeof` the `reactElement`,
-2. If it is a primitive (`number` or `string`), create a new DOM-node and return it.
-3. If it's not a primitive, then do the logic we implemented in the previous tasks.
-
 The following call to `ReactDOM.render()`..
 
 ```js
@@ -285,13 +279,11 @@ ReactDOM.render(
 </div>
 ```
 
-:trophy: Extend the `render()` method in `ReactDOM.js` to support primitive types by appending their value to the target element.
+:trophy: Extend the `mount` function in `VDomNode` to support primitive types
 
-To check if an element is a primitive type, you should remember:
+1. Check if the `reactElement` is a primitive type
 
 :bulb: Primitive types are not represented with an object with a `type` field.
-
-:bulb: Primitives are always leaf-nodes and does have children.
 
 :bulb: You can use the [typeof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) operator to check the type of a variable, like this util-function:
 
@@ -302,8 +294,14 @@ static isPrimitive(reactElement) {
 }
 ```
 
+2. If it is a primitive (`number` or `string`), create a new DOM-node and return it.
+
+:bulb: Primitives are always leaf-nodes and does have children.
+
 :bulb: [createTextNode](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode) is perfect for
 representing primitive types in the DOM.
+
+3. If it's not a primitive, then do the logic we implemented in the previous tasks.
 
 ## 5. Functional components and props
 
