@@ -168,6 +168,8 @@ The function returns an object like the one below.
 :bulb: In this workshop, we won't make use of `$$typeof`, `ref` or `_owner`, but do take a look at [this blog post](https://overreacted.io/why-do-react-elements-have-typeof-property/) for details about what `$$typeof` is. Essentially it is to protect
 against XSS-attacks.
 
+:running: It's time to run some tests. If you haven't already, run `npm install` first. Then run `npm run test1`.
+
 ## 2. Render HTML elements
 
 Time to render our newly created React element!
@@ -215,6 +217,8 @@ Remember to also implement the `constructor` and `mount` in `VDomNode`:
 
 :bulb: [document.createElement()](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) can be used to create HTML elements.
 
+:running: Remember to run the tests `npm run test2` :wave:
+
 ## 3. Handle children
 
 Great, we are now able to create **one** HTML element! In order to render more than one element we need to handle children.
@@ -256,6 +260,8 @@ function getChildrenAsArray(props) {
 
 2. Iterate over the array of virtual child nodes, mount each of the virtual child nodes with the `.mount()` and use `appendChild` to append the result of `mount` to the element you created
    in the previous task.
+
+:running: Third time's the charm, run those tests! `npm run test3`
 
 ## 4. Primitive types
 
@@ -307,6 +313,8 @@ representing primitive types in the DOM.
 
 3. If it's not a primitive, then do the logic we implemented in the previous tasks.
 
+:running: You know what to do: `npm run test4`
+
 ## 5. Functional components and props
 
 In many ways React components are like JavaScript functions.
@@ -345,6 +353,8 @@ You also need to implement `VCompositeNode.js`:
 
 :bulb: As you see in the code snippet above, you can simply give the `props` object as an argument to your functional component.
 
+:running: Don't forget the tests! `npm run test5`
+
 ## 6. className
 
 No application is complete without styling. In React there is mainly two ways to style your elements – [inline styling](https://reactjs.org/docs/dom-elements.html#style) and [CSS](https://reactjs.org/docs/faq-styling.html). We'll cover CSS in this task and inline styling in task #7.
@@ -354,6 +364,8 @@ To specify a CSS class of an element, use the `className` attribute. This is one
 :trophy: Implement support for the `className` attribute in `VDomNode.js`
 
 :bulb: You can use the [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) property of the Element interface to set the value of the class attribute of a specific HTML element.
+
+:running: Tests FTW! `npm run test6`
 
 ## 7. Inline styles
 
@@ -365,6 +377,8 @@ Inline styling is another way to style your application. The `style` attribute a
 
 :bulb: You can use the [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) property of the HTMLElement to set the style attribute of a specific HTML element.
 
+:running: You know the drill. `npm run test7`
+
 ## 8. Attributes
 
 If you are familiar with HTML, you know that we need to support more attributes than `style` and `className`. Luckily for us, most of these attributes are similar for React (we will handle events in the next task).
@@ -374,6 +388,8 @@ If you are familiar with HTML, you know that we need to support more attributes 
 :bulb: You can use [setAttribute()](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute) to set attributes.
 
 :bulb: You can use [Object.entries](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) to loop through the keys and values of an object.
+
+:running: You know the hammer too? Just kidding. That was a tool joke. What a tool. `npm run test8`
 
 ## 9. Events
 
@@ -429,6 +445,8 @@ We had to cut some corners so you wouldn't be stuck here the rest of the week. R
 portable, meaning that the events are not platform (react native) or browser specific. The way React does this is, in 
 short, to append only one listener for each event on the root of the app and then delegate these further down to 
 underlying components with a wrapper of data from the original event.
+
+:running: In the event you have forgotten to run your tests `npm run test9`.
 
 ## 10. React.Component
 
