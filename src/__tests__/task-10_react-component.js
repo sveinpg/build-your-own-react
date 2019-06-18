@@ -1,8 +1,10 @@
-import React from '../react';
-import '../test-utils';
-import { getExampleDOM } from '../test-utils';
-import ReactDOM from '../react-dom';
 import { getNodeText } from 'dom-testing-library';
+
+import React from '../react';
+import ReactDOM from '../react-dom';
+import { getExampleDOM } from '../test-utils';
+
+import '../test-utils';
 
 class Greeting extends React.Component {
   render() {
