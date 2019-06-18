@@ -1,9 +1,19 @@
 import React from '../react';
 import '../test-utils';
+import { getExampleDOM } from '../test-utils';
+import ReactDOM from '../react-dom';
+import { getNodeText } from 'dom-testing-library';
 
 class Greeting extends React.Component {
   render() {
     return <p>Hello world</p>;
+  }
+}
+
+class GreetingWithProps extends React.Component {
+  render() {
+    const { name } = this.props;
+    return <p>Hello {name}</p>;
   }
 }
 
@@ -29,3 +39,16 @@ test('Check React Component throws error if used directly', async () => {
 
   expect(error instanceof Error).toBe(true);
 });
+
+test('Check Component has prototype isReactComponent', async () => {
+  expect(React.Component.prototype.isReactComponent).toEqual(true);
+});
+
+test('Check Component sets props', async () => {
+  const container = getExampleDOM();
+
+  ReactDOM.render(<GreetingWithProps name='world' />, container);
+
+  expect(getNodeText(container.querySelector('p'))).toBe('Hello world');
+});
+
