@@ -173,6 +173,8 @@ React elements can be of different types (HTML elements, React components or pri
 
 The specific HTML element we are going to render is specified by the `type` value of the React element with a `string`. HTML elements are the only type of React elements that are specified by a string.
 
+The following call to `ReactDOM.render()`...
+
 ```js
 ReactDOM.render(
     React.createElement('div', {}),
@@ -206,8 +208,6 @@ Remember to also implement the `constructor` and `mount` in `VDomNode`:
 
 5. The `constructor` need to set the `reactElement`-argument as a class-property.
 6. `mount` has to create a DOM-element from the `reactElement` class-property and return it.
-
-The following call to `ReactDOM.render()`...
 
 :bulb: [document.createElement()](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) can be used to create HTML elements.
 
