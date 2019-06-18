@@ -12,13 +12,15 @@ Generally, when we speak about React we talk about both [React](https://www.npmj
 
 **ReactDOM** is the glue between React and the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model). When you want to show your React application you need to use `ReactDOM.render()` from the ReactDOM package. This package include the [reconciliation algorithm](#reconciliation) and platform-specific code – also known as [renderers](#renderers).
 
-**React** – often referred to as React core and includes [the top-level React APIs](https://reactjs.org/docs/react-api.html#react). It only includes the APIs necessary to define components: the component base class, lifecycle methods, state, props and all the concepts we know and love.
+**React** – often referred to as React core and includes [the top-level React APIs](https://reactjs
+.org/docs/react-api.html#react). It only includes the APIs necessary to define components: the component base class, 
+lifecycle functions, state, props and all the concepts we know and love.
 
 ## <a name="react-elements"></a> React elements
 
 React elements are the building blocks of React applications. React elements might be confused with the concept of
 React components. To clarify, React elements are generally what gets rendered on the screen, i.e. the return value of
-the `render()` method of a React component or the return of a functional component.
+the `render()` function of a React component or the return of a functional component.
 
 ```jsx
 const element = <p>I'm an element</p>;
@@ -32,10 +34,11 @@ In this workshop we are going to create a renderer that renders React components
 
 ## <a name="reconciliation"></a> Reconciliation
 
-Different renderers such as ReactDOM and React Native shares a lot of logic. Rendering, custom components, state, lifecycle methods and refs should work consistently across platforms.
+Different renderers such as ReactDOM and React Native shares a lot of logic. Rendering, custom components, state, 
+lifecycle functions and refs should work consistently across platforms.
 
-When you use React you can think of the `render()` method as creating a tree of React elements. If props or state is
-changed, the `render()` method might return a different tree. The reconciler then needs to figure out how to
+When you use React you can think of the `render()` function as creating a tree of React elements. If props or state is
+changed, the `render()` function might return a different tree. The reconciler then needs to figure out how to
 effectively update the UI to match the most recent tree with the minimum number of operations required.
 
 > If you want to learn more about this, the [React documentation](https://reactjs.org/docs/reconciliation.html) contains an article that explains the choices made in React's diffing algorithm.
@@ -202,7 +205,8 @@ Now we need to mount (create a DOM-element) for our virtual node and append it t
 3. In `render` need to mount our virtual node by calling the mount method on the virtual node. `vNode.mount()`
 4. Append the result of the mount method to the `domContainerNode`.
 
-:bulb: [Node.appendChild()](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) method adds a node to the end of the list of children of a specified parent node.
+:bulb: [Node.appendChild()](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) function adds a node to 
+the end of the list of children of a specified parent node.
 
 Remember to also implement the `constructor` and `mount` in `VDomNode`:
 
@@ -333,7 +337,7 @@ You also need to implement `VCompositeNode.js`:
 3. `mount` should render the `reactElement` class-property by calling `type` as a function with its `props` as the
    argument (`type(props);`).
 4. Call `instantiateVNode` with the result the rendering we did in step-3 to get a virtual-node.
-5. The last ting we need to do is to call `mount` on the virtual-node we got in step-5 and return the value.
+5. The last ting we need to do is to call `mount` on the virtual-node we got in step-4 and return the value.
 
 :trophy: Extend `react-dom/index.js` and `VCompositeNode.js` to handle functional components.
 
@@ -373,7 +377,9 @@ If you are familiar with HTML, you know that we need to support more attributes 
 
 ## 9. Events
 
-With plain html and JavaScript we primarily have to two ways of adding event listeners. You can either use the [addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) JavaScript method or you can pass a string as a HTML attribute to the HTML element.
+With plain html and JavaScript we primarily have to two ways of adding event listeners.
+You can either use the [addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
+function or you can add an event as a string-attribute to the HTML-element.
 
 ```html
 <button id="click-me">JavaScript</button>
@@ -387,7 +393,8 @@ With plain html and JavaScript we primarily have to two ways of adding event lis
 </script>
 ```
 
-[Handling events in React](https://reactjs.org/docs/handling-events.html) is similar to the second way of adding an event listener – by passing a HTML attribute. However, there are some syntactic differences:
+Similarly, [events in React](https://reactjs.org/docs/handling-events.html) use attributes in JSX (props).
+However, there are some syntactic differences:
 
 -   React events are named using camelCase, rather than lowercase.
 -   With JSX you pass a function as the event handler, rather than a string.
@@ -400,7 +407,8 @@ const button = () => (
 
 > When using React you should generally not need to call `addEventListener` to add listeners to a DOM element after it is created.
 
-:trophy: Use `addEventListener()` to add event listeners for each of the attributes that start with `on`.
+:trophy: Use `addEventListener()` to add event listeners in `VDomNode.js` for each of the attributes that start with 
+`on`.
 
 :bulb: You can use the following regex to find strings that start with `on`:
 
@@ -411,6 +419,16 @@ if (/^on.*$/.test(varToTest)) {
     console.log('Found match ', varToTest);
 }
 ```
+
+:bulb: Remember that, unlike React, events in plain JavaScript do not use camleCasing.
+
+:books: Alright, you got us! You called our bluff, the way we are implementing events in this task is not true to 
+Facebook's implementation of React.
+We had to cut some corners so you wouldn't be stuck here the rest of the week. React uses something called 
+[SyntheticEvents](https://reactjs.org/docs/events.html). One of the benefits of SyntheticEvent is to make react code 
+portable, meaning that the events are not platform (react native) or browser specific. The way React does this is, in 
+short, to append only one listener for each event on the root of the app and then delegate these further down to 
+underlying components with a wrapper of data from the original event.
 
 ## 10. React.Component
 
@@ -430,13 +448,15 @@ class Greeting extends React.Component {
 }
 ```
 
-To create a class component you simply extend [React.Component](https://reactjs.org/docs/react-component.html) and implement the `render`-method to specify what to render.
+To create a class component you simply extend [React.Component](https://reactjs.org/docs/react-component.html) and 
+implement the `render`-function to specify what to render.
 
 :trophy: Create a class in `react.js` and export it with the name `Component`.
 
 :bulb: Use a [named export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description) to specify the name of an export.
 
-As mentioned, the `render`-method is used to specify what to render. It is the only required method in a class component and should return [React elements](#react-elements).
+As mentioned, the `render`-function is used to specify what to render. It is the only required method in a class 
+component and should return [React elements](#react-elements).
 
 :trophy: Create an instance method in your newly created class called `render` that throws an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error).
 
