@@ -337,7 +337,7 @@ You also need to implement `VCompositeNode.js`:
 
 2. The `constructor` need to set the `reactElement`-argument as a class-property. (Just like we did for `VDomNode` in task 2)
 
-3. The next thing we need to do is render out component. Call the functional component (`type`) with its `props` as the argument. `this.reactElement.type(this.reactElement.props)` 
+3. The next thing we need to do is to render our component. Call the functional component (`type`) with its `props` as the argument. `this.reactElement.type(this.reactElement.props)` 
 
 :bulb: `this.reactElement.type` is a functional component (Like `Greeting` in the snippet above)
 
