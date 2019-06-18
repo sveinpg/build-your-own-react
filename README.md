@@ -336,6 +336,8 @@ ReactDOM.render(element, document.getElementById('root'));
 
 In the above example the prop "name" is set as a JSX attribute. React passes all JSX attributes to our user-defined component in a single object.
 
+:trophy: Extend `react-dom/index.js` and `VCompositeNode.js` to handle functional components.
+
 To get functional components working, you should:
 
 1. Extend `instantiateVNode` in `react-dom/index.js` to be able to instantiate a `VCompositeNode`.
@@ -343,17 +345,17 @@ To get functional components working, you should:
 
 You also need to implement `VCompositeNode.js`:
 
-2. The `constructor` need to set the `reactElement`-argument as a class-property.
-3. `mount` should render the `reactElement` class-property by calling `type` as a function with its `props` as the
-   argument (`type(props);`).
-4. Call `instantiateVNode` with the result the rendering we did in step-3 to get a virtual-node.
-5. The last ting we need to do is to call `mount` on the virtual-node we got in step-4 and return the value.
+2. The `constructor` needs to set the `reactElement`-argument as a class-property. Just like we did for `VDomNode` in task 2.
 
-:trophy: Extend `react-dom/index.js` and `VCompositeNode.js` to handle functional components.
+3. The next thing we need to do is to render our component. Call the functional component (`type`) with its `props` as the argument. `type(props)` 
 
-:trophy: Extend your handling of functional components to pass `props` to the function.
+:bulb: `this.reactElement.type` is a functional component (like `Greeting` in the snippet above).
 
-:bulb: As you see in the code snippet above, you can simply give the `props` object as an argument to your functional component.
+4. Call `instantiateVNode` with the result of the rendering we did in step 3 to get a virtual node.
+
+:bulb: User defined (composite) components always render *exactly one* React element (which in turn can contain multiple React elements as children), hence we only need to call `instantiateVNode` once with the value returned from our component. 
+
+5. The last ting we need to do is to call `mount` on the virtual node we got in step 4 and return the value.
 
 :running: Don't forget the tests! `npm run test5`
 
