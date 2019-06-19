@@ -265,12 +265,12 @@ function getChildrenAsArray(props) {
 
 :running: Third time's the charm, run those tests! `npm run test3`
 
-## 4. Primitive types
+## 4. Primitive types and empty elements
 
-Your next task is to handle primitive types like `number` and `string`.
-Unlike HTML elements and React components, primitive types are not represented with a React element.
-Moreover, they are not represented with an object with a `type` field. Instead they are represented with their own value.
-Because of this primitive types are always children of another React element.
+Your next task is to handle primitive types like `number` and `string`, as well as empty elements.
+Unlike HTML elements and React components, primitive types and empty elements are not represented as a standard React element.
+Moreover, they are not represented as an object with a `type` field. Instead they are represented with their own value.
+Because of this primitive types and empty elements are always leafs nodes (i.e. children of another React element).
 
 The following call to `ReactDOM.render()`..
 
@@ -291,11 +291,36 @@ ReactDOM.render(
 </div>
 ```
 
-:trophy: Extend the `mount` function in `VDomNode` to support primitive types
+while
 
-1. Check if the `reactElement` is a primitive type
+```js
+ReactDOM.render(
+    React.createElement('div', {}, null),
+    document.getElementById('root')
+);
+```
 
-:bulb: Primitive types are not represented with an object with a `type` field.
+..should result in just a `div`.
+
+```html
+<div id="root">
+    <div></div>
+</div>
+```
+
+:trophy: Extend the `mount` function in `VDomNode` to support primitive types and empty elements.
+
+1. Check if the `reactElement` is a empty (`null` or `undefined`)
+
+:bulb: Primitive types and empty elements are not represented with an object with a `type` field.
+
+2. If the element is in fact empty, return an empty DOM-node.
+
+:bulb: [createTextNode](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode) is perfect for
+representing primitive types and empty nodes in the DOM. Use `createTextNode` with an empty string as an argument. Since
+this won't render anything to the DOM.
+
+3. Check if the `reactElement` is a primitive type
 
 :bulb: You can use the [typeof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) operator to check the type of a variable, like this util-function:
 
@@ -306,14 +331,11 @@ function isPrimitive(reactElement) {
 }
 ```
 
-2. If it is a primitive (`number` or `string`), create a new DOM-node and return it.
+4. If it is a primitive (`number` or `string`), create a new DOM-node and return it.
 
 :bulb: Primitives are always leaf-nodes and does not have children.
 
-:bulb: [createTextNode](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode) is perfect for
-representing primitive types in the DOM.
-
-3. If it's not a primitive, then do the logic we implemented in the previous tasks.
+5. If it's not a primitive, then do the logic we implemented in the previous tasks.
 
 :running: You know what to do: `npm run test4`
 
