@@ -550,7 +550,7 @@ as you would be rendering for every single component updating its state.
 It will be very advantageous to defer the actual rendering until after we are done updating state in all components.
 We can do this by wrapping `ReactDOM.render()` in a `setTimeout`.
 
-:trophy: Implement a re-render function in ReactDOM and call this from the `setState` function.
+:trophy: Implement a re-render function `_reRender` in ReactDOM and call this from the `setState` function.
 The re-render function should call `setTimeout` with `ReactDOM.render` as its callback function.
 
 :bulb: Timeouts in JS are only guaranteed to not run _sooner_ than requested, but they _may_ run later.
