@@ -1,62 +1,40 @@
-import { getNodeText, fireEvent, waitForDomChange } from 'dom-testing-library';
-
 import React from '../react';
-import ReactDOM from '../react-dom';
-import { getExampleDOM } from '../test-utils';
+import '../test-utils';
 
 class Greeting extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { name: 'world' };
+    this.state = { name: 'world', moreState: 'right here' };
   }
 
   render() {
     const { name } = this.state;
-    const { newState } = this.props;
-    return (
-      <div>
-        <p>Hello {name}</p>
-        <button onClick={ () => this.setState(newState) }>
-          Expand your horizon
-        </button>
-      </div>
-    );
+    return <p>Hello {name}</p>;
   }
 }
 
-test('Check Component correctly updates state', async () => {
-  const container = getExampleDOM();
+test('Check Component correctly updates state', () => {
+  const element = new Greeting();
 
-  ReactDOM.render(<Greeting newState={ { name: 'universe' } } />, container);
+  element.setState({ name: 'universe' });
 
-  expect(getNodeText(container.querySelector('p'))).toBe('Hello world');
-
-  fireEvent(
-    container.querySelector('button'),
-    new MouseEvent('click')
-  );
-
-  await waitForDomChange({ container });
-
-  expect(getNodeText(container.querySelector('p'))).toBe('Hello universe');
+  expect(element.state.name).toBe('universe');
 });
 
-test("Check DOM isn't re-rendered if setState is called with null", async done => {
-  const container = getExampleDOM();
+test('Check Component only changes given state', () => {
+  const element = new Greeting();
 
-  ReactDOM.render(<Greeting newState={ null } />, container);
+  element.setState({ name: 'universe' });
 
-  fireEvent(
-    container.querySelector('button'),
-    new MouseEvent('click')
-  );
+  expect(element.state.name).toBe('universe');
+  expect(element.state.moreState).toBe('right here');
+});
 
-  try {
-    await waitForDomChange({ container, timeout: 100 });
-    done.fail('Calling setState with null should not trigger a re-render');
-  } catch {
-    // We expect to catch a timeout
-  }
+test('Check Component does not change state if new state is null', () => {
+  const element = new Greeting();
 
-  done();
+  element.setState(null);
+
+  expect(element.state.name).toBe('world');
+  expect(element.state.moreState).toBe('right here');
 });
