@@ -55,11 +55,13 @@ To run the tests for a specific task, you can simply specify the task (in this c
 npm run test1
 ```
 
-To run all tests:
+To run tests for task 2, just replace `test1` with `test2`, and so on. To run all tests:
 
 ```
 npm run test
 ```
+
+Note that these test scripts will also run the tests for all the previous tasks. This way you can be sure you don't break anything in the process.
 
 ## Playground
 
@@ -121,15 +123,6 @@ To make your life easier, we have used emojis to mark important content:
 :books: - Some extended information you might check out some other time.
 
 :running: - We'll keep on reminding you to run the tests.
-
-### :bulb: Yes, already a tips. Starting off strong!
-
-We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented
-the task correctly.
-
-You can run the tests for task 1 with `npm run test1`, the tests for task 2 with `npm run test2`, and so on.
-
-Note that these test scripts will also run the tests for all the previous tasks. This way you can be sure you don't break anything in the process.
 
 ## 1. React.createElement()
 
@@ -467,8 +460,8 @@ if (/^on.*$/.test(varToTest)) {
 :books: Alright, you got us! You called our bluff, the way we are implementing events in this task is not true to 
 Facebook's implementation of React.
 We had to cut some corners so you wouldn't be stuck here the rest of the week. React uses something called 
-[SyntheticEvents](https://reactjs.org/docs/events.html). One of the benefits of SyntheticEvent is to make react code 
-portable, meaning that the events are not platform (react native) or browser specific. The way React does this is, in 
+[SyntheticEvents](https://reactjs.org/docs/events.html). One of the benefits of SyntheticEvent is to make React code 
+portable, meaning that the events are not platform (React native) or browser specific. The way React does this is, in 
 short, to append only one listener for each event on the root of the app and then delegate these further down to 
 underlying components with a wrapper of data from the original event.
 
