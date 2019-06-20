@@ -262,10 +262,10 @@ function getChildrenAsArray(props) {
 
 Your next task is to handle primitive types like `number` and `string`, as well as empty elements.
 Unlike HTML elements and React components, primitive types and empty elements are not represented as a standard React element.
-Moreover, they are not represented as an object with a `type` field. Instead they are represented with their own value.
-Because of this primitive types and empty elements are always leafs nodes (i.e. children of another React element).
+Moreover, they are not represented as an object with a `type` field. Instead they are represented as their own value.
+Because of this primitive types and empty elements are always leaf nodes (i.e. children of another React element).
 
-The following call to `ReactDOM.render()`..
+The following call to `ReactDOM.render()`...
 
 ```js
 ReactDOM.render(
@@ -274,7 +274,7 @@ ReactDOM.render(
 );
 ```
 
-..should result in a `div` element with the text `Hello world!` inside it.
+...should result in a `div` element with the text `Hello world!` inside it.
 
 ```html
 <div id="root">
@@ -284,7 +284,7 @@ ReactDOM.render(
 </div>
 ```
 
-while
+...while...
 
 ```js
 ReactDOM.render(
@@ -293,7 +293,7 @@ ReactDOM.render(
 );
 ```
 
-..should result in just a `div`.
+...should result in just a `div`.
 
 ```html
 <div id="root">
