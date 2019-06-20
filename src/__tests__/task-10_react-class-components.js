@@ -1,8 +1,4 @@
-import { getNodeText } from 'dom-testing-library';
-
 import React from '../react';
-import ReactDOM from '../react-dom';
-import { getExampleDOM } from '../test-utils';
 
 class Greeting extends React.Component {
   render() {
@@ -17,14 +13,14 @@ class GreetingWithProps extends React.Component {
   }
 }
 
-test('Check Component render method returns React element', async () => {
+test('Check Component render method returns React element', () => {
   const instance = new Greeting();
   const element = instance.render();
 
   expect(element.props.children).toEqual(['Hello world']);
 });
 
-test('Check React Component throws error if used directly', async () => {
+test('Check React Component throws error if used directly', () => {
   const instance = new React.Component();
 
   expect(instance.render).not.toBeUndefined();
@@ -40,15 +36,14 @@ test('Check React Component throws error if used directly', async () => {
   expect(error instanceof Error).toBe(true);
 });
 
-test('Check Component has prototype isReactComponent', async () => {
+test('Check Component has prototype isReactComponent', () => {
   expect(React.Component.prototype.isReactComponent).toEqual(true);
 });
 
-test('Check Component sets props', async () => {
-  const container = getExampleDOM();
+test('Check Component sets props', () => {
+  const instance = new GreetingWithProps({ name: 'world' });
+  const element = instance.render();
 
-  ReactDOM.render(<GreetingWithProps name='world' />, container);
-
-  expect(getNodeText(container.querySelector('p'))).toBe('Hello world');
+  expect(element.props.children).toEqual(['Hello ', 'world']);
 });
 

@@ -18,7 +18,8 @@
         "test9": "jest task-[1-9]_.*.js",
         "test10": "jest task-[1-9][0]?_.*.js",
         "test11": "jest task-[1-9][0-1]?_.*.js",
-        "test12": "jest task-[1-9][0-2]?_.*.js"
+        "test12": "jest task-[1-9][0-2]?_.*.js",
+        "test13": "jest task-[1-9][0-3]?_.*.js"
     },
     "keywords": [],
     "author": "",

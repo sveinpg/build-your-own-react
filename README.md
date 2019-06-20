@@ -475,7 +475,7 @@ underlying components with a wrapper of data from the original event.
 
 :running: In the event you have forgotten to run your tests `npm run test9`.
 
-## 10. React.Component
+## 10. React class components
 
 Now we have created a library that supports stateless applications, well done!
 
@@ -527,7 +527,31 @@ that takes the `props` as an argument and assign them as a class-property.
 
 :running: This seems like a good time to `npm run test10`.
 
-## 11. State
+## 11. Render React class component
+
+So, we now have functioning React components that support `props`. But there is one problem... they don't render.
+
+:trophy: We need to extend `mount` in `VCompositeNode` to not only handle functional components, but also 
+class-components.
+
+1. To do this we have to check which component we are about to render. Remember the `isReactComponent` -flag that
+we introduced in the last task? It's almost scary how simple this is, but just check if `isReactComponent` is `true` 
+on the `prototype` of the component (that is the `type` property of the `reactElement`).
+
+2. Instead of calling `type` as a function, in the way that we did for functional components. We call `new type` with 
+`props` as arguments.
+
+3. We then need to call the `render` function of newly instantiated component.
+
+4. The result of `render` returns a `reactElement`. To make this a virtual node we call `instantiateVNode`.
+
+5. To sum it all up, call `mount` on the virtual node we got in step 4.
+
+6. If the `isReactComponent` is `false` then do all the logic for functional components that we had implemented before.
+
+:running: This seems like a good time to `npm run test11`.
+
+## 12. State
 
 As mentioned, the whole point of making this Component class is to be able to create stateful components.
 So finally, let's add some state.
@@ -559,9 +583,9 @@ If it is `undefined` or `null` you should simply do nothing - just return from t
 
 :fire: In React `setState()` can also take a function as the first parameter. If you want this you can check the type of `state` in your function. If it's a function, call it with the current state as an argument.
 
-:running: Time to check the state of things with `npm run test11`.
+:running: Time to check the state of things with `npm run test12`.
 
-## 12. (Re)rendering with state
+## 13. (Re)rendering with state
 
 If you try the code you currently have, you might notice that changing the state doesn't actually change anything in your DOM.
 Your `setState` function also needs to trigger a re-render of your DOM.
@@ -582,7 +606,7 @@ A timeout of 0 ms will run its callback as soon as the browser isn't busy doing 
 :books: When you use `setTimeout` the callback function is placed on the callback queue and ran at the next event loop.
 There was [a nice talk about this](https://www.youtube.com/watch?v=8aGhZQkoFbQ) at JSConf EU 2014.
 
-:running: Finally, for the last time, run the tests `npm run test12`.
+:running: Finally, for the last time, run the tests `npm run test13`.
 
 # :feet: Next steps
 
