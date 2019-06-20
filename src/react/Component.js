@@ -1,9 +1,9 @@
 import ReactDOM from '../react-dom';
 
 class Component {
-    constructor() {}
+    constructor(props) {}
 
-    setState() {}
+    setState(state) {}
 
     render() {}
 }

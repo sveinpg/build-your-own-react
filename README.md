@@ -573,8 +573,8 @@ class Greeting extends React.Component {
 Strictly speaking your component now just has a property `state`, it doesn't really _have_ state.
 As you may know, in React you can use `this.setState()` to change this property, and finally make your component stateful.
 
-:trophy: Implement an instance method on your `React.Component` class which takes `state` as an argument.
-This is expected to be an object, and it should be merged to the existing state.
+:trophy: Implement `setState` in `react/Component.js`.
+The argument of `setState` is expected to be an object, and it should be merged to the existing state.
 If it is `undefined` or `null` you should simply do nothing - just return from the function.
 
 :bulb: To merge objects you can either use `Object.assign()` or the shorthand [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax).
@@ -595,7 +595,7 @@ as you would be rendering for every single component updating its state.
 It will be very advantageous to defer the actual rendering until after we are done updating state in all components.
 We can do this by wrapping `ReactDOM.render()` in a `setTimeout`.
 
-:trophy: Implement a re-render function `_reRender` in ReactDOM and call this from the `setState` function.
+:trophy: Implement the `_reRender` function in ReactDOM and call this from the `setState` function.
 The re-render function should call `setTimeout` with `ReactDOM.render` as its callback function.
 
 :bulb: Timeouts in JS are only guaranteed to not run _sooner_ than requested, but they _may_ run later.
@@ -603,6 +603,36 @@ A timeout of 0 ms will run its callback as soon as the browser isn't busy doing 
 
 :books: When you use `setTimeout` the callback function is placed on the callback queue and ran at the next event loop.
 There was [a nice talk about this](https://www.youtube.com/watch?v=8aGhZQkoFbQ) at JSConf EU 2014.
+
+:trophy: Our implementation fails when we call `_reRender`. This is because we are calling the `render`-function 
+without any arguments in `_reRender`, while `render` expects a `reactElement` and a `domContainerNode`.
+To fix this we have to store `reactElement` and `domContainerNode` from the first render and then, if `render` is 
+called without any arguments (i.e. `reactElement` and `domContainerNode` are `undefined`), we use the stored instances.
+
+:trophy: Even though we are calling to re-render in `setState` the state of components does not persist between renders.
+The reason for this is that we are new'ing up components on every render instead of keeping previously rendered 
+class-components in memory.
+To fix this, we are going to implement a class-cache that saves our component instances between renders..
+
+1. Add the `classCache` to `react-dom/index.js`:
+
+```js
+const classCache = {
+    index: -1,
+    cache: []
+};
+```
+
+2. Call `mount` on the virtual node returned by `instantiateVNode` in `react-dom/index.js` with the cache as the 
+argument.
+
+3. For `mount` in `VDomNode` you basically just need to pass on the cache to the next call to `mount`.
+
+4. In `VCompositeNode` and the `mount` function. If the component is a class-component we have to increase the 
+cache-index property and get the element at that index. If the element is defined, use it, if not, instantiate the 
+class-component as we did before. Remember to push the class instance back into the cache before you are done.
+
+5. When re-render, remember to reset the cache index in `react-dom/index.js`.
 
 :running: Finally, for the last time, run the tests `npm run test13`.
 
@@ -615,13 +645,18 @@ That’s all – we have a functional version of React now. Lets take a closer l
 -   Handles children, state, props, events and other attributes.
 -   Supports initial rendering and re-rendering.
 
-The main purpose of this article was to demonstrate core principles of React internal structure. However, some features were left out and this implementation serves as a foundation for you extend with these features.
+The main purpose of this workshop was to demonstrate core principles of React internal structure. However, some 
+features were left out and this implementation serves as a foundation for you extend with these features.
 
 ## Remove the class cache
 
-In our implementation we used a class cache to keep track of instanciated classes. However, this approach is flawed. If the order of components changes between renders we will retrieve the wrong class instance from the cache.
+In our implementation we used a class cache to keep track of instantiated classes. However, this approach is flawed 
+and not at all how React actually does it.
+If, for example, the order of components changes between renders we will retrieve the wrong class instance from the 
+cache.
 
-Every time we change the state of one our components in our application, the DOM gets uppdated to reflect the new state. Frequent DOM manipulations affects performance and should be avoided. To avoid this we should minimize the number of manipulations.
+Every time we change the state of one our components in our application, the DOM gets updated to reflect the new state.
+Frequent DOM manipulations affects performance and should be avoided. To avoid this we should minimize the number of manipulations.
 
 > If an element type in the same place in the tree “matches up” between the previous and the next renders, React reuses the existing host instance.
 > Source: https://overreacted.io/react-as-a-ui-runtime/#reconciliation
