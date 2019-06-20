@@ -55,11 +55,13 @@ To run the tests for a specific task, you can simply specify the task (in this c
 npm run test1
 ```
 
-To run all tests:
+To run tests for task 2, just replace `test1` with `test2`, and so on. To run all tests:
 
 ```
 npm run test
 ```
+
+Note that these test scripts will also run the tests for all the previous tasks. This way you can be sure you don't break anything in the process.
 
 ## Playground
 
@@ -121,15 +123,6 @@ To make your life easier, we have used emojis to mark important content:
 :books: - Some extended information you might check out some other time.
 
 :running: - We'll keep on reminding you to run the tests.
-
-### :bulb: Yes, already a tips. Starting off strong!
-
-We have implemented a test-suite, with unit-tests for each task. This way you can easily verify that you've implemented
-the task correctly.
-
-You can run the tests for task 1 with `npm run test1`, the tests for task 2 with `npm run test2`, and so on.
-
-Note that these test scripts will also run the tests for all the previous tasks. This way you can be sure you don't break anything in the process.
 
 ## 1. React.createElement()
 
@@ -265,14 +258,14 @@ function getChildrenAsArray(props) {
 
 :running: Third time's the charm, run those tests! `npm run test3`
 
-## 4. Primitive types
+## 4. Primitive types and empty elements
 
-Your next task is to handle primitive types like `number` and `string`.
-Unlike HTML elements and React components, primitive types are not represented with a React element.
-Moreover, they are not represented with an object with a `type` field. Instead they are represented with their own value.
-Because of this primitive types are always children of another React element.
+Your next task is to handle primitive types like `number` and `string`, as well as empty elements.
+Unlike HTML elements and React components, primitive types and empty elements are not represented as a standard React element.
+Moreover, they are not represented as an object with a `type` field. Instead they are represented as their own value.
+Because of this primitive types and empty elements are always leaf nodes (i.e. children of another React element).
 
-The following call to `ReactDOM.render()`..
+The following call to `ReactDOM.render()`...
 
 ```js
 ReactDOM.render(
@@ -281,7 +274,7 @@ ReactDOM.render(
 );
 ```
 
-..should result in a `div` element with the text `Hello world!` inside it.
+...should result in a `div` element with the text `Hello world!` inside it.
 
 ```html
 <div id="root">
@@ -291,11 +284,36 @@ ReactDOM.render(
 </div>
 ```
 
-:trophy: Extend the `mount` function in `VDomNode` to support primitive types
+...while...
 
-1. Check if the `reactElement` is a primitive type
+```js
+ReactDOM.render(
+    React.createElement('div', {}, null),
+    document.getElementById('root')
+);
+```
 
-:bulb: Primitive types are not represented with an object with a `type` field.
+...should result in just a `div`.
+
+```html
+<div id="root">
+    <div></div>
+</div>
+```
+
+:trophy: Extend the `mount` function in `VDomNode` to support primitive types and empty elements.
+
+1. Check if the `reactElement` is a empty (`null` or `undefined`)
+
+:bulb: Primitive types and empty elements are not represented with an object with a `type` field.
+
+2. If the element is in fact empty, return an empty DOM-node.
+
+:bulb: [createTextNode](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode) is perfect for
+representing primitive types and empty nodes in the DOM. Use `createTextNode` with an empty string as an argument. Since
+this won't render anything to the DOM.
+
+3. Check if the `reactElement` is a primitive type
 
 :bulb: You can use the [typeof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) operator to check the type of a variable, like this util-function:
 
@@ -306,14 +324,11 @@ function isPrimitive(reactElement) {
 }
 ```
 
-2. If it is a primitive (`number` or `string`), create a new DOM-node and return it.
+4. If it is a primitive (`number` or `string`), create a new DOM-node and return it.
 
 :bulb: Primitives are always leaf-nodes and does not have children.
 
-:bulb: [createTextNode](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode) is perfect for
-representing primitive types in the DOM.
-
-3. If it's not a primitive, then do the logic we implemented in the previous tasks.
+5. If it's not a primitive, then do the logic we implemented in the previous tasks.
 
 :running: You know what to do: `npm run test4`
 
@@ -445,8 +460,8 @@ if (/^on.*$/.test(varToTest)) {
 :books: Alright, you got us! You called our bluff, the way we are implementing events in this task is not true to 
 Facebook's implementation of React.
 We had to cut some corners so you wouldn't be stuck here the rest of the week. React uses something called 
-[SyntheticEvents](https://reactjs.org/docs/events.html). One of the benefits of SyntheticEvent is to make react code 
-portable, meaning that the events are not platform (react native) or browser specific. The way React does this is, in 
+[SyntheticEvents](https://reactjs.org/docs/events.html). One of the benefits of SyntheticEvent is to make React code 
+portable, meaning that the events are not platform (React native) or browser specific. The way React does this is, in 
 short, to append only one listener for each event on the root of the app and then delegate these further down to 
 underlying components with a wrapper of data from the original event.
 
