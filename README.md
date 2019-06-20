@@ -168,7 +168,8 @@ The function returns an object like the one below.
 
 :bulb: Unfamiliar with `React.createElement()`? Code written with [JSX](https://reactjs.org/docs/introducing-jsx.html) will be converted to use React.createElement(). You will not typically invoke React.createElement() directly if you are using JSX.
 
-:bulb: We use the rest operator `...children` to handle several children. However, if the app code specifies children as an array, the rest operator will still wrap the argument in an array. When this is the case you need to [flatten](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) the array. (Requires polyfill for IE/Edge)
+:bulb: We use the rest operator `...children` to handle several children. However, if the app code specifies children as an array, the rest operator will still wrap the argument in an array.
+When this is the case you need to [flatten](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) the array (requires polyfill for IE/Edge).
 
 :books: In this workshop, we won't make use of `$$typeof`, `ref` or `_owner`, but do take a look at [this blog post](https://overreacted.io/why-do-react-elements-have-typeof-property/) for details about what `$$typeof` is. Essentially it is to protect
 against XSS-attacks.
@@ -205,11 +206,13 @@ ReactDOM.render(
 To complete our task, we need to:
 
 1. return a `new VDomNode(reactElement)` from the `instantiateVNode` function in `react-dom/index.js`.
+
 2. In `render`, we instansite our virtual node with our reactElement by calling `instantiateVNode(reactElement)`. Store it in a variable named `vNode`.
 
 Now we need to mount (create a DOM-element) for our virtual node and append it to the DOM.
 
 3. In `render` we need to mount our virtual node by calling the mount method on the virtual node. `vNode.mount()`
+
 4. Append the result of the mount method to the `domContainerNode`.
 
 :bulb: [Node.appendChild()](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) function adds a node to 
@@ -218,6 +221,7 @@ the end of the list of children of a specified parent node.
 Remember to also implement the `constructor` and `mount` in `VDomNode`:
 
 5. The `constructor` need to set the `reactElement`-argument as a class-property.
+
 6. `mount` has to create a DOM-element from the `reactElement` class-property and return it.
 
 :bulb: [document.createElement()](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) can be used to create HTML elements.
@@ -372,7 +376,7 @@ You also need to implement `VCompositeNode.js`:
 
 2. The `constructor` needs to set the `reactElement`-argument as a class-property. Just like we did for `VDomNode` in task 2.
 
-3. The next thing we need to do is to render our component in `mount`. Call the functional component (`type`) with its `props` as the argument. `type(props)` 
+3. The next thing we need to do is to render our component in `mount`. Call the functional component (`type`) with its `props` as the argument `type(props)`. 
 
 :bulb: `this.reactElement.type` is a functional component (like `Greeting` in the snippet above).
 
