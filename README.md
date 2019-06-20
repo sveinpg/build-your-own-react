@@ -653,17 +653,17 @@ features were left out and this implementation serves as a foundation for you ex
 ### Remove the class cache
 
 In our implementation we used a class cache to keep track of instantiated classes. However, this approach is flawed 
-and not at all how React actually does it.
-If, for example, the order of components changes between renders we will retrieve the wrong class instance from the 
-cache.
+and not at all how React actually does it. If, for example, the order of components changes between renders we will 
+retrieve the wrong class instance from the cache.
 
-Every time we change the state of one our components in our application, the DOM gets updated to reflect the new state.
-Frequent DOM manipulations affects performance and should be avoided. To avoid this we should minimize the number of manipulations.
+You might also have noticed that we have som unimplemented functions in `VDomNode` and `VCompisteNode`. Instead of 
+calling `mount` again for virtual nodes when re-renders, we should in fact call `update` and update the nodes.
+The way to handle stateful components between renders is to keep an instance of the instantiated component as a 
+class-property in `VCompositeNode`, and this is where `getPublicInstance` comes in to play.
 
-> If an element type in the same place in the tree “matches up” between the previous and the next renders, React reuses the existing host instance.
-> Source: https://overreacted.io/react-as-a-ui-runtime/#reconciliation
-
-There are multiple ways to reduce the number of manipulations. For instance, by reusing HTML-elements (such as `<div/>`) or to use the `key` prop of children to determine which to update.
+On calling the `update` function in `VDomNode`, when looping through children, we can retrieve and check if new 
+react-elements are of the 
+same `type` that they were the last time we rendered. We can then update, append, or remove nodes accordingly.
 
 In `src/solution/react-dom/react-dom` we have provided a more advanced implementation that you can use as inspiration.
 
@@ -673,6 +673,19 @@ React components has several "lifecycle methods" that you can override to run co
 
 Read the about the lifecycle methods in [the documentation](https://reactjs.org/docs/react-component.html#the-component-lifecycle) and try to implement them yourself.
 
-### Reconciliation
+### More advanced reconciliation
 
-Our implementation renders the whole application regardless of which part of the application that triggered the re-render. To further improve the performance of our implementation we can add a `_dirty` to the component that changed. This way we are able to only re-render the subtree that changed.
+Every time we change the state of one our components in our application, the DOM gets updated to reflect the new state.
+Frequent DOM manipulations affects performance and should be avoided.
+To avoid this we should minimize the number of manipulations.
+
+There are multiple ways to reduce the number of manipulations.
+For instance, by reusing HTML-elements (such as `<div/>`) or to use the `key` prop of children to determine which to update.
+
+> If an element type in the same place in the tree “matches up” between the previous and the next renders, React reuses the existing host instance.
+> React only updates the properties that are absolutely necessary. For instance if only `className` on the Component has been changed, then that's the only thing that needs to be updated.
+> Source: https://overreacted.io/react-as-a-ui-runtime/#reconciliation
+
+Our implementation renders the whole application regardless of which part of the application that triggered the re-render.
+To further improve the performance of our implementation we can add a `_dirty` to the component that changed.
+This way we are able to only re-render the subtree that changed.
