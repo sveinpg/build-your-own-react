@@ -11,3 +11,9 @@ test('Check creation of React elements', async () => {
   ]);
   expect(element.props.myProp).toBe('myValue');
 });
+
+test('Check createElement handles an array of children', async () => {
+  const element = React.createElement('p', {}, ['Hello', 'world']);
+
+  expect(element.props.children).toEqual(['Hello', 'world']);
+});
