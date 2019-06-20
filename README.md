@@ -1,4 +1,6 @@
-# Table of contents
+# Build your own react
+
+## Table of contents
 
 :closed_book: [Introduction](#introduction)
 
@@ -6,7 +8,7 @@
 
 :construction_worker_man: [Tasks](#tasks)
 
-# <a name="introduction"></a> :closed_book: Introduction
+## <a name="introduction"></a> :closed_book: Introduction
 
 Generally, when we speak about React we talk about both [React](https://www.npmjs.com/package/react) and [ReactDOM](https://www.npmjs.com/package/react-dom).
 Prior to v0.14, all ReactDOM functionality was part of the React package.
@@ -20,7 +22,7 @@ This package include the [reconciliation algorithm](#reconciliation) and platfor
 It only includes the APIs necessary to define components: the component base class, 
 lifecycle functions, state, props and all the concepts we know and love.
 
-## <a name="react-elements"></a> React elements
+### <a name="react-elements"></a> React elements
 
 React elements are the building blocks of React applications. React elements might be confused with the concept of
 React components. To clarify, React elements are generally what gets rendered on the screen, i.e. the return value of
@@ -30,7 +32,7 @@ the `render()` function of a React component or the return of a functional compo
 const element = <p>I'm an element</p>;
 ```
 
-## <a name="renderers"></a> Renderers
+### <a name="renderers"></a> Renderers
 
 React was originally created for the DOM, but the concept of renderers was introduced to support native platforms like React Native.
 A renderer is responsible for turning a tree of [React elements](#react-elements) into the underlying platform. In other words,
@@ -38,7 +40,7 @@ if we want to support another platform all we need is a new renderer.
 
 In this workshop we are going to create a renderer that renders React components to the DOM, just like ReactDOM.
 
-## <a name="reconciliation"></a> Reconciliation
+### <a name="reconciliation"></a> Reconciliation
 
 Different renderers such as ReactDOM and React Native shares a lot of logic. Rendering, custom components, state, 
 lifecycle functions and refs should work consistently across platforms.
@@ -49,7 +51,7 @@ effectively update the UI to match the most recent tree with the minimum number 
 
 > If you want to learn more about this, the [React documentation](https://reactjs.org/docs/reconciliation.html) contains an article that explains the choices made in React's diffing algorithm.
 
-# <a name="test-your-impl"></a> :running: Testing your implementation
+## <a name="test-your-impl"></a> :running: Testing your implementation
 
 First of all, run `npm install`
 
@@ -71,7 +73,7 @@ npm run test
 
 Note that these test scripts will also run the tests for all the previous tasks. This way you can be sure you don't break anything in the process.
 
-## Playground
+### Playground
 
 In addition to the tests, you can edit `src/index.js` to play with your implementation.
 
@@ -83,7 +85,7 @@ npm start
 
 The dev server should now be running on http://localhost:1234
 
-## Examples
+### Examples
 
 We have provided you with some examples you can use in `src/examples`
 
@@ -100,7 +102,7 @@ npm install
 npm start
 ```
 
-# :house: The structure
+## :house: The structure
 
 If you've already looked in the `/react-dom` directory or `/react` directory, you might have noticed that they
 are not empty.
@@ -116,7 +118,7 @@ of nodes known as the "virtual DOM". The "virtual DOM" that we are about to impl
 the structure is there to make it easier to extend with a more advanced reconciliation-algorithm that
 can just render portions of a sub-tree instead of rendering the whole tree every time.
 
-# <a name="tasks"></a> :construction_worker_man: Tasks
+## <a name="tasks"></a> :construction_worker_man: Tasks
 
 Time to get your hands dirty.
 
@@ -132,7 +134,7 @@ To make your life easier, we have used emojis to mark important content:
 
 :running: - We'll keep on reminding you to run the tests.
 
-## 1. React.createElement()
+### 1. React.createElement()
 
 `createElement` creates and returns a new [React element](#react-elements) of a given type. The function signature of `createElement` takes three arguments:
 
@@ -173,7 +175,7 @@ against XSS-attacks.
 
 :running: It's time to run some tests. If you haven't already, run `npm install` first. Then run `npm run test1`.
 
-## 2. Render HTML elements
+### 2. Render HTML elements
 
 Time to render our newly created React element!
 
@@ -222,7 +224,7 @@ Remember to also implement the `constructor` and `mount` in `VDomNode`:
 
 :running: Remember to run the tests `npm run test2` :wave:
 
-## 3. Handle children
+### 3. Handle children
 
 Great, we are now able to create **one** HTML element! In order to render more than one element we need to handle children.
 
@@ -266,7 +268,7 @@ function getChildrenAsArray(props) {
 
 :running: Third time's the charm, run those tests! `npm run test3`
 
-## 4. Primitive types and empty elements
+### 4. Primitive types and empty elements
 
 Your next task is to handle primitive types like `number` and `string`, as well as empty elements.
 Unlike HTML elements and React components, primitive types and empty elements are not represented as a standard React element.
@@ -340,7 +342,7 @@ function isPrimitive(reactElement) {
 
 :running: You know what to do: `npm run test4`
 
-## 5. Functional components and props
+### 5. Functional components and props
 
 In many ways React components are like JavaScript functions.
 Just like functions, they accept arbitrary input. All input values are passed to the component in a single object called `props`.
@@ -382,7 +384,7 @@ You also need to implement `VCompositeNode.js`:
 
 :running: Don't forget the tests! `npm run test5`
 
-## 6. className
+### 6. className
 
 No application is complete without styling. In React there is mainly two ways to style your elements – [inline styling](https://reactjs.org/docs/dom-elements.html#style) and [CSS](https://reactjs.org/docs/faq-styling.html). We'll cover CSS in this task and inline styling in task #7.
 
@@ -394,7 +396,7 @@ To specify a CSS class of an element, use the `className` attribute. This is one
 
 :running: Tests FTW! `npm run test6`
 
-## 7. Inline styles
+### 7. Inline styles
 
 Inline styling is another way to style your application. The `style` attribute accepts a JavaScript object with camelCased properties. For instance, `background-color` becomes `backgroundColor` etc.
 
@@ -406,7 +408,7 @@ Inline styling is another way to style your application. The `style` attribute a
 
 :running: You know the drill. `npm run test7`
 
-## 8. Attributes
+### 8. Attributes
 
 If you are familiar with HTML, you know that we need to support more attributes than `style` and `className`. Luckily for us, most of these attributes are similar for React (we will handle events in the next task).
 
@@ -418,7 +420,7 @@ If you are familiar with HTML, you know that we need to support more attributes 
 
 :running: You know the hammer too? Just kidding. That was a tool joke. What a tool. `npm run test8`
 
-## 9. Events
+### 9. Events
 
 With plain html and JavaScript we primarily have to two ways of adding event listeners.
 You can either use the [addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
@@ -475,7 +477,7 @@ underlying components with a wrapper of data from the original event.
 
 :running: In the event you have forgotten to run your tests `npm run test9`.
 
-## 10. React class components
+### 10. React class components
 
 Now we have created a library that supports stateless applications, well done!
 
@@ -527,7 +529,7 @@ that takes the `props` as an argument and assign them as a class-property.
 
 :running: This seems like a good time to `npm run test10`.
 
-## 11. Render React class component
+### 11. Render React class component
 
 So, we now have functioning React components that support `props`. But there is one problem... they don't render.
 
@@ -549,7 +551,7 @@ on the `prototype` of the component (that is the `type` property of the `reactEl
 
 :running: Hammer time, `npm run test11`.
 
-## 12. State
+### 12. State
 
 As mentioned, the whole point of making this Component class is to be able to create stateful components.
 So finally, let's add some state.
@@ -583,7 +585,7 @@ If it is `undefined` or `null` you should simply do nothing - just return from t
 
 :running: Time to check the state of things with `npm run test12`.
 
-## 13. (Re)rendering with state
+### 13. (Re)rendering with state
 
 If you try the code you currently have, you might notice that changing the state doesn't actually change anything in your DOM.
 Your `setState` function also needs to trigger a re-render of your DOM.
@@ -636,7 +638,7 @@ class-component as we did before. Remember to push the class instance back into 
 
 :running: Finally, for the last time, run the tests `npm run test13`.
 
-# :feet: Next steps
+## :feet: Next steps
 
 That’s all – we have a functional version of React now. Lets take a closer look at what we built:
 
@@ -648,7 +650,7 @@ That’s all – we have a functional version of React now. Lets take a closer l
 The main purpose of this workshop was to demonstrate core principles of React internal structure. However, some 
 features were left out and this implementation serves as a foundation for you extend with these features.
 
-## Remove the class cache
+### Remove the class cache
 
 In our implementation we used a class cache to keep track of instantiated classes. However, this approach is flawed 
 and not at all how React actually does it.
@@ -665,12 +667,12 @@ There are multiple ways to reduce the number of manipulations. For instance, by 
 
 In `src/solution/react-dom/react-dom` we have provided a more advanced implementation that you can use as inspiration.
 
-## Lifecycle methods
+### Lifecycle methods
 
 React components has several "lifecycle methods" that you can override to run code at a particular time. For instance, to run code after the component is mounted we can override `Component.componentDidMount`.
 
 Read the about the lifecycle methods in [the documentation](https://reactjs.org/docs/react-component.html#the-component-lifecycle) and try to implement them yourself.
 
-## Reconciliation
+### Reconciliation
 
 Our implementation renders the whole application regardless of which part of the application that triggered the re-render. To further improve the performance of our implementation we can add a `_dirty` to the component that changed. This way we are able to only re-render the subtree that changed.
