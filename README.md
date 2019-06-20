@@ -61,7 +61,9 @@ To run the tests for a specific task, you can simply specify the task (in this c
 npm run test1
 ```
 
-To run tests for task 2, just replace `test1` with `test2`, and so on. To run all tests:
+To run tests for task 2, just replace `test1` with `test2`, and so on.
+
+To run all tests:
 
 ```
 npm run test
@@ -71,7 +73,7 @@ Note that these test scripts will also run the tests for all the previous tasks.
 
 ## Playground
 
-In addition to the test you edit `src/index.js` to play with you implementation.
+In addition to the tests, you can edit `src/index.js` to play with your implementation.
 
 To run the code:
 
@@ -85,7 +87,7 @@ The dev server should now be running on http://localhost:1234
 
 We have provided you with some examples you can use in `src/examples`
 
-To run the an example:
+To run an example:
 
 1. Change directory to the example `cd src/examples/<the example you want to test>`
 2. Install and run the example with `npm`
