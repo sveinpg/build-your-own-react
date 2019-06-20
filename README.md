@@ -539,17 +539,15 @@ we introduced in the last task? It's almost scary how simple this is, but just c
 on the `prototype` of the component (that is the `type` property of the `reactElement`).
 
 2. Instead of calling `type` as a function, in the way that we did for functional components. We call `new type` with 
-`props` as arguments.
+`props` as an argument.
 
-3. We then need to call the `render` function of newly instantiated component.
+3. We then need to call the `render` function of our newly instantiated component.
 
 4. The result of `render` returns a `reactElement`. To make this a virtual node we call `instantiateVNode`.
 
 5. To sum it all up, call `mount` on the virtual node we got in step 4.
 
-6. If the `isReactComponent` is `false` then do all the logic for functional components that we had implemented before.
-
-:running: This seems like a good time to `npm run test11`.
+:running: Hammer time, `npm run test11`.
 
 ## 12. State
 
