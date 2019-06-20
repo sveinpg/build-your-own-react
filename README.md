@@ -168,7 +168,9 @@ The function returns an object like the one below.
 
 :bulb: Unfamiliar with `React.createElement()`? Code written with [JSX](https://reactjs.org/docs/introducing-jsx.html) will be converted to use React.createElement(). You will not typically invoke React.createElement() directly if you are using JSX.
 
-:bulb: In this workshop, we won't make use of `$$typeof`, `ref` or `_owner`, but do take a look at [this blog post](https://overreacted.io/why-do-react-elements-have-typeof-property/) for details about what `$$typeof` is. Essentially it is to protect
+:bulb: We use the rest operator `...children` to handle several children. However, if the app code specifies children as an array, the rest operator will still wrap the argument in an array. When this is the case you need to [flatten](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) the array. (Requires polyfill for IE/Edge)
+
+:books: In this workshop, we won't make use of `$$typeof`, `ref` or `_owner`, but do take a look at [this blog post](https://overreacted.io/why-do-react-elements-have-typeof-property/) for details about what `$$typeof` is. Essentially it is to protect
 against XSS-attacks.
 
 :running: It's time to run some tests. If you haven't already, run `npm install` first. Then run `npm run test1`.
@@ -207,7 +209,7 @@ To complete our task, we need to:
 
 Now we need to mount (create a DOM-element) for our virtual node and append it to the DOM.
 
-3. In `render` need to mount our virtual node by calling the mount method on the virtual node. `vNode.mount()`
+3. In `render` we need to mount our virtual node by calling the mount method on the virtual node. `vNode.mount()`
 4. Append the result of the mount method to the `domContainerNode`.
 
 :bulb: [Node.appendChild()](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) function adds a node to 
@@ -370,7 +372,7 @@ You also need to implement `VCompositeNode.js`:
 
 2. The `constructor` needs to set the `reactElement`-argument as a class-property. Just like we did for `VDomNode` in task 2.
 
-3. The next thing we need to do is to render our component. Call the functional component (`type`) with its `props` as the argument. `type(props)` 
+3. The next thing we need to do is to render our component in `mount`. Call the functional component (`type`) with its `props` as the argument. `type(props)` 
 
 :bulb: `this.reactElement.type` is a functional component (like `Greeting` in the snippet above).
 
@@ -629,10 +631,11 @@ argument.
 3. For `mount` in `VDomNode` you basically just need to pass on the cache to the next call to `mount`.
 
 4. In `VCompositeNode` and the `mount` function. If the component is a class-component we have to increase the 
-cache-index property and get the element at that index. If the element is defined, use it, if not, instantiate the 
-class-component as we did before. Remember to push the class instance back into the cache before you are done.
+cache-index property and get the element at that index. If the element is defined, use it and update its props,
+if not, instantiate the class-component as we did before. Remember to push the class instance back into the
+cache before you are done.
 
-5. When re-render, remember to reset the cache index in `react-dom/index.js`.
+5. When re-render, you first need to reset the cache index and remove all contents in `domContainerNode` in `react-dom/index.js`.
 
 :running: Finally, for the last time, run the tests `npm run test13`.
 
