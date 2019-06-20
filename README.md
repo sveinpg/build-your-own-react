@@ -152,6 +152,8 @@ The function returns an object like the one below.
 {
   type: 'div',
   props: {
+    className: 'my-class',
+    randomProp: 'randomValue',
     children: [{
       type: 'button',
       props: { className: 'blue' }
