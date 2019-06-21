@@ -1,4 +1,4 @@
-# Build your own react
+# Build your own React
 
 ## Table of contents
 
