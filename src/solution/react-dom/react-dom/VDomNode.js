@@ -19,12 +19,12 @@ export default class VDomNode {
         return !Array.isArray(children) ? [children] : children;
     }
 
-    static setAttributes(domNode, props = {}) {
+    static setAttributes(domNode, nextProps = {}, prevProps = {}) {
         const {
             className,
             style,
             ...restProps
-        } = props;
+        } = nextProps;
 
         // Set className
         if (className) {
@@ -40,9 +40,19 @@ export default class VDomNode {
 
         // Add event listeners and other props
         Object.entries(restProps).forEach(([key, value]) => {
+            if (key === 'children') {
+                return;
+            }
+
             if (/^on.*$/.test(key)) {
-                domNode.addEventListener(key.substring(2).toLowerCase(), value);
-            } else if (key !== 'children') {
+                const event = key.substring(2).toLowerCase();
+                if (prevProps[key]) {
+                    domNode.removeEventListener(event, prevProps[key]);
+                }
+                domNode.addEventListener(event, value);
+            } else if (key === 'value') {
+                domNode.value = value;
+            } else {
                 domNode.setAttribute(key, value);
             }
         });
@@ -88,8 +98,12 @@ export default class VDomNode {
 
     update(nextReactElement) {
         const {
-            props: { children: currentChildren = {} } = {},
+            props: prevProps = {},
         } = this.currentReactElement || {};
+
+        const {
+            children: currentChildren = {},
+        } = prevProps;
 
         const {
             props: nextProps = {},
@@ -127,7 +141,7 @@ export default class VDomNode {
             }
         }
 
-        VDomNode.setAttributes(this.getDomNode(), nextProps);
+        VDomNode.setAttributes(this.getDomNode(), nextProps, prevProps);
 
         this.childrenVNodes = nextChildrenVNodes;
         this.currentReactElement = nextReactElement;

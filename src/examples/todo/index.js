@@ -17,14 +17,16 @@ class TodoForm extends React.Component {
                     type="text"
                     placeholder="Write here..."
                     value={this.state.value}
-                    onChange={event =>
-                        this.setState({ value: event.target.value })
-                    }
+                    onChange={event => {
+                        this.setState({value: event.target.value})
+                    }}
                 />
                 <button
                     onClick={() => {
-                        this.props.addTodo(this.state.value);
-                        this.setState({ value: '' });
+                        if (this.state.value) {
+                            this.props.addTodo(this.state.value);
+                            this.setState({ value: '' });
+                        }
                     }}
                 >
                     Submit
@@ -46,7 +48,6 @@ class TodoApp extends React.Component {
     render() {
         const { todos } = this.state;
 
-        console.log(todos);
         return (
             <div>
                 <TodoForm
