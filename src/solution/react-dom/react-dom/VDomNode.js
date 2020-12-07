@@ -21,8 +21,14 @@ export default class VDomNode {
 
     static setAttributes(domNode, nextProps = {}, prevProps = {}) {
         const {
+            className: prevClass,
+            style: prevStyle = {},
+            ...prevRestProps
+        } = prevProps;
+
+        const {
             className,
-            style,
+            style = {},
             ...restProps
         } = nextProps;
 
@@ -31,12 +37,35 @@ export default class VDomNode {
             domNode.className = className;
         }
 
+        // Remove outdated styles
+        Object.keys(prevStyle)
+          .filter(key => !style[key])
+          .forEach((key) => {
+              domNode.style[key] = '';
+          });
+
         // Set styles
-        if (style) {
-            Object.entries(style).forEach(([key, value]) => {
-                domNode.style[key] = value;
-            });
-        }
+        Object.entries(style).forEach(([key, value]) => {
+            domNode.style[key] = value;
+        });
+
+
+        // Remove outdated event listeners and other props
+        Object.entries(prevRestProps)
+          .filter(([key]) => !restProps[key])
+          .forEach(([key, value]) => {
+              if (key === 'children') {
+                  return;
+              }
+
+              if (/^on.*$/.test(key)) {
+                  domNode.removeEventListener(key.substring(2).toLowerCase(), value);
+              } else if (key === 'value') {
+                  domNode.value = '';
+              } else {
+                  domNode.removeAttribute(key);
+              }
+          });
 
         // Add event listeners and other props
         Object.entries(restProps).forEach(([key, value]) => {
@@ -46,8 +75,10 @@ export default class VDomNode {
 
             if (/^on.*$/.test(key)) {
                 const event = key.substring(2).toLowerCase();
+
+                // Remove previous event listener for same event or else we will have two listeners for the same event
                 if (prevProps[key]) {
-                    domNode.removeEventListener(event, prevProps[key]);
+                    domNode.removeEventListener(event, prevRestProps[key]);
                 }
                 domNode.addEventListener(event, value);
             } else if (key === 'value') {
