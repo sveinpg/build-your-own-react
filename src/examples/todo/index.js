@@ -12,24 +12,28 @@ class TodoForm extends React.Component {
 
     render() {
         return (
-            <div>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+
+                if (this.state.value) {
+                  this.props.addTodo(this.state.value);
+                  this.setState({ value: '' });
+                }
+              }}
+            >
                 <input
                     type="text"
                     placeholder="Write here..."
                     value={this.state.value}
-                    onChange={event =>
-                        this.setState({ value: event.target.value })
-                    }
-                />
-                <button
-                    onClick={() => {
-                        this.props.addTodo(this.state.value);
-                        this.setState({ value: '' });
+                    onChange={event => {
+                        this.setState({value: event.target.value});
                     }}
-                >
+                />
+                <button type="submit">
                     Submit
                 </button>
-            </div>
+            </form>
         );
     }
 }
@@ -46,7 +50,6 @@ class TodoApp extends React.Component {
     render() {
         const { todos } = this.state;
 
-        console.log(todos);
         return (
             <div>
                 <TodoForm

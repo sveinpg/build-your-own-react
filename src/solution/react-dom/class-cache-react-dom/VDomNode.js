@@ -36,9 +36,15 @@ export default class VDomNode {
 
         // Add event listeners and other props
         Object.entries(restProps).forEach(([key, value]) => {
+            if (key === 'children') {
+                return;
+            }
+
             if (/^on.*$/.test(key)) {
                 domNode.addEventListener(key.substring(2).toLowerCase(), value);
-            } else if (key !== 'children') {
+            } else if (key === 'value') {
+                domNode.value = value;
+            } else {
                 domNode.setAttribute(key, value);
             }
         });
