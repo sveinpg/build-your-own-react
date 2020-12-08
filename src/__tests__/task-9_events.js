@@ -1,4 +1,4 @@
-import { fireEvent } from 'dom-testing-library';
+import { fireEvent } from '@testing-library/dom';
 
 import React from '../react';
 import ReactDOM from '../react-dom';

@@ -1,4 +1,4 @@
-import { getNodeText, fireEvent, waitForDomChange } from 'dom-testing-library';
+import { getNodeText, fireEvent, waitFor } from '@testing-library/dom';
 
 import React from '../react';
 import ReactDOM from '../react-dom';
@@ -36,27 +36,5 @@ test('Check state updates correctly updates the DOM (fails with timeout if React
     new MouseEvent('click')
   );
 
-  await waitForDomChange({ container });
-
-  expect(getNodeText(container.querySelector('p'))).toBe('Hello universe');
-});
-
-test('Check DOM is not re-rendered if setState is called with null', async done => {
-  const container = getExampleDOM();
-
-  ReactDOM.render(<Greeting newState={ null } />, container);
-
-  fireEvent(
-    container.querySelector('button'),
-    new MouseEvent('click')
-  );
-
-  try {
-    await waitForDomChange({ container, timeout: 100 });
-    done.fail('Calling setState with null should not trigger a re-render');
-  } catch {
-    // We expect to catch a timeout
-  }
-
-  done();
+  await waitFor(() => { expect(getNodeText(container.querySelector('p'))).toBe('Hello universe') });
 });

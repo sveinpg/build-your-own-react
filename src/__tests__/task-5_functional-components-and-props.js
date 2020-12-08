@@ -1,4 +1,4 @@
-import { getNodeText } from 'dom-testing-library';
+import { getNodeText } from '@testing-library/dom';
 
 import React from '../react';
 import ReactDOM from '../react-dom';
