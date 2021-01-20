@@ -21,7 +21,7 @@ test('Check Component correctly updates state', () => {
   expect(element.state.name).toBe('universe');
 });
 
-test('Check Component only changes given state', () => {
+test('Check if key-value pairs are preserved when another part of the state is updatede', () => {
   const element = new Greeting();
 
   element.setState({ name: 'universe' });
