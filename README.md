@@ -453,7 +453,7 @@ However, there are some syntactic differences:
 -   With JSX you pass a function as the event handler, rather than a string.
 
 ```jsx
-const button = () => (
+const Button = () => (
     <button onClick={() => alert('The button was clicked')}>Click me</button>
 );
 ```
