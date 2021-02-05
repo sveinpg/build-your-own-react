@@ -224,7 +224,7 @@ the end of the list of children of a specified parent node.
 
 Remember to also implement the `constructor` and `mount` in `VDomNode`:
 
-5. The `constructor` need to set the `reactElement`-argument as a class-property.
+5. The `constructor` need to set the `reactElement`-argument as a class-property. For instance [like this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#class_declarations)
 
 6. `mount` has to create a DOM-element from the `reactElement` class-property and return it.
 
