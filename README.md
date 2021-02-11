@@ -87,7 +87,7 @@ The dev server should now be running on http://localhost:1234
 
 ### Examples
 
-We have provided you with some examples you can use in `src/examples`
+We have provided you with  e examples you can use in `src/examples`
 
 To run an example:
 
@@ -665,7 +665,7 @@ In our implementation we used a class cache to keep track of instantiated classe
 and not at all how React actually does it. If, for example, the order of components changes between renders we will 
 retrieve the wrong class instance from the cache.
 
-You might also have noticed that we have som unimplemented functions in `VDomNode` and `VCompisteNode`. Instead of 
+You might also have noticed that we have some unimplemented functions in `VDomNode` and `VCompisteNode`. Instead of 
 calling `mount` again for virtual nodes when re-renders, we should in fact call `update` and update the nodes.
 The way to handle stateful components between renders is to keep an instance of the instantiated component as a 
 class-property in `VCompositeNode`, and this is where `getPublicInstance` comes in to play.
