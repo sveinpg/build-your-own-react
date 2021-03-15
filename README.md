@@ -42,7 +42,7 @@ In this workshop we are going to create a renderer that renders React components
 
 ### <a name="reconciliation"></a> Reconciliation
 
-Different renderers such as ReactDOM and React Native shares a lot of logic. Rendering, custom components, state, 
+Different renderers, such as ReactDOM and React Native, share a lot of logic. Rendering, custom components, state, 
 lifecycle functions and refs should work consistently across platforms.
 
 When you use React you can think of the `render()` function as creating a tree of React elements. If props or state is
@@ -106,16 +106,16 @@ npm start
 
 If you've already looked in the `/react-dom` directory or `/react` directory, you might have noticed that they
 are not empty.
-We've taken the liberty of implementing a skeleton for you of empty functions that are to be implemented.
+We've taken the liberty of implementing a skeleton of empty functions for you to implement.
 
 To stay true to the virtual-DOM mindset you will find `VCompositeNode.js` and `VDomNode.js` in the `react-dom`
 directory. `VDomNode.js` is a "virtual" DOM-node, while the `VCompositeNode` represents a "virtual" react-component node.
 Everything that can be represented in the DOM, such as a `number`, `string`, `div`, `a`, `p` etc. should be a
 `VDomNode`. Everything else, and by that we mean stateful- or stateless-components should be a `VCompositeNode`.
 
-These "virtual"-nodes can have children, which again are "virtual" nodes. This means that we get a tree-structure
+These "virtual" nodes can have children, which again are "virtual" nodes. This means that we get a tree-structure
 of nodes known as the "virtual DOM". The "virtual DOM" that we are about to implement is pretty naive. Nevertheless,
-the structure is there to make it easier to extend with a more advanced reconciliation-algorithm that
+the structure is there to make it easier to extend with a more advanced reconciliation algorithm that
 can just render portions of a sub-tree instead of rendering the whole tree every time.
 
 ## <a name="tasks"></a> :construction_worker_man: Tasks
@@ -138,7 +138,7 @@ To make your life easier, we have used emojis to mark important content:
 
 `createElement` creates and returns a new [React element](#react-elements) of a given type. The function signature of `createElement` takes three arguments:
 
--   `type` - the type of the element we are creating. This can be either be a [HTML element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) or a React component. If we are creating a HTML element, the name of the element (`div`, `p` etc.) is passed as a string. If we are creating a React component, the variable that the component is assigned to is passed as the value.
+-   `type` - the type of the element we are creating. This can be either be an [HTML element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) or a React component. If we are creating an HTML element, the name of the element (`div`, `p` etc.) is passed as a string. If we are creating a React component, the variable that the component is assigned to is passed as the value.
 -   `props` - An object containing the properties (`props`) that get passed to the component.
 -   `children` - The children of the component. You can pass as many children as you want.
 
@@ -211,7 +211,7 @@ To complete our task, we need to:
 
 1. return a `new VDomNode(reactElement)` from the `instantiateVNode` function in `react-dom/index.js`.
 
-2. In `render`, we instansite our virtual node with our reactElement by calling `instantiateVNode(reactElement)`. Store it in a variable named `vNode`.
+2. In `render`, we instantiate our virtual node with our reactElement by calling `instantiateVNode(reactElement)`. Store it in a variable named `vNode`.
 
 Now we need to mount (create a DOM-element) for our virtual node and append it to the DOM.
 
@@ -267,7 +267,7 @@ ReactDOM.render(
 ```js
 function getChildrenAsArray(props) {
     const { children = [] } = props || {};
-    return !Array.isArray(children) ? [children] : children;
+    return Array.isArray(children) ? children : [children];
 }
 ```
 
@@ -280,7 +280,7 @@ function getChildrenAsArray(props) {
 
 Your next task is to handle primitive types like `number` and `string`, as well as empty elements.
 Unlike HTML elements and React components, primitive types and empty elements are not represented as a standard React element.
-Moreover, they are not represented as an object with a `type` field. Instead they are represented as their own value.
+Moreover, they are not represented as an object with a `type` field. Instead, they are represented as their own value.
 Because of this primitive types and empty elements are always leaf nodes (i.e. children of another React element).
 
 The following call to `ReactDOM.render()`...
@@ -354,7 +354,7 @@ function isPrimitive(reactElement) {
 
 In many ways React components are like JavaScript functions.
 Just like functions, they accept arbitrary input. All input values are passed to the component in a single object called `props`.
-Props are used to customise components, and enables us to re-use components.
+Props are used to customise components, and they enable component re-use.
 
 For example, this code renders "Hello, NDC" on the page.
 
@@ -367,7 +367,7 @@ const element = <Greeting name="NDC" />;
 ReactDOM.render(element, document.getElementById('root'));
 ```
 
-In the above example the prop "name" is set as a JSX attribute. React passes all JSX attributes to our user-defined component in a single object.
+In the above example, the prop "name" is set as a JSX attribute. React passes all JSX attributes to our user-defined component in a single object.
 
 :trophy: Extend `react-dom/index.js` and `VCompositeNode.js` to handle functional components.
 
@@ -378,7 +378,7 @@ To get functional components working, you should:
 
 You also need to implement `VCompositeNode.js`:
 
-2. The `constructor` needs to set the `reactElement`-argument as a class-property. Just like we did for `VDomNode` in task 2.
+2. The `constructor` needs to set the `reactElement` argument as a class property, just like we did for `VDomNode` in task 2.
 
 3. The next thing we need to do is to render our component in `mount`. Call the functional component (`type`) with its `props` as the argument `type(props)`. 
 
@@ -388,13 +388,13 @@ You also need to implement `VCompositeNode.js`:
 
 :bulb: User defined (composite) components always render *exactly one* React element (which in turn can contain multiple React elements as children), hence we only need to call `instantiateVNode` once with the value returned from our component. 
 
-5. The last ting we need to do is to call `mount` on the virtual node we got in step 4 and return the value.
+5. The last thing we need to do is to call `mount` on the virtual node from step 4 and return the value.
 
 :running: Don't forget the tests! `npm run test5`
 
 ### 6. className
 
-No application is complete without styling. In React there is mainly two ways to style your elements – [inline styling](https://reactjs.org/docs/dom-elements.html#style) and [CSS](https://reactjs.org/docs/faq-styling.html). We'll cover CSS in this task and inline styling in task #7.
+No application is complete without styling. In React, there are two main ways to style your elements – [inline styling](https://reactjs.org/docs/dom-elements.html#style) and [CSS](https://reactjs.org/docs/faq-styling.html). We'll cover CSS in this task and inline styling in task #7.
 
 To specify a CSS class of an element, use the `className` attribute. This is one of the JSX attributes (`props`) that are reserved by React. It is used to set the [class attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class) of the specific element.
 
@@ -430,9 +430,9 @@ If you are familiar with HTML, you know that we need to support more attributes 
 
 ### 9. Events
 
-With plain html and JavaScript we primarily have to two ways of adding event listeners.
+With plain html and JavaScript we primarily have two ways of adding event listeners.
 You can either use the [addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
-function or you can add an event as a string-attribute to the HTML-element.
+function or you can add an event as a string attribute to the HTML element.
 
 ```html
 <button id="click-me">JavaScript</button>
@@ -473,7 +473,7 @@ if (/^on.*$/.test(varToTest)) {
 }
 ```
 
-:bulb: Remember that, unlike React, events in plain JavaScript do not use camleCasing.
+:bulb: Remember that, unlike React, events in plain JavaScript do not use camelCasing.
 
 :books: Alright, you got us! You called our bluff, the way we are implementing events in this task is not true to 
 Facebook's implementation of React.
@@ -497,7 +497,7 @@ Historically, stateful React components are defined using [a class](https://deve
 > With the addition of hooks, you can [use state and other React features](https://reactjs.org/docs/hooks-state.html) without writing a class. This will not be covered in this workshop.
 
 To create a class component you simply extend [React.Component](https://reactjs.org/docs/react-component.html) and 
-implement the `render`-function to specify what to render.
+implement the `render` function to specify what to render.
 
 ```jsx
 class Greeting extends React.Component {
@@ -508,15 +508,15 @@ class Greeting extends React.Component {
 ```
 
 If you take a look in `react/` you will find that we've already created a base `Component` for you.
-But still, using class components in our implementation of React does not work properly – yet.
+But, using class components in our implementation of React still does not work properly – yet.
 
-:trophy: As mentioned, the `render`-function is used to specify what to render. It is the only required method in a 
+:trophy: As mentioned, the `render` function is used to specify what to render. It is the only required method in a 
 class component and should return [React elements](#react-elements).
 To enforce that all classes that extend the `Component` class implements the `render`, let the 
 `render` function in `react/Component.js` throw an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error).
 
 :trophy: We need to treat functional and class components differently. In contrast to functional components, we need 
-to call the `render`-method to determine the React elements to render. 
+to call the `render` method to determine the React elements to render. 
 To do this we need to know if a component is a functional or class component.
 Since [JavaScript classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) in fact are functions,
 we can not use the type of the variable to determine it. Instead add a simple flag as a
@@ -531,7 +531,7 @@ Component.prototype.isReactComponent = true;
 class. In other words, the props should be available in the
 [function context](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#Function_context)
 of our class. Implement a [constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Constructor)
-that takes the `props` as an argument and assign them as a class-property.
+that takes the `props` as an argument and assign them as a class property.
 
 :bulb: To assign the `props` you can simply say: `this.props = props;`
 
@@ -542,9 +542,9 @@ that takes the `props` as an argument and assign them as a class-property.
 So, we now have functioning React components that support `props`. But there is one problem... they don't render.
 
 :trophy: We need to extend `mount` in `VCompositeNode` to not only handle functional components, but also 
-class-components.
+class components.
 
-1. To do this we have to check which component we are about to render. Remember the `isReactComponent` -flag that
+1. To do this we have to check which component we are about to render. Remember the `isReactComponent` flag that
 we introduced in the last task? It's almost scary how simple this is, but just check if `isReactComponent` is `true` 
 on the `prototype` of the component (that is the `type` property of the `reactElement`).
 
@@ -580,7 +580,7 @@ class Greeting extends React.Component {
 }
 ```
 
-Strictly speaking your component now just has a property `state`, it doesn't really _have_ state.
+Strictly speaking, your component now just has a property called `state`, it doesn't really _have_ state.
 As you may know, in React you can use `this.setState()` to change this property, and finally make your component stateful.
 
 :trophy: Implement `setState` in `react/Component.js`.
@@ -589,7 +589,7 @@ If it is `undefined` or `null` you should simply do nothing - just return from t
 
 :bulb: To merge objects you can either use `Object.assign()` or the shorthand [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax).
 
-:fire: In React `setState()` can also take a function as the first parameter. If you want this you can check the type of `state` in your function. If it's a function, call it with the current state as an argument.
+:fire: In React, `setState()` can also take a function as the first parameter. If you want this functionality, you can check the type of `state` in your function. If `state` is a function, call `state` with the current state as an argument.
 
 :running: Time to check the state of things with `npm run test12`.
 
@@ -598,12 +598,12 @@ If it is `undefined` or `null` you should simply do nothing - just return from t
 If you try the code you currently have, you might notice that changing the state doesn't actually change anything in your DOM.
 Your `setState` function also needs to trigger a re-render of your DOM.
 
-You could simply call `ReactDOM.render()` in `setState` after updating the state, but we want to do a little bit better than that.
+You could simply call `ReactDOM.render()` in `setState` after updating the state, but we want to do better than that.
 
 If you have many components updating their state at the same time, simply calling `ReactDOM.render()` would be quite the bottleneck,
 as you would be rendering for every single component updating its state.
-It will be very advantageous to defer the actual rendering until after we are done updating state in all components.
-We can do this by wrapping `ReactDOM.render()` in a `setTimeout`.
+It would be very advantageous to defer the actual rendering until after we are done updating state in all components.
+We can do this by wrapping `ReactDOM.render()` in a `setTimeout` with a zero millisecond delay.
 
 :trophy: Implement the `_reRender` function in ReactDOM and call this from the `setState` function.
 The re-render function should call `setTimeout` with `ReactDOM.render` as its callback function.
@@ -614,15 +614,15 @@ A timeout of 0 ms will run its callback as soon as the browser isn't busy doing 
 :books: When you use `setTimeout` the callback function is placed on the callback queue and ran at the next event loop.
 There was [a nice talk about this](https://www.youtube.com/watch?v=8aGhZQkoFbQ) at JSConf EU 2014.
 
-:trophy: Our implementation fails when we call `_reRender`. This is because we are calling the `render`-function 
+:trophy: Our implementation fails when we call `_reRender`. This is because we are calling the `render` function 
 without any arguments in `_reRender`, while `render` expects a `reactElement` and a `domContainerNode`.
 To fix this we have to store `reactElement` and `domContainerNode` from the first render and then, if `render` is 
 called without any arguments (i.e. `reactElement` and `domContainerNode` are `undefined`), we use the stored instances.
 
 :trophy: Even though we are calling to re-render in `setState` the state of components does not persist between renders.
-The reason for this is that we are new'ing up components on every render instead of keeping previously rendered 
-class-components in memory.
-To fix this, we are going to implement a class-cache that saves our component instances between renders..
+The reason for this is that we are creating new components on every render instead of keeping previously rendered 
+class components in memory.
+To fix this, we are going to implement a class cache that saves our component instances between renders...
 
 1. Add the `classCache` to `react-dom/index.js`:
 
@@ -633,17 +633,17 @@ const classCache = {
 };
 ```
 
-2. Call `mount` on the virtual node returned by `instantiateVNode` in `react-dom/index.js` with the cache as the 
-argument.
+2. Call `mount` on the virtual node returned by `instantiateVNode` in the `render` method of `react-dom/index.js`, with the cache as the `mount` method's
+argument. Don't call `mount` on the virtual nodes returned in `instantiateVNode`'s function declaration!
 
-3. For `mount` in `VDomNode` you basically just need to pass on the cache to the next call to `mount`.
+3. For `mount` in `VDomNode`, you need to pass the cache to the next call of `mount`.
 
-4. In `VCompositeNode` and the `mount` function. If the component is a class-component we have to increase the 
-cache-index property and get the element at that index. If the element is defined, use it and update its props,
-if not, instantiate the class-component as we did before. Remember to push the class instance back into the
-cache before you are done.
+4. For the `mount` function in `VCompositeNode`, if the component is a class component, we have to increase the 
+cache's index property, and get the element at that new index of the `cache` array inside the `classCache` parameter. If the element is defined, use it and update its `props` attribute.
+If the element is undefined, instantiate the class component as we did before. Remember to push the class instance back into the
+cache after updating its `props` attribute.
 
-5. When re-render, you first need to reset the cache index and remove all contents in `domContainerNode` in `react-dom/index.js`.
+5. On re-render, you need to reset the cache index and remove all contents in `domContainerNode` in `react-dom/index.js`.
 
 :running: Finally, for the last time, run the tests `npm run test13`.
 
@@ -661,26 +661,26 @@ features were left out and this implementation serves as a foundation for you ex
 
 ### Remove the class cache
 
-In our implementation we used a class cache to keep track of instantiated classes. However, this approach is flawed 
-and not at all how React actually does it. If, for example, the order of components changes between renders we will 
+In our implementation, we used a class cache to keep track of instantiated classes. However, this approach is flawed 
+and not at all how React actually does it. If, for example, the order of components changes between renders, we will 
 retrieve the wrong class instance from the cache.
 
 You might also have noticed that we have some unimplemented functions in `VDomNode` and `VCompisteNode`. Instead of 
 calling `mount` again for virtual nodes when re-renders, we should in fact call `update` and update the nodes.
 The way to handle stateful components between renders is to keep an instance of the instantiated component as a 
-class-property in `VCompositeNode`, and this is where `getPublicInstance` comes in to play.
+class property in `VCompositeNode`, and this is where `getPublicInstance` comes in to play.
 
 On calling the `update` function in `VDomNode`, when looping through children, we can retrieve and check if new 
-react-elements are of the 
+react elements are of the 
 same `type` that they were the last time we rendered. We can then update, append, or remove nodes accordingly.
 
-In `src/solution/react-dom/react-dom` we have provided a more advanced implementation that you can use as inspiration.
+In `src/solution/react-dom/react-dom` we have provided a more advanced implementation that you can look at for inspiration.
 
 ### Lifecycle methods
 
-React components has several "lifecycle methods" that you can override to run code at a particular time. For instance, to run code after the component is mounted we can override `Component.componentDidMount`.
+React components have several "lifecycle methods" that you can override to run code at a particular time. For instance, to run code after the component mounts, we can override `Component.componentDidMount`.
 
-Read the about the lifecycle methods in [the documentation](https://reactjs.org/docs/react-component.html#the-component-lifecycle) and try to implement them yourself.
+Read about the lifecycle methods in [the documentation](https://reactjs.org/docs/react-component.html#the-component-lifecycle) and try to implement them.
 
 ### More advanced reconciliation
 
@@ -688,13 +688,12 @@ Every time we change the state of one our components in our application, the DOM
 Frequent DOM manipulations affects performance and should be avoided.
 To avoid this we should minimize the number of manipulations.
 
-There are multiple ways to reduce the number of manipulations.
-For instance, by reusing HTML-elements (such as `<div/>`) or to use the `key` prop of children to determine which to update.
+There are multiple ways to reduce the number of manipulations, like reusing HTML elements, such as `<div/>`, or using the `key` prop of children to determine which child to update.
 
-> If an element type in the same place in the tree “matches up” between the previous and the next renders, React reuses the existing host instance.
-> React only updates the properties that are absolutely necessary. For instance if only `className` on the Component has been changed, then that's the only thing that needs to be updated.
+> If an element type in the same place in the tree “matches up” between the previous render and the next one, React reuses the existing host instance.
+> React only updates the properties that are absolutely necessary. For instance, if a Component's `className` prop is the only thing on the Component that changed, then that's the only thing that React needs to update.
 > Source: https://overreacted.io/react-as-a-ui-runtime/#reconciliation
 
-Our implementation renders the whole application regardless of which part of the application that triggered the re-render.
-To further improve the performance of our implementation we can add a `_dirty` to the component that changed.
+Our implementation renders the whole application regardless of which part of the application triggered the re-render.
+To further improve the performance of our implementation, we can add `_dirty` to the component that changed.
 This way we are able to only re-render the subtree that changed.
